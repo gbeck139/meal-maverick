@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+
+{%block head%}
+  <title>Goals</title>
+{%endblock%}
+{%block body%}
+  <h1>Your goals...</h1>
+  <h2>Time and money are important!! How much do you have available for meal prep this week? </h2>
+  
+  <h2>Set Your Goals</h2>
+    <form action="/goals" method="POST">
+        <label for="budget">Budget:</label>
+        <input type="text" id="budget" name="budget" required><br>
+
+        <label for="preferences">Preferences:</label>
+        <input type="text" id="preferences" name="preferences"><br>
+
+        <label for="zipCode">Zip Code:</label>
+        <input type="text" id="zipCode" name="zipCode" required><br>
+
+        <button type="submit">Submit</button>
+</form>
+<div id="result"></div>
+{%endblock%}

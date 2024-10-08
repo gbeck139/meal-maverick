@@ -1,0 +1,54 @@
+
+
+/* Our default values set as CSS variables */
+:root {
+  --color-bg: #00000F;
+  --color-text-main: #000000;
+  --color-primary: #FFF000;
+  --font-family: monospace;
+}
+
+
+body {
+  font-family: monospace;
+  background-color: var(--color-bg);
+}
+
+h1 {
+  font-family: var(--font-family);
+  color: #00FF00;
+}
+
+/* Subheading */
+h2 {
+  font-family: var(--font-family);
+  color: #00FF00;
+}
+
+label {
+  color: #FFFFFF;
+}
+
+p {
+  color: #00FF00;
+}
+
+/* Links */
+a {
+  font-size: 15px;
+  color: #00FF00;
+  font-family: var(--font-family);
+}
+
+
+
+/* Links that open files in the editor */
+.fileopener {
+  cursor:pointer;
+  font-weight:bold;
+  border-bottom:3px solid var(--color-primary);
+  color: var(--color-secondary);
+}
+.fileopener:hover {
+  border-bottom:3px solid var(--color-secondary);
+}
