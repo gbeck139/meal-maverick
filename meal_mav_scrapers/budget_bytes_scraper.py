@@ -34,8 +34,8 @@ def scrape_website():
     driver = webdriver.Chrome(options=options)
     meals = []
 
-    for i in range(1):
-        time.sleep(2)
+    for i in range(1,9):
+        time.sleep(.1)
         url = f"https://www.budgetbytes.com/category/extra-bytes/budget-friendly-meal-prep/page/{i}"
         driver.get(url)
 
@@ -44,20 +44,27 @@ def scrape_website():
 
         # Print the page source (you can also parse it)
         soup = BeautifulSoup(page_source, 'html.parser')
-        count = 0
         for meal_info in soup.find_all("article", {"class": "post-summary post-summary--default"}):
             name = meal_info.find("h3", class_="post-summary__title").text.strip()
-            unit_price = float(meal_info.find("span", class_="cost-per").text.strip().split('$')[-1].split(" ")[0])
+            try:
+                unit_price = float(meal_info.find("span", class_="cost-per").text.strip().split('$')[-1].split(" ")[0])
+            except AttributeError:
+                continue
             recipe_url = meal_info.find("a")["href"]
             print_url = recipe_url[:28]+"wprm_print/" + recipe_url[28:]
-            time.sleep(2)
+            time.sleep(.5)
             driver.get(recipe_url)
             # driver.get("https://www.budgetbytes.com/turkey-pinwheels/")
             recipe = driver.page_source
             recipe_soup = BeautifulSoup(recipe, 'html.parser')
 
             header_soup = recipe_soup.find("div", class_="bb-recipe-card__meta")
-            prep = int(header_soup.find("span", class_="wprm-recipe-details wprm-recipe-details-minutes wprm-recipe-total_time wprm-recipe-total_time-minutes").text.strip().split(" ")[0])
+            # prep = int(header_soup.find("span", class_="wprm-recipe-details wprm-recipe-details-minutes wprm-recipe-total_time wprm-recipe-total_time-minutes").text.strip().split(" ")[0])
+            prep_time = header_soup.find("span",class_="wprm-recipe-time wprm-block-text-normal").text.strip().split(" ")
+            if 'h' in prep_time[1]:
+                prep = 60 * int(prep_time[0])
+            else:
+                prep = int(prep_time[0])
             servings = int(header_soup.find("input")["value"])
 
             ingredients = {}
@@ -66,8 +73,7 @@ def scrape_website():
                 ingredient_quantity = ingredient_soup.find("span", class_="wprm-recipe-ingredient-amount")
                 if ingredient_quantity is None:
                     continue
-                else:
-                    ingredient_quantity = ingredient_quantity.text.strip()
+                ingredient_quantity = ingredient_quantity.text.strip()
                 ingredient_unit = ingredient_soup.find("span", class_="wprm-recipe-ingredient-unit")
                 if ingredient_unit is None:
                     ingredient_unit = ""
@@ -77,16 +83,23 @@ def scrape_website():
                 if ingredient_estimated_price is None:
                     ingredient_estimated_price = 0
                 else:
-                    ingredient_estimated_price = ingredient_estimated_price.text.strip()
+                    ingredient_estimated_price = ingredient_estimated_price.text.strip().replace("*", "").replace("o", "0")
                     if "$" not in ingredient_estimated_price:
                         continue
                     else:
                         ingredient_estimated_price = ingredient_estimated_price[2:-1]
                 ingredients[ingredient_name] = {}
                 print(ingredient_name)
-                ingredients[ingredient_name]["quantity"] = parse_quantity(ingredient_quantity)
+                if ingredient_quantity == "handful":
+                    ingredients[ingredient_name]["quantity"] = float(1)
+                    ingredients[ingredient_name]["unit"] = "cup"
+                elif ingredient_quantity == "pinch":
+                    ingredients[ingredient_name]["quantity"] = float(1)
+                    ingredients[ingredient_name]["unit"] = "tsp"
+                else:
+                    ingredients[ingredient_name]["quantity"] = parse_quantity(ingredient_quantity)
+                    ingredients[ingredient_name]["unit"] = ingredient_unit
                 ingredients[ingredient_name]["price"] = float(ingredient_estimated_price)
-                ingredients[ingredient_name]["unit"] = ingredient_unit
 
             print(f"Name: {name}\nServings: {servings}\nServing price: {unit_price}\nPrep: {prep}\nIngredients: {ingredients}\nURL: {print_url}")
             meal = {"name": name, "servings": servings, "unit_price": unit_price, "prep": prep,
