@@ -7,7 +7,7 @@
   <h1>This week's plan...</h1>
   <h2>Here are the recipes for the meals you chose and a shopping list, as well as the store that currently has the best deals</h2>
   {% for meal in selected_meals%}
-    <li>{{meal.name}}</li>
+    <p>{{meal.name}}</p>
   {%endfor%}
   <a href="/">Home</a>
 {%endblock%}
