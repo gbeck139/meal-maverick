@@ -5,22 +5,7 @@
 
 <style>
 
-  .progress-container {
-    width: 100%;
-    background-color: #f3f3f3;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-top: 20px;
-}
 
-.progress-bar {
-    height: 30px;
-    width: 0;
-    background-color: #4caf50;
-    text-align: center;
-    line-height: 30px; /* Center text vertically */
-    color: white;
-}
   
 </style>
 
@@ -38,11 +23,11 @@
       <div id="progressBar" class="progress-bar">0%</div>
   </div>
 
-<div>
+<div id="budgetData" data-budget="{{ budget }}">
 <h1>Select Items</h1>
     <form id="mealForm" method="POST" action="/menu">
         {% for meal in meals %}
-            <input type="checkbox" name="selected_meals" value="{{ meal.id }},{{meal.unit_price}}" id="meal{{ meal.id }}" onchange="toggleServings({{ meal.id }})"> {{ meal.name }}<br>
+            <input type="checkbox" name="selected_meals" value="{{ meal.id }}" data-price="{{meal.unit_price}}" id="meal{{ meal.id }}" onchange="toggleServings({{ meal.id }})"> {{ meal.name }}<br>
             <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" value="{{meal.servings}}" style="width: 50px; display: none;"><br>
         {% endfor %}
         <button type="submit">Submit</button>
@@ -54,40 +39,11 @@
 </div>
 
 
-<script></script>
+<script src="../static/js/toggleServings.js"></script>
 
 
 
-    <script>
-        // JavaScript to handle progress bar updates
-        const mealForm = document.getElementById('mealForm');
-        const progressBar = document.getElementById('progressBar');
-
-        mealForm.addEventListener('change', function() {
-            let totalValue = 0;
-
-            // Calculate total value of selected meals based on servings
-            const mealsChecked = document.querySelectorAll('input[name="selected_meals"]:checked');
-            mealsChecked.forEach(meal => {
-                
-              const [id, unitPrice] = meal.value.split(',');
-              // const id = meal.id    
-              const unitPriceValue = parseFloat(unitPrice);
-              const servingsId = 'servings'+id; // Get the corresponding servings input ID
-              const servings = parseInt(document.getElementById(servingsId).value); // Get the number of servings
-                
-                totalValue += unitPriceValue * servings; // Multiply price by servings
-            });
-
-            // Assume maximum value for progress is $100 (can be adjusted)
-            const maxValue = {{budget}};
-            const percentage = (totalValue / maxValue) * 100;
-
-            // Update progress bar
-            progressBar.style.width = percentage + '%';
-            progressBar.textContent = Math.round(percentage) + '%'; // Show percentage text
-        });
-    </script>
+<script scr="../static/js/budgetBar.js"></script>
 
 
 {%endblock%}
