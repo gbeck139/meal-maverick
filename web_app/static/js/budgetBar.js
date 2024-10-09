@@ -20,9 +20,9 @@
 
             // Assume maximum value for progress is $100 (can be adjusted)
             const maxValue = parseFloat(document.getElementById("budget").getAttribute("data-budget"));
-            const percentage = (totalValue / maxValue) * 100;
+            const percentage = 100;//(totalValue / maxValue) * 100;
 
             // Update progress bar
             progressBar.style.width = percentage + '%';
-            progressBar.textContent = Math.round(percentage) + '%'; // Show percentage text
+            progressBar.textContent = "100%"//Math.round(percentage) + '%'; // Show percentage text
         });
