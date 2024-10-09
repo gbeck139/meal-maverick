@@ -16,25 +16,33 @@
       
         <label for="budget">Money($):</label>
         <input type="text" id="budget" name="budget" required><br>
-        
+        <p id="budgetErrorMessage" style="color: red;"></p>  
+      
         <label for="zipCode">Zip Code:</label>
         <input type="text" id="zipCode" name="zipCode"><br>
 
         <button type="submit">Submit</button>
   </form>
 <div id="result"></div>
-{%endblock%}
 
 <script>
 function validateForm() {
     const time = document.getElementById('time').value;
+    const budget = document.getElementById('budget').value;
     const timeErrorMessage = document.getElementById('timeErrorMessage');
+    const budgetErrorMessage = document.getElementById('budgetErrorMessage');
 
-    if (!/^\d+$/.test(time) || parseInt(time) <= 0) {
+    if ( parseInt(time) <= 0) {
         timeErrorMessage.textContent = "Please enter a valid amount of time";
         return false;  // Prevent form submission
-    }else if ()
+    }else if (!/^\d+.d+$/.test(budget) || parseFloat(budget) <= 0){
+      budgetErrorMessage.textContent = "Please enter a valid dollar amount";
+      return false;
+    }
 
-    return true;  // Allow form submission
+    return false;  // Allow form submission
 }
 </script>
+
+{%endblock%}
+
