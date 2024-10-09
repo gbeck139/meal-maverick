@@ -27,11 +27,12 @@ def goals():
   if request.method == 'POST':
       time = request.form.get('time')
       budget = request.form.get('budget')
-      people = request.form.get('people')
-      servingsPerDay = request.form.get('servingsPerDay')
+      people = int(request.form.get('people'))
+      servingsPerDay = int(request.form.get('servingsPerDay'))
+      totalServings = 7 * people * servingsPerDay
       zipCode = request.form.get('zipCode')
 
-      return redirect(url_for('menu', time=time, budget=budget, people=people, servingsPerDay=servingsPerDay, zipCode=zipCode))
+      return redirect(url_for('menu', time=time, budget=budget, totalServings=totalServings, zipCode=zipCode))
 
   return render_template('goals.html')
 
@@ -45,11 +46,9 @@ def menu():
     meals = Meal.query.all()
     time = request.args.get('time')
     budget = request.args.get('budget')
-    people = request.args.get('people')
-    servingsPerDay = request.args.get('servingsPerDay')
-    total_servings = people*servingsPerDay*7
-    zip_code = request.args.get('zipCode')
-    return render_template('menu.html', time=time, budget=budget, people=people, total_servings=totalServings, zip_code=zip_code, meals=meals)
+    totalServings = int(request.args.get('totalServings'))
+    zipCode = request.args.get('zipCode')
+    return render_template('menu.html', time=time, budget=budget, total_servings=totalServings, zip_code=zipCode, meals=meals)
 
 
 @app.route('/plan', methods=['GET', 'POST'])
