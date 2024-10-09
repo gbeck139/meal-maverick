@@ -16,6 +16,7 @@
     <form id="mealForm" method="POST" action="/menu">
         {% for meal in meals %}
             <input type="checkbox" name="selected_meals" value="{{ meal.id }}"> {{ meal.name }}<br>
+            <input type="number" id="servings{{meal.id}}" min="1" value="{{meal.servings}}" style="width: 50px;"> servings<br>
         {% endfor %}
         <button type="submit">Submit</button>
     </form>
@@ -27,34 +28,33 @@
 
 
 
-<script>
-    // JavaScript to handle progress bar updates
-    const mealForm = document.getElementById('mealForm');
-    const progressBar = document.getElementById('progressBar');
+    <script>
+        // JavaScript to handle progress bar updates
+        const mealForm = document.getElementById('mealForm');
+        const progressBar = document.getElementById('progressBar');
 
-    mealForm.addEventListener('change', function() {
-        let totalValue = 0;
+        mealForm.addEventListener('change', function() {
+            let totalValue = 0;
 
-        // Calculate total value of selected meals
-        const checkboxes = document.querySelectorAll('input[name="selected_meals"]:checked');
-        checkboxes.forEach(checkbox => {
-            totalValue += parseFloat(checkbox.value);
+            // Calculate total value of selected meals based on servings
+            const checkboxes = document.querySelectorAll('input[name="selected_meals"]:checked');
+            checkboxes.forEach(checkbox => {
+                const mealPrice = parseFloat(checkbox.value);
+                const servingsInputId = 'servings' + checkbox.id.charAt(checkbox.id.length - 1); // Get the corresponding servings input ID
+                const servings = parseInt(document.getElementById(servingsInputId).value) || 0; // Get the number of servings
+                
+                totalValue += mealPrice * servings; // Multiply price by servings
+            });
+
+            // Assume maximum value for progress is $100 (can be adjusted)
+            const maxValue = 100;
+            const percentage = (totalValue / maxValue) * 100;
+
+            // Update progress bar
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = Math.round(percentage) + '%'; // Show percentage text
         });
-      
-      
-      //change checkbox value
-      //change max to goal
-      //
-
-        // Assume maximum value for progress is $50 (can be adjusted)
-        const maxValue = 50;
-        const percentage = (totalValue / maxValue) * 100;
-
-        // Update progress bar
-        progressBar.style.width = percentage + '%';
-        progressBar.textContent = Math.round(percentage) + '%'; // Show percentage text
-    });
-</script>
+    </script>
 
 
 {%endblock%}
