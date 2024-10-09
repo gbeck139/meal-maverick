@@ -1,3 +1,5 @@
 <p>
-  {{value}}
+    {% for meal in value%}
+    <p>{{meal.name}}</p>
+  {%endfor%}
 </p>
