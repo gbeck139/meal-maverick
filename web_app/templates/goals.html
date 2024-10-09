@@ -12,12 +12,19 @@
   <h2>Set Your Goals</h2>
     <form action="/goals" method="POST" onsubmit="return validateForm()">
         <label for="time">Time(mins):</label>
-        <input type="text" id="time" name="time" required><br>
+        <input type="number" id="time" name="time" min="5" max ="500" required><br>
         <p id="timeErrorMessage" style="color: red;"></p>
       
         <label for="budget">Money($):</label>
-        <input type="text" id="budget" name="budget" required><br>
+        <input type="number" id="budget" name="budget" min="5" max="720" required><br>
         <p id="budgetErrorMessage" style="color: red;"></p>  
+      
+      <label for="servingsPerDay">Servings per day:</label>
+        <input type="number" id="servingsPerDay" name="servingsPerDay" min="1" max="" required><br>
+        
+        <label for="servingsPerDay">Servings per day:</label>
+        <input type="number" id="servingsPerDay" name="servingsPerDay" min="1" max="" required><br>
+<!--         <p id="budgetErrorMessage" style="color: red;"></p>   -->
       
         <label for="zipCode">Zip Code:</label>
         <input type="text" id="zipCode" name="zipCode"><br>
