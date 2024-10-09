@@ -3,11 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meals.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/meals.db'
 db = SQLAlchemy(app)
 
 class Meal(db.Model):
-    __table__ = db.Table('meals', db.metadata, autoload=True)
+    __table__ = db.Table('meals', db.metadata, autoload=True, autoload_with=db.engine)
 
 @app.route('/')
 def home():
@@ -42,4 +42,6 @@ def plan():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+  with app.app_context():
+    db.create_all()
+  app.run(debug=True)
