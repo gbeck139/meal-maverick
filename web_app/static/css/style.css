@@ -40,6 +40,10 @@ a {
   font-family: var(--font-family);
 }
 
+li {
+  color: #00FF00;
+}
+
 
 
 /* Links that open files in the editor */
