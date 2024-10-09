@@ -16,7 +16,6 @@
     height: 30px;
     width: 0;
     background-color: #4caf50;
-    text-align: center;
     line-height: 30px; /* Center text vertically */
     color: white;
 }
@@ -34,7 +33,7 @@
 <h2>Here is where you can choose the meals you want for the week</h2>
 
   <div class="progress-container">
-      <div id="progressBar" class="progress-bar">0%</div>
+      <div id="mealProgressBar" class="progress-bar">0%</div>
   </div>
 
 <div id="budget" data-budget="{{ budget }}">
@@ -42,7 +41,7 @@
     <form id="mealForm" method="POST" action="/menu">
         {% for meal in meals %}
             <input type="checkbox" name="selected_meals" value="{{ meal.id }}" data-price="{{meal.unit_price}}" id="meal{{ meal.id }}" onchange="toggleServings({{ meal.id }})"> {{ meal.name }}<br>
-            <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" value="{{meal.servings}}" style="width: 50px; display: none;"><br>
+            <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" max="{{totalServings}}" value="{{meal.servings}}" style="width: 50px; display: none;"><br>
         {% endfor %}
         <button type="submit">Submit</button>
     </form>
@@ -60,7 +59,7 @@
 <script>
 // JavaScript to handle progress bar updates
       const mealForm = document.getElementById('mealForm');
-      const progressBar = document.getElementById('progressBar');
+      const mealProgressBar = document.getElementById('mealProgressBar');
       const budgetElement = document.getElementById("budget");
       const maxValue = parseFloat(budgetElement.getAttribute("data-budget"));
 
@@ -78,16 +77,14 @@
         const servings = parseInt(document.getElementById(servingsId).value); // Get the number of servings
 
           totalValue += unitPriceValue * servings; // Multiply price by servings
-        console.log("change")
       });
 
       // Assume maximum value for progress is $100 (can be adjusted)
       const percentage = (totalValue / maxValue) * 100;
 
       // Update progress bar
-      progressBar.style.width = percentage + '%';
-      progressBar.textContent = '$'+totalValue; // Show percentage text
-    console.log("loaded")
+      mealProgressBar.style.width = percentage + '%';
+      mealProgressBar.textContent = '$'+totalValue.toFixed(2); // Show percentage text
   });
 </script>
 
