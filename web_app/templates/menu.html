@@ -5,7 +5,7 @@
 
 <style>
 .progress-container {
-    width: 100%;
+    width: 70%;
     background-color: #f3f3f3;
     border-radius: 5px;
     overflow: hidden;
@@ -19,6 +19,11 @@
     line-height: 30px; /* Center text vertically */
     color: white;
 }
+  
+  .number {
+    text-align: right;
+    color: white;
+  }
 
 </style>
 
@@ -35,6 +40,7 @@
   <div class="progress-container">
       <div id="mealProgressBar" class="progress-bar">0%</div>
       <div id="timeProgressBar" class="progress-bar">0%</div>
+      <p class="number"></p>
   </div>
 
 <div id="budget">
