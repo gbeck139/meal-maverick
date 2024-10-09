@@ -39,10 +39,8 @@ def menu():
     if request.method == 'POST':
 
         selected_ids = request.form.getlist('selected_meals') 
-        selected_meals = Meal.query.filter(Meal.id.in_(selected_ids)).all()
-        print("hi")
-        return render_template('test.html', value=selected_meals)
-        # return redirect(url_for('plan', selected_meals=selected_meals))
+        # return render_template('test.html', value=selected_meals)
+        return redirect(url_for('plan', selected_ids=','.join(selected_ids)))
     meals = Meal.query.all()
     budget = request.args.get('budget')
     preferences = request.args.get('preferences')
@@ -50,9 +48,10 @@ def menu():
     return render_template('menu.html', budget=budget, preferences=preferences, zip_code=zip_code, meals=meals)
 
 
-@app.route('/plan')
+@app.route('/plan', methods=['GET', 'POST'])
 def plan():
-  selected_meals = request.args.get('selected_meals')
+  selected_ids = request.args.get('selected_ids').split(',')
+  selected_meals = Meal.query.filter(Meal.id.in_(selected_ids)).all()
   return render_template('plan.html', selected_meals=selected_meals)
 
 
