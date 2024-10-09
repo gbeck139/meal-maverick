@@ -41,7 +41,7 @@
 <h1>Select Items</h1>
     <form id="mealForm" method="POST" action="/menu">
         {% for meal in meals %}
-            <input type="checkbox" name="selected_meals" value="{{ meal.id }}" data-price="{{meal.unit_price}}" id="meal{{ meal.id }}" onchange="toggleServings({{ meal.id }})"> {{ meal.name }}<br>
+            <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" onchange="toggleServings({{ meal.id }})"> {{ meal.name }}<br>
             <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" max="{{totalServings}}" value="1" style="width: 50px; display: none;"><br>
         {% endfor %}
         <button type="submit">Submit</button>
@@ -73,20 +73,22 @@
       const mealsChecked = document.querySelectorAll('input[name="selected_meals"]:checked');
       mealsChecked.forEach(meal => {
 
-        const id = meal.value;
-        // const id = meal.id    
+        const id = meal.value; 
         const unitPriceValue = parseFloat(meal.getAttribute("data-price"));
-        const servingsId = 'servings'+id; // Get the corresponding servings input ID
-        const servings = parseInt(document.getElementById(servingsId).value); // Get the number of servings
+        const time = parseInt(meal.getAttribute("data-time"));
+        const inputId = 'servings'+id; // Get the corresponding servings input ID
+        const servings = parseInt(document.getElementById(inputId).value); // Get the number of servings
 
           totalValue += unitPriceValue * servings; // Multiply price by servings
+          totalTime += time;
       });
 
       // Assume maximum value for progress is $100 (can be adjusted)
-      const percentage = (totalValue / maxValue) * 100;
+      const costPercentage = (totalValue / maxValue) * 100;
+      const timePercentage = (totalTime/maxTime) * 100;
 
       // Update progress bar
-      mealProgressBar.style.width = percentage + '%';
+      mealProgressBar.style.width = costPercentage + '%';
       mealProgressBar.textContent = '$'+totalValue.toFixed(2); // Show percentage text
   });
 </script>
