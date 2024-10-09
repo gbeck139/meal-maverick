@@ -27,9 +27,11 @@ def goals():
   if request.method == 'POST':
       time = request.form.get('time')
       budget = request.form.get('budget')
-      zip_code = request.form.get('zipCode')
+      people = request.form.get('people')
+      servingsPerDay = request.form.get('servingsPerDay')
+      zipCode = request.form.get('zipCode')
 
-      return redirect(url_for('menu', time=time, budget=budget, zipCode=zip_code))
+      return redirect(url_for('menu', time=time, budget=budget, zipCode=ziCode))
 
   return render_template('goals.html')
 
