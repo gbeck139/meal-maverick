@@ -2,8 +2,35 @@
 
 {%block head%}
   <title>Menu</title>
+
+<style>
+
+  .progress-container {
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.progress-bar {
+    height: 30px;
+    width: 0;
+    background-color: #4caf50;
+    text-align: center;
+    line-height: 30px; /* Center text vertically */
+    color: green;
+}
+  
+</style>
+
 {%endblock%}
 {%block body%}
+
+
+
+
+
 <h1>Choose your meals</h1>
 <h2>Here is where you can choose the meals you want for the week</h2>
 
@@ -40,16 +67,16 @@
             const mealsChecked = document.querySelectorAll('input[name="selected_meals"]:checked');
             mealsChecked.forEach(meal => {
                 
-              const [id, unit_price] = meal.value.split(',');
-              unit_price = parseFloat(unit_price);
+              const [id, unitPrice] = meal.value.split(',');
+              unitPrice = parseFloat(unit_price);
               const servingsId = 'servings'+id; // Get the corresponding servings input ID
-              const servings = parseInt(document.getElementById(servingsId).value) || 0; // Get the number of servings
+              const servings = parseInt(document.getElementById(servingsId).value); // Get the number of servings
                 
-                totalValue += mealPrice * servings; // Multiply price by servings
+                totalValue += unitPrice * servings; // Multiply price by servings
             });
 
             // Assume maximum value for progress is $100 (can be adjusted)
-            const maxValue = 100;
+            const maxValue = {{budget}};
             const percentage = (totalValue / maxValue) * 100;
 
             // Update progress bar
