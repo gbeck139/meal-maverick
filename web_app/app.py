@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -25,12 +25,25 @@ def home():
 @app.route('/goals', methods=['GET', 'POST'])  # Accept both GET and POST methods
 def goals():
     if request.method == 'POST':
-
+        time = request.form.get('time')
         budget = request.form.get('budget')
-        preferences = request.form.get('preferences')
         zip_code = request.form.get('zipCode')
+        
+        # Validate 'time' input
+        if not time.isdigit() or 0 >= int(time):
+            flash("Please enter a valid amount of time", "error")
+            return redirect(url_for('goals'))  # Redirect back to the form
+        
+        # Validate 'budget' input
+        try:
+            budget_value = float(budget)
+            if budget_value <= 0:
+                raise ValueError("Budget must be a positive number.")
+        except ValueError:
+            flash("Please enter a valid dollar amount", "error")
+            return redirect(url_for('goals'))  # Redirect back to the form
 
-        return redirect(url_for('menu', budget=budget, preferences=preferences, zipCode=zip_code))
+        return redirect(url_for('menu', time=time, budget=budget, zipCode=zip_code))
 
     return render_template('goals.html')
 
@@ -42,10 +55,10 @@ def menu():
         # return render_template('test.html', value=selected_meals)
         return redirect(url_for('plan', selected_ids=','.join(selected_ids)))
     meals = Meal.query.all()
+    time = request.args.get('time')
     budget = request.args.get('budget')
-    preferences = request.args.get('preferences')
     zip_code = request.args.get('zipCode')
-    return render_template('menu.html', budget=budget, preferences=preferences, zip_code=zip_code, meals=meals)
+    return render_template('menu.html', time=time, budget=budget, zip_code=zip_code, meals=meals)
 
 
 @app.route('/plan', methods=['GET', 'POST'])
