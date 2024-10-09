@@ -24,29 +24,14 @@ def home():
 
 @app.route('/goals', methods=['GET', 'POST'])  # Accept both GET and POST methods
 def goals():
-  time_error = None
-  budget_error = None
   if request.method == 'POST':
       time = request.form.get('time')
       budget = request.form.get('budget')
       zip_code = request.form.get('zipCode')
 
-      # Validate 'time' input
-      if not time.isdigit() or 0 >= int(time):
-          time_error = "Please enter a valid amount of time"
+      return redirect(url_for('menu', time=time, budget=budget, zipCode=zip_code))
 
-      # Validate 'budget' input
-      try:
-          budget_value = float(budget)
-          if budget_value <= 0:
-              raise ValueError("Budget must be a positive number.")
-      except ValueError:
-          budget_error = "Please enter a valid dollar amount"
-
-      if not time_error or budget_error:
-        return redirect(url_for('menu', time=time, budget=budget, zipCode=zip_code))
-
-  return render_template('goals.html', time_error=time_error, buget_error=budget_error)
+  return render_template('goals.html')
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
