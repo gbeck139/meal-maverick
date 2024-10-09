@@ -4,6 +4,13 @@
   <title>Menu</title>
 
 <style>
+
+  .progress-container-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
 .progress-container {
     width: 70%;
     background-color: #f3f3f3;
@@ -17,11 +24,13 @@
     width: 0;
     background-color: #4caf50;
     line-height: 30px; /* Center text vertically */
+    margin-bottom: 10px;
     color: white;
 }
   
   .number {
-    text-align: right;
+    margin-left: 20px;
+    font-size: 40px;
     color: white;
   }
 
@@ -37,11 +46,15 @@
 <h1>Choose your meals</h1>
 <h2>Here is where you can choose the meals you want for the week</h2>
 
+<div class="progress-container-wrapper">
   <div class="progress-container">
       <div id="mealProgressBar" class="progress-bar">0%</div>
       <div id="timeProgressBar" class="progress-bar">0%</div>
-      <p class="number"></p>
+      
   </div>
+  <p class="number">5</p>
+</div>
+  
 
 <div id="budget">
 <h1>Select Items</h1>
