@@ -52,7 +52,7 @@
       <div id="timeProgressBar" class="progress-bar">0%</div>
       
   </div>
-  <p class="number">0/{{totalServings}} servings</p>
+  <p id="currentServings" class="number">0/{{maxServings}} servings</p>
 </div>
   
 
@@ -87,6 +87,7 @@
   mealForm.addEventListener('change', function() {
       let totalValue = 0;
       let totalTime = 0;
+      let totalServings = 0;
 
       // Calculate total value of selected meals based on servings
       const mealsChecked = document.querySelectorAll('input[name="selected_meals"]:checked');
@@ -100,6 +101,7 @@
 
           totalValue += unitPriceValue * servings; // Multiply price by servings
           totalTime += time;
+          totalServings += servings;
       });
 
       // Assume maximum value for progress is $100 (can be adjusted)
@@ -111,7 +113,7 @@
       mealProgressBar.textContent = '$'+totalValue.toFixed(2); // Show percentage text
       timeProgressBar.style.width = timePercentage+'%';
       timeProgressBar.textContent = totalTime+' mins';
-      document.getElementById('servingsTotal').textContent = 
+      document.getElementById('currentServings').textContent = totalServings+'/{{maxServings}} servings'
   });
 </script>
 
