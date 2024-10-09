@@ -9,9 +9,9 @@
             const mealsChecked = document.querySelectorAll('input[name="selected_meals"]:checked');
             mealsChecked.forEach(meal => {
                 
-              const [id, unitPrice] = meal.value.split(',');
+              const id = meal.value;
               // const id = meal.id    
-              const unitPriceValue = parseFloat(unitPrice);
+              const unitPriceValue = parseFloat(meal.getAttribute("data-price"));
               const servingsId = 'servings'+id; // Get the corresponding servings input ID
               const servings = parseInt(document.getElementById(servingsId).value); // Get the number of servings
                 
@@ -19,7 +19,7 @@
             });
 
             // Assume maximum value for progress is $100 (can be adjusted)
-            const maxValue = ;
+            const maxValue = parseFloat(document.getElementById("budget").getAttribute("data-budget"));
             const percentage = (totalValue / maxValue) * 100;
 
             // Update progress bar
