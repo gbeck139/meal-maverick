@@ -42,11 +42,8 @@
 <h1>Select Items</h1>
     <form id="mealForm" method="POST" action="/menu">
         {% for meal in meals %}
-            <input type="checkbox" name="selected_meals" value="{{ meal.id }},{{meal.unit_price}}"> {{ meal.name }}<br>
-            <input type="number" id="servings{{meal.id}}" min="1" value="{{meal.servings}}" style="width: 50px;"> servings<br>
-      
             <input type="checkbox" name="selected_meals" value="{{ meal.id }},{{meal.unit_price}}" id="meal{{ meal.id }}" onchange="toggleServings({{ meal.id }})"> {{ meal.name }}<br>
-            <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" value="{{meal.servings}}" style="width: 50px; display: none;"> servings<br>
+            <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" value="{{meal.servings}}" style="width: 50px; display: none;"><br>
         {% endfor %}
         <button type="submit">Submit</button>
     </form>
@@ -55,6 +52,23 @@
 <div class="contents">
   
 </div>
+
+
+<script>
+    function toggleServings(mealId) {
+        const servings = document.getElementById('servings' + mealId);
+        const checkbox = document.getElementById('meal' + mealId);
+        
+        // Toggle the display of the servings input based on the checkbox state
+        if (checkbox.checked) {
+            servings.style.display = 'inline'; // Show servings input
+            servings.textContent = " servings";
+        } else {
+            servings.style.display = 'none'; // Hide servings input
+            servings.textContent = "";
+        }
+    }
+</script>
 
 
 
@@ -71,6 +85,7 @@
             mealsChecked.forEach(meal => {
                 
               const [id, unitPrice] = meal.value.split(',');
+              // const id = meal.id    
               const unitPriceValue = parseFloat(unitPrice);
               const servingsId = 'servings'+id; // Get the corresponding servings input ID
               const servings = parseInt(document.getElementById(servingsId).value); // Get the number of servings
