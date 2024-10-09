@@ -34,14 +34,15 @@
 
   <div class="progress-container">
       <div id="mealProgressBar" class="progress-bar">0%</div>
+      <div id="timeProgressBar" class="progress-bar">0%</div>
   </div>
 
-<div id="budget" data-budget="{{ budget }}">
+<div id="budget">
 <h1>Select Items</h1>
     <form id="mealForm" method="POST" action="/menu">
         {% for meal in meals %}
             <input type="checkbox" name="selected_meals" value="{{ meal.id }}" data-price="{{meal.unit_price}}" id="meal{{ meal.id }}" onchange="toggleServings({{ meal.id }})"> {{ meal.name }}<br>
-            <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" max="{{totalServings}}" value="{{meal.servings}}" style="width: 50px; display: none;"><br>
+            <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" max="{{totalServings}}" value="1" style="width: 50px; display: none;"><br>
         {% endfor %}
         <button type="submit">Submit</button>
     </form>
@@ -60,11 +61,13 @@
 // JavaScript to handle progress bar updates
       const mealForm = document.getElementById('mealForm');
       const mealProgressBar = document.getElementById('mealProgressBar');
-      const budgetElement = document.getElementById("budget");
-      const maxValue = parseFloat(budgetElement.getAttribute("data-budget"));
+      const timeProgressBar = document.getElementById('timeProgressBar');
+      const maxValue = {{budget}};
+      const maxTime = {{time}};
 
   mealForm.addEventListener('change', function() {
       let totalValue = 0;
+      let totalTime = 0;
 
       // Calculate total value of selected meals based on servings
       const mealsChecked = document.querySelectorAll('input[name="selected_meals"]:checked');

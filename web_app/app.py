@@ -42,10 +42,10 @@ def menu():
 
         selected_ids = request.form.getlist('selected_meals') 
         # return render_template('test.html', value=selected_meals)
-        return redirect(url_for('plan', selected_ids=','.join(selected_ids),s))
+        return redirect(url_for('plan', selected_ids=','.join(selected_ids),zipCode=zipCode))
     meals = Meal.query.all()
     time = request.args.get('time')
-    budget = request.args.get('budget')
+    budget = float(request.args.get('budget'))
     totalServings = int(request.args.get('totalServings'))
     zipCode = request.args.get('zipCode')
     return render_template('menu.html', time=time, budget=budget, totalServings=totalServings, meals=meals)

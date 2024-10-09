@@ -9,5 +9,6 @@
         } else {
             servings.style.display = 'none'; // Hide servings input
             servings.textContent = "";
+            servings.value = "1";
         }
     }
