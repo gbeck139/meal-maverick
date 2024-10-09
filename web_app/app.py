@@ -38,8 +38,8 @@ def goals():
 def menu():
     if request.method == 'POST':
 
-        selected_meals = request.form.get('selected_meals')
-
+        selected_ids = request.form.getlist('selected_meals') 
+        selected_meals = Item.query.filter(Item.id.in_(selected_ids)).all()
         return redirect(url_for('plan', selected_meals=selected_meals))
     meals = Meal.query.all()
     budget = request.args.get('budget')

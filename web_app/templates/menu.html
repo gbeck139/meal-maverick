@@ -10,12 +10,11 @@
 <h1>Select Items</h1>
     <form method="POST" action="/menu">
         {% for meal in meals %}
-            <input type="checkbox" name="selected_meals" value="{{ meal.id }}" color="#00FF00"> {{ meal.name }}<br>
+            <input type="checkbox" name="selected_meals" value="{{ meal.id }}"> {{ meal.name }}<br>
         {% endfor %}
         <button type="submit">Submit</button>
     </form>
 </div>
-<a href="/plan">Plan</a>
 
 <div class="contents">
   
