@@ -7,11 +7,13 @@
 <h1>Choose your meals</h1>
 <h2>Here is where you can choose the meals you want for the week</h2>
 <div>
-  {% for meal in meals %}
-  <li>
-    {{meal.name}}
-  </li>
-  {%endfor%}
+<h1>Select Items</h1>
+    <form method="POST" action="/menu">
+        {% for meal in meals %}
+            <input type="checkbox" name="selected_meals" value="{{ meal.id }}" color="#00FF00"> {{ meal.name }}<br>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
 </div>
 <a href="/plan">Plan</a>
 

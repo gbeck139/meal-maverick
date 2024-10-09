@@ -34,8 +34,13 @@ def goals():
 
     return render_template('goals.html')
 
-@app.route('/menu', methods=['GET'])
+@app.route('/menu', methods=['GET', 'POST'])
 def menu():
+    if request.method == 'POST':
+
+        selected_meals = request.form.get('selected_meals')
+
+        return redirect(url_for('plan', selected_meals=selected_meals))
     meals = Meal.query.all()
     budget = request.args.get('budget')
     preferences = request.args.get('preferences')
