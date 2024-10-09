@@ -6,6 +6,13 @@
 {%block body%}
 <h1>Choose your meals</h1>
 <h2>Here is where you can choose the meals you want for the week</h2>
+<div>
+  {% for meal in meals %}
+  <li>
+    {{meal.name}}
+  </li>
+  {%endfor%}
+</div>
 <a href="/plan">Plan</a>
 
 <div class="contents">

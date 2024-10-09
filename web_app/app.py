@@ -7,7 +7,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/meals.db'
 db = SQLAlchemy(app)
 
 class Meal(db.Model):
-    __table__ = db.Table('meals', db.metadata, autoload=True, autoload_with=db.engine)
+    __tablename__ = 'meals'
+
+    id = db.Column(db.Integer, primary_key=True)  # Primary key
+    name = db.Column(db.String, nullable=False)  # Meal name
+    servings = db.Column(db.Integer)  # Number of servings
+    unit_price = db.Column(db.Float)  # Price per unit
+    prep = db.Column(db.Integer)  # Preparation time
+    ingredients = db.Column(db.Text)  # Ingredients list
+    url = db.Column(db.String)  # URL for the meal
 
 @app.route('/')
 def home():
@@ -42,6 +50,4 @@ def plan():
 
 
 if __name__ == "__main__":
-  with app.app_context():
-    db.create_all()
   app.run(debug=True)
