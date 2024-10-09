@@ -9,16 +9,16 @@
   
   <h2>Set Your Goals</h2>
     <form action="/goals" method="POST">
-        <label for="budget">Budget:</label>
+        <label for="time">Time(mins):</label>
+        <input type="text" id="time" name="time" required><br>
+
+        <label for="budget">Money($):</label>
         <input type="text" id="budget" name="budget" required><br>
-
-        <label for="preferences">Preferences:</label>
-        <input type="text" id="preferences" name="preferences"><br>
-
+      
         <label for="zipCode">Zip Code:</label>
-        <input type="text" id="zipCode" name="zipCode" required><br>
+        <input type="text" id="zipCode" name="zipCode"><br>
 
         <button type="submit">Submit</button>
-</form>
+  </form>
 <div id="result"></div>
 {%endblock%}
