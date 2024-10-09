@@ -15,7 +15,7 @@
 <h1>Select Items</h1>
     <form id="mealForm" method="POST" action="/menu">
         {% for meal in meals %}
-            <input type="checkbox" name="selected_meals" value="{{ meal.id }}"> {{ meal.name }}<br>
+            <input type="checkbox" name="selected_meals" value="{{ meal.id }},{{meal.unit_price}}"> {{ meal.name }}<br>
             <input type="number" id="servings{{meal.id}}" min="1" value="{{meal.servings}}" style="width: 50px;"> servings<br>
         {% endfor %}
         <button type="submit">Submit</button>
@@ -37,11 +37,13 @@
             let totalValue = 0;
 
             // Calculate total value of selected meals based on servings
-            const checkboxes = document.querySelectorAll('input[name="selected_meals"]:checked');
-            checkboxes.forEach(checkbox => {
-                const mealPrice = parseFloat(checkbox.value);
-                const servingsInputId = 'servings' + checkbox.id.charAt(checkbox.id.length - 1); // Get the corresponding servings input ID
-                const servings = parseInt(document.getElementById(servingsInputId).value) || 0; // Get the number of servings
+            const mealsChecked = document.querySelectorAll('input[name="selected_meals"]:checked');
+            mealsChecked.forEach(meal => {
+                
+              const [id, unit_price] = meal.value.split(',');
+              unit_price = parseFloat(unit_price);
+              const servingsId = 'servings'+id; // Get the corresponding servings input ID
+              const servings = parseInt(document.getElementById(servingsId).value) || 0; // Get the number of servings
                 
                 totalValue += mealPrice * servings; // Multiply price by servings
             });
