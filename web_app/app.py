@@ -7,7 +7,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meals.db'
 db = SQLAlchemy(app)
 
 class Meal(db.Model):
-    __table__ = db.Table('meals', db.metadata, autoload=True, autoload_with=db.engine)
+    __table__ = db.Table('meals', db.metadata, autoload=True)
 
 @app.route('/')
 def home():
