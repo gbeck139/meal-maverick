@@ -19,7 +19,7 @@
     background-color: #4caf50;
     text-align: center;
     line-height: 30px; /* Center text vertically */
-    color: green;
+    color: white;
 }
   
 </style>
@@ -44,6 +44,9 @@
         {% for meal in meals %}
             <input type="checkbox" name="selected_meals" value="{{ meal.id }},{{meal.unit_price}}"> {{ meal.name }}<br>
             <input type="number" id="servings{{meal.id}}" min="1" value="{{meal.servings}}" style="width: 50px;"> servings<br>
+      
+            <input type="checkbox" name="selected_meals" value="{{ meal.id }},{{meal.unit_price}}" id="meal{{ meal.id }}" onchange="toggleServings({{ meal.id }})"> {{ meal.name }}<br>
+            <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" value="{{meal.servings}}" style="width: 50px; display: none;"> servings<br>
         {% endfor %}
         <button type="submit">Submit</button>
     </form>
@@ -68,11 +71,11 @@
             mealsChecked.forEach(meal => {
                 
               const [id, unitPrice] = meal.value.split(',');
-              unitPrice = parseFloat(unit_price);
+              const unitPriceValue = parseFloat(unitPrice);
               const servingsId = 'servings'+id; // Get the corresponding servings input ID
               const servings = parseInt(document.getElementById(servingsId).value); // Get the number of servings
                 
-                totalValue += unitPrice * servings; // Multiply price by servings
+                totalValue += unitPriceValue * servings; // Multiply price by servings
             });
 
             // Assume maximum value for progress is $100 (can be adjusted)
