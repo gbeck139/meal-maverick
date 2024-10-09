@@ -6,9 +6,14 @@
 {%block body%}
 <h1>Choose your meals</h1>
 <h2>Here is where you can choose the meals you want for the week</h2>
+
+  <div class="progress-container">
+      <div id="progressBar" class="progress-bar">0%</div>
+  </div>
+
 <div>
 <h1>Select Items</h1>
-    <form method="POST" action="/menu">
+    <form id="mealForm" method="POST" action="/menu">
         {% for meal in meals %}
             <input type="checkbox" name="selected_meals" value="{{ meal.id }}"> {{ meal.name }}<br>
         {% endfor %}
@@ -19,4 +24,32 @@
 <div class="contents">
   
 </div>
+
+
+
+<script>
+    // JavaScript to handle progress bar updates
+    const mealForm = document.getElementById('mealForm');
+    const progressBar = document.getElementById('progressBar');
+
+    mealForm.addEventListener('change', function() {
+        let totalValue = 0;
+
+        // Calculate total value of selected meals
+        const checkboxes = document.querySelectorAll('input[name="selected_meals"]:checked');
+        checkboxes.forEach(checkbox => {
+            totalValue += parseFloat(checkbox.value);
+        });
+
+        // Assume maximum value for progress is $50 (can be adjusted)
+        const maxValue = 50;
+        const percentage = (totalValue / maxValue) * 100;
+
+        // Update progress bar
+        progressBar.style.width = percentage + '%';
+        progressBar.textContent = Math.round(percentage) + '%'; // Show percentage text
+    });
+</script>
+
+
 {%endblock%}
