@@ -1,9 +1,13 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meals.db'
 db = SQLAlchemy(app)
+
+class Meal(db.Model):
+    __table__ = db.Table('meals', db.metadata, autoload=True, autoload_with=db.engine)
 
 @app.route('/')
 def home():
@@ -24,13 +28,11 @@ def goals():
 
 @app.route('/menu', methods=['GET'])
 def menu():
-
+    meals = Meal.query.all()
     budget = request.args.get('budget')
     preferences = request.args.get('preferences')
     zip_code = request.args.get('zipCode')
-
-
-    return render_template('menu.html', budget=budget, preferences=preferences, zip_code=zip_code)
+    return render_template('menu.html', budget=budget, preferences=preferences, zip_code=zip_code, meals=meals)
 
 
 @app.route('/plan')
