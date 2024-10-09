@@ -90,6 +90,8 @@
       // Update progress bar
       mealProgressBar.style.width = costPercentage + '%';
       mealProgressBar.textContent = '$'+totalValue.toFixed(2); // Show percentage text
+      timeProgressBar.style.width = timePercentage+'%';
+      timeProgressBar.textContent = totalTime+' mins';
   });
 </script>
 
