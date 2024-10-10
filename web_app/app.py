@@ -70,22 +70,26 @@ def plan():
   
   for meal in selected_meals:
     ingredients = json.loads(meal.ingredients)
-    for ingredient in ingredients:
+    
+    quantities = ingredients
+    
+    
+    
+    for ingredient, values in ingredients.items():
       if ingredient not in shopping_list:
-        # if ingredient["unit"] == "cup" or ingredient["unit"] == "tsp" or ingredient["unit"] == "tbps":
-        #   shopping_list[ingredient] = {"unit": None, "quantity" : None}   
-        # else:
-        #   shopping_list[ingredient] = {"unit": ingredient["unit"], "quantity" : ingredient["quantity"]}
-        shopping_list = json.loads(meal.ingredients)
-        pass
+        if values["unit"] == "cup" or values["unit"] == "tsp" or values["unit"] == "tbps":
+          shopping_list[ingredient] = {"unit": None, "quantity" : None}   
+        else:
+          shopping_list[ingredient] = {"unit": ingredient["unit"], "quantity" : ingredient["quantity"]}
+        shopping_list[ingredient] = values['quanitity']
       else:
-#         listIngredient = shopping_list[ingredient]
-#         if listIngredient["quantity"] is not None:
-#           listIngredient["quantity"] += ingredient["quantity"]
+        listIngredient = shopping_list[ingredient]
+        # if listIngredient["quantity"] is not None:
+        #   listIngredient["quantity"] += ingredient["quantity"]
         pass
   
   
-  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list)
+  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list, quantities=quantities)
 
 
 
