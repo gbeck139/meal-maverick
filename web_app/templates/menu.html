@@ -7,8 +7,8 @@
 
   .data-container{
     display: flex;
-    align-items: center;
-    margin-top: 20px;
+    align-items: flex-start;
+
   }
   
 .progress-container-wrapper {
@@ -20,6 +20,7 @@
     border-radius: 5px;
     overflow: hidden;
     margin-top: 20px;
+    
 }
 
 .progress-bar {
@@ -36,6 +37,7 @@
   
   .number {
     margin-left: 20px;
+    margin-top: 10px;
     font-size: 40px;
     color: white;
   }
@@ -68,7 +70,7 @@
 </div>
 
 
-<div id="budget">
+<div id="budget" overflow="scroll" height="100%">
 <h1>Select Items</h1>
     <form id="mealForm" method="POST" action="/menu">
         {% for meal in meals %}
