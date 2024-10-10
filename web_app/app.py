@@ -73,10 +73,8 @@ def plan():
     
     for ingredient, values in ingredients.items():
       if ingredient not in shopping_list:
-        if values["unit"] is "cup" or values["unit"]  is "tsp" or values["unit"] is "tbsp":
-          shopping_list[ingredient] = {"unit": "", "quantity": 0}   
-        else:
-          shopping_list[ingredient] = {"unit": values["unit"], "quantity" : int(values["quantity"])}
+        # if values["unit"] == "cup" or values["unit"] == "tsp" or values["unit"] == "tbsp":
+        shopping_list[ingredient] = {"unit": values["unit"], "quantity" : int(values["quantity"])}
       else:
         if values["quantity"] != "":
           shopping_list[ingredient]["quantity"] += int(values["quantity"])
