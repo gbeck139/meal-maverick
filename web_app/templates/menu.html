@@ -44,7 +44,7 @@
       <div style="  overflow-y: scroll; height: calc(50vh);">
         {% for meal in meals %}
             <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" onchange="toggleServings({{ meal.id }})"> {{ meal.name }} (${{meal.unit_price}})<br>
-            <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" max="{{totalServings}}" value="1" style="width: 50px; display: none;"><br>
+            <input type="number" id="servings{{ meal.id }}" name="servings" min="1" max="{{totalServings}}" value="1" style="width: 50px; display: none;"><br>
         {% endfor %}
       </div>
         <button type="submit" style="margin-top: 10px;">Submit</button>
