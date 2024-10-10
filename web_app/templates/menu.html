@@ -24,9 +24,12 @@
     width: 0;
     background-color: #4caf50;
     line-height: 30px; /* Center text vertically */
-    margin-bottom: 10px;
     color: white;
 }
+  
+  .progress-bar + .progress-bar {
+    margin-top: 10px; /* Add space between bars */
+  }
   
   .number {
     margin-left: 20px;
@@ -47,10 +50,16 @@
 <h2>Here is where you can choose the meals you want for the week</h2>
 
 <div class="progress-container-wrapper">
-  <div class="progress-container">
-      <div id="mealProgressBar" class="progress-bar">0%</div>
-      <div id="timeProgressBar" class="progress-bar">0%</div>
-      
+  <div>
+    <div class="progress-container">
+        <div id="mealProgressBar" class="progress-bar">0%</div>
+
+    </div>
+
+    <div class="progress-container">
+        <div id="timeProgressBar" class="progress-bar">0%</div>
+
+    </div>
   </div>
   <p id="currentServings" class="number">0/{{maxServings}} servings</p>
 </div>
