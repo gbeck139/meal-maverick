@@ -58,14 +58,24 @@ def menu():
 def plan():
   selected_ids = request.args.get('selected_ids').split(',')
   selected_meals = Meal.query.filter(Meal.id.in_(selected_ids)).all()
+  shopping_list ={}
   # for each meal
   #  look at ingrdients and quantities
-  #
-  #
+  #    if ingredient not in shopping list add it
+  #      if unit is not tsp, tbsp, cup add quantity with unit
+  #    else if has quanitiy, quanitiy += ingredient quanitity
+  
+  # pass in shopping list
+  
+  for meal in selected_meals:
+    for ingredient in meal.ingredients:
+      if ingredient not in shopping_list:
+        if ingredient.unit != "cup" or ingredient.unit != "tsp" or ingredient.unit != "tbps":
+          shopping_list[ingredient] = {ingredient.}
   
   
   
-  return render_template('plan.html', selected_meals=selected_meals, ingredients=ingredients)
+  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list)
 
 
 
