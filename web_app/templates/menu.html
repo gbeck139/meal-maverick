@@ -33,7 +33,7 @@
       </div>
 
   </div>
-  <p id="currentServings" class="number">0/{{servingsPerPerson} servings</p>
+  <p id="currentServings" class="number">0/{{servingsPerPerson}} meals planned</p>
 </div>
 
 
@@ -41,7 +41,7 @@
     <form id="mealForm" method="POST" action="/menu">
       <div style="  overflow-y: scroll; height: calc(50vh);">
         {% for meal in meals %}
-            <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" onchange="toggleServings({{ meal.id }})"> {{ meal.name }}<br>
+            <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" onchange="toggleServings({{ meal.id }})"> {{ meal.name }} (${{meal.unit_price}})<br>
             <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" max="{{totalServings}}" value="1" style="width: 50px; display: none;"><br>
         {% endfor %}
       </div>
@@ -86,6 +86,7 @@
       const timePercentage = (totalTime/maxTime) * 100;
 
       // Update progress bar
+      mealProgressBar.color = 
       mealProgressBar.style.width = costPercentage + '%';
       mealProgressBar.textContent = '$'+totalValue.toFixed(2); // Show percentage text
       timeProgressBar.style.width = timePercentage+'%';
