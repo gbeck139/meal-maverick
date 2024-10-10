@@ -10,8 +10,9 @@
     <p>{{meal.name}}</p>
   {%endfor%}
 
-  {% for item in shopping_list%}
-    <p>{{item}}</p>
+  {% for item, values in shopping_list.items()%}
+    <p>{{values["quantity"] + " " + item.lower() + " " + </p>
+    <p></p>
   {%endfor%}
 <p>{{quantities}}</p>
   <a href="/">Home</a>
