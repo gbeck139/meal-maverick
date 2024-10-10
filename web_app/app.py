@@ -69,27 +69,21 @@ def plan():
   # pass in shopping list
   
   for meal in selected_meals:
-    ingredients = json.loads(meal.ingredients)
+    ingredients = dict(json.loads(meal.ingredients))
     
-    quantities = ingredients
-    
-    
-    
-    for ingredient, values in ingredients.items():
+    for ingredient, (quantity, unit, price) in ingredients.items():
       if ingredient not in shopping_list:
-        if values["unit"] == "cup" or values["unit"] == "tsp" or values["unit"] == "tbps":
+        if unit == "cup" or unit == "tsp" or unit == "tbps":
           shopping_list[ingredient] = {"unit": None, "quantity" : None}   
         else:
-          shopping_list[ingredient] = {"unit": ingredient["unit"], "quantity" : ingredient["quantity"]}
-        shopping_list[ingredient] = values['quanitity']
+          shopping_list[ingredient] = {"unit": unit, "quantity" : quantity}
       else:
-        listIngredient = shopping_list[ingredient]
-        # if listIngredient["quantity"] is not None:
-        #   listIngredient["quantity"] += ingredient["quantity"]
-        pass
+        if shopping_list[ingredient] is not None:
+          # shopping_list["quantity"] += quantity
+          pass
   
   
-  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list, quantities=quantities)
+  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list)
 
 
 
