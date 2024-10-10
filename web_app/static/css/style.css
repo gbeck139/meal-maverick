@@ -88,10 +88,6 @@ form {
     color: white;
   }
 
-#meal-container {
-  overflow-y: scroll;
-  height: 100%;
-}
 
 /* Links that open files in the editor */
 .fileopener {
