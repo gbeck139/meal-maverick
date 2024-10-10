@@ -71,12 +71,12 @@ def plan():
   for meal in selected_meals:
     ingredients = dict(json.loads(meal.ingredients))
     
-    for ingredient, (quantity, unit, price) in ingredients.items():
+    for ingredient, values in ingredients.items():
       if ingredient not in shopping_list:
-        if unit == "cup" or unit == "tsp" or unit == "tbps":
+        if values["unit"] == "cup" or values["unit"]  == "tsp" or values["unit"]  == "tbps":
           shopping_list[ingredient] = {"unit": None, "quantity" : None}   
         else:
-          shopping_list[ingredient] = {"unit": unit, "quantity" : quantity}
+          shopping_list[ingredient] = {"unit": values["unit"], "quantity" : values["quantity"]}
       else:
         if shopping_list[ingredient] is not None:
           # shopping_list["quantity"] += quantity
