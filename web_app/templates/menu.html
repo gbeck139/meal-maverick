@@ -37,20 +37,16 @@
 </div>
 
 
-<div id="meal-container">
 <h1>Select Items</h1>
     <form id="mealForm" method="POST" action="/menu">
+      <div style="  overflow-y: scroll; height: calc(50vh);">
         {% for meal in meals %}
             <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" onchange="toggleServings({{ meal.id }})"> {{ meal.name }}<br>
             <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" max="{{totalServings}}" value="1" style="width: 50px; display: none;"><br>
         {% endfor %}
-        <button type="submit">Submit</button>
+      </div>
+        <button type="submit" style="margin-top: 10px;">Submit</button>
     </form>
-</div>
-
-<div class="contents">
-  
-</div>
 
 
 <script src="../static/js/toggleServings.js"></script>
