@@ -11,7 +11,11 @@
   {%endfor%}
 
   {% for item, values in shopping_list.items()%}
-    <p>{{values["quantity"] + " " + item.lower() + " " + values["unit"]}}</p>
+    {%if values["quantity"] == 0%}
+      <p>{{item.lower()}}</p>
+    {%else%}
+      <p>{{values["quantity"]}} {{values["unit"]}} {{item.lower()}}</p>
+    {%endif%}
   {%endfor%}
 <p>{{quantities}}</p>
   <a href="/">Home</a>
