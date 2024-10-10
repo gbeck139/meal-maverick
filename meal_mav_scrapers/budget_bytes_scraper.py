@@ -69,7 +69,7 @@ def scrape_website():
 
             ingredients = {}
             for ingredient_soup in recipe_soup.find_all("li", class_="wprm-recipe-ingredient"):
-                ingredient_name = ingredient_soup.find("span", class_="wprm-recipe-ingredient-name").text.strip().replace("*", "").split(",")[0].split(" (")[0]
+                ingredient_name = ingredient_soup.find("span", class_="wprm-recipe-ingredient-name").text.strip().replace("*", "").split(" (")[0]
                 ingredient_quantity = ingredient_soup.find("span", class_="wprm-recipe-ingredient-amount")
                 if ingredient_quantity is None:
                     continue
@@ -126,6 +126,9 @@ if __name__ == "__main__":
     connection.commit()
 
     meals = scrape_website()  # Scrape the website for meal data
+
+    cursor.execute('DELETE FROM meals;')
+    connection.commit()
 
     for meal in meals:
         cursor.execute('''
