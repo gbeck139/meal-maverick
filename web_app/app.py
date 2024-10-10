@@ -32,7 +32,7 @@ def goals():
       maxServings = 7 * people * servingsPerDay
       zipCode = request.form.get('zipCode')
 
-      return redirect(url_for('menu', time=time, budget=budget, maxServings=maxServings, zipCode=zipCode))
+      return redirect(url_for('menu', time=time, budget=budget, maxServings=maxServings, zipCode=zipCode, people=people))
 
   return render_template('goals.html')
 
@@ -48,8 +48,10 @@ def menu():
     time = request.args.get('time')
     budget = float(request.args.get('budget'))
     maxServings = int(request.args.get('maxServings'))
+    people = int(request.args.get('people'))
     zipCode = request.args.get('zipCode')
-    return render_template('menu.html', time=time, budget=budget, maxServings=maxServings, meals=meals)
+    serv
+    return render_template('menu.html', time=time, budget=budget, maxServings=maxServings, meals=meals, people=people)
 
 
 @app.route('/plan', methods=['GET', 'POST'])
