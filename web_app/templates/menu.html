@@ -33,7 +33,7 @@
       </div>
 
   </div>
-  <p id="currentServings" class="number">0/{{maxServings}} servings</p>
+  <p id="currentServings" class="number">0/{{servingsPerPerson} servings</p>
 </div>
 
 
@@ -76,7 +76,7 @@
         const inputId = 'servings'+id; // Get the corresponding servings input ID
         const servings = parseInt(document.getElementById(inputId).value); // Get the number of servings
 
-          totalValue += unitPriceValue * servings; // Multiply price by servings
+          totalValue += unitPriceValue * servings *{{people}}; // Multiply price by servings
           totalTime += time;
           totalServings += servings;
       });
@@ -90,7 +90,7 @@
       mealProgressBar.textContent = '$'+totalValue.toFixed(2); // Show percentage text
       timeProgressBar.style.width = timePercentage+'%';
       timeProgressBar.textContent = totalTime+' mins';
-      document.getElementById('currentServings').textContent = totalServings+'/{{maxServings}} servings'
+      document.getElementById('currentServings').textContent = totalServings+'/{{servingsPerPerson}} servings'
   });
 </script>
 
