@@ -62,7 +62,7 @@ form {
 }
 
 .progress-container {
-    background-color: #f3f3f3;
+    background-color: black;
     border-radius: 5px;
     overflow: hidden;
     margin-top: 20px;
@@ -72,9 +72,9 @@ form {
 .progress-bar {
     height: 30px;
     width: 0;
-    background-color: ;
+/*     background-color: red; */
     line-height: 30px; /* Center text vertically */
-    color: black;
+    color: white;
 }
   
   .progress-bar + .progress-bar {
