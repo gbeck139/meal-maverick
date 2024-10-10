@@ -58,7 +58,14 @@ def menu():
 def plan():
   selected_ids = request.args.get('selected_ids').split(',')
   selected_meals = Meal.query.filter(Meal.id.in_(selected_ids)).all()
-  return render_template('plan.html', selected_meals=selected_meals)
+  # for each meal
+  #  look at ingrdients and quantities
+  #
+  #
+  
+  
+  
+  return render_template('plan.html', selected_meals=selected_meals, ingredients=ingredients)
 
 
 

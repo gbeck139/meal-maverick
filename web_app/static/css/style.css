@@ -88,6 +88,10 @@ form {
     color: white;
   }
 
+.hidden{
+  visibility: hidden;
+}
+
 
 /* Links that open files in the editor */
 .fileopener {
