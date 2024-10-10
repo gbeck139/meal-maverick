@@ -11,8 +11,8 @@
   {%endfor%}
 
 // shopping list
-  {% for item in ingredients%}
-    <p>{{meal.name}}</p>
+  {% for item in shopping_list%}
+    <p>{{item["quantity"]}}</p>
   {%endfor%}
   <a href="/">Home</a>
 {%endblock%}
