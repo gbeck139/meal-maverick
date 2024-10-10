@@ -5,42 +5,9 @@
 
 <style>
 
-  .data-container{
-    display: flex;
-    align-items: flex-start;
 
-  }
   
-.progress-container-wrapper {
-    width:100%;
-}
-
-.progress-container {
-    background-color: #f3f3f3;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-top: 20px;
-    
-}
-
-.progress-bar {
-    height: 30px;
-    width: 0;
-    background-color: #4caf50;
-    line-height: 30px; /* Center text vertically */
-    color: white;
-}
   
-  .progress-bar + .progress-bar {
-    margin-top: 10px; /* Add space between bars */
-  }
-  
-  .number {
-    margin-left: 20px;
-    margin-top: 10px;
-    font-size: 40px;
-    color: white;
-  }
 
 </style>
 
@@ -70,7 +37,7 @@
 </div>
 
 
-<div id="budget" overflow="scroll" height="100%">
+<div id="meal-container">
 <h1>Select Items</h1>
     <form id="mealForm" method="POST" action="/menu">
         {% for meal in meals %}
