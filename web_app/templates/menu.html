@@ -24,16 +24,18 @@
 
 <div class = "data-container">
   <div class="progress-container-wrapper">
+    <p> Estimated price:</p>
       <div class="progress-container">
-          <div id="mealProgressBar" class="progress-bar">0%</div>
+          <div id="mealProgressBar" class="progress-bar">$0.00</div>
       </div>
 
       <div class="progress-container">
-          <div id="timeProgressBar" class="progress-bar">0%</div>
+        <p> Estimated prep time:</p>
+          <div id="timeProgressBar" class="progress-bar">0</div>
       </div>
 
   </div>
-  <p id="currentServings" class="number">0/{{servingsPerPerson}} meals planned</p>
+  <p id="currentServings" class="number">0/{{servingsPerPerson}} meals</p>
 </div>
 
 
@@ -98,7 +100,7 @@
       mealProgressBar.textContent = '$'+totalValue.toFixed(2); // Show percentage text
       timeProgressBar.style.width = timePercentage+'%';
       timeProgressBar.textContent = totalTime+' mins';
-      document.getElementById('currentServings').textContent = totalServings+'/{{servingsPerPerson}} servings'
+      document.getElementById('currentServings').textContent = totalServings+'/{{servingsPerPerson}} meals'
   });
 </script>
 
