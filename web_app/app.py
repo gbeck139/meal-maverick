@@ -50,8 +50,8 @@ def menu():
     maxServings = int(request.args.get('maxServings'))
     people = int(request.args.get('people'))
     zipCode = request.args.get('zipCode')
-    serv
-    return render_template('menu.html', time=time, budget=budget, maxServings=maxServings, meals=meals, people=people)
+    servingsPerPerson = int(maxServings/people)
+    return render_template('menu.html', time=time, budget=budget, maxServings=maxServings, meals=meals, people=people, servingsPerPerson=servingsPerPerson)
 
 
 @app.route('/plan', methods=['GET', 'POST'])
