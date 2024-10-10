@@ -68,10 +68,16 @@ def plan():
   # pass in shopping list
   
   for meal in selected_meals:
-    for ingredient in meal.ingredients:
+    for ingredient in json.loads(meal.ingredients):
       if ingredient not in shopping_list:
-        if ingredient.unit != "cup" or ingredient.unit != "tsp" or ingredient.unit != "tbps":
-          shopping_list[ingredient] = {ingredient.}
+        if ingredient["unit"] != "cup" or ingredient["unit"] != "tsp" or ingredient["unit"] != "tbps":
+          shopping_list[ingredient] = {"unit": ingredient["unit"], "quantity" = ingredient["quantity"]}
+        else:
+          shopping_list[ingredient] = {"unit": None, "quantity" = None}
+      else:
+        listIngredient = shopping_list[ingredient]
+        if listIngredient["quantity"] not None:
+          listIngredient["quantity"] += ingredient["quantity"]
   
   
   
