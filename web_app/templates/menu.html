@@ -86,7 +86,14 @@
       const timePercentage = (totalTime/maxTime) * 100;
 
       // Update progress bar
-      mealProgressBar.color = 
+      const costGreen = Math.max(0, 255-Math.round(2.55*costPercentage));
+      const costRed = Math.min(255, Math.round(2.55*costPercentage));
+      const timeGreen = Math.max(0, 255-Math.round(2.55*costPercentage));
+      const timeRed = Math.min(255, Math.round(2.55*costPercentage));
+  
+      mealProgressBar.style.backgroundColor='rgb(${costRed}, ${costGreen}, 0)';
+      timeProgressBar.style.backgroundColor='rgb(${timeRed}, ${timeGreen}, 0)';'
+  
       mealProgressBar.style.width = costPercentage + '%';
       mealProgressBar.textContent = '$'+totalValue.toFixed(2); // Show percentage text
       timeProgressBar.style.width = timePercentage+'%';

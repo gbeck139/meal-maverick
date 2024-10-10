@@ -72,9 +72,9 @@ form {
 .progress-bar {
     height: 30px;
     width: 0;
-    background-color: #4caf50;
+    background-color: ;
     line-height: 30px; /* Center text vertically */
-    color: white;
+    color: black;
 }
   
   .progress-bar + .progress-bar {
