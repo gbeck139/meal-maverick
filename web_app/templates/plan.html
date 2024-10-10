@@ -10,9 +10,9 @@
     <p>{{meal.name}}</p>
   {%endfor%}
 
-// shopping list
-  {% for item in shopping_list%}
-    <p>{{item["quantity"]}}</p>
+  {% for item, quant in shopping_list%}
+    <p>{{quant}}</p>
   {%endfor%}
+<p>{{quantities}}</p>
   <a href="/">Home</a>
 {%endblock%}
