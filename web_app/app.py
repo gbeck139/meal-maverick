@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-
+import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/meals.db'
@@ -41,6 +41,7 @@ def menu():
     if request.method == 'POST':
 
         selected_ids = request.form.getlist('selected_meals') 
+        meal_quantities = request.form.getlist('') 
         zipCode = request.args.get('zipCode')
         # return render_template('test.html', value=selected_meals)
         return redirect(url_for('plan', selected_ids=','.join(selected_ids),zipCode=zipCode))
@@ -68,15 +69,16 @@ def plan():
   # pass in shopping list
   
   for meal in selected_meals:
-    for ingredient in json.loads(meal.ingredients):
+    ingredients = json.loads(meal.ingredients)
+    for ingredient in ingredients:
       if ingredient not in shopping_list:
         if ingredient["unit"] != "cup" or ingredient["unit"] != "tsp" or ingredient["unit"] != "tbps":
-          shopping_list[ingredient] = {"unit": ingredient["unit"], "quantity" = ingredient["quantity"]}
+          shopping_list[ingredient] = {"unit": ingredient["unit"], "quantity" : ingredient["quantity"]}
         else:
-          shopping_list[ingredient] = {"unit": None, "quantity" = None}
+          shopping_list[ingredient] = {"unit": None, "quantity" : None}
       else:
         listIngredient = shopping_list[ingredient]
-        if listIngredient["quantity"] not None:
+        if listIngredient["quantity"] is not None:
           listIngredient["quantity"] += ingredient["quantity"]
   
   
