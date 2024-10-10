@@ -74,13 +74,12 @@ def plan():
     for ingredient, values in ingredients.items():
       if ingredient not in shopping_list:
         if values["unit"] == "cup" or values["unit"]  == "tsp" or values["unit"]  == "tbps":
-          shopping_list[ingredient] = {"unit": None, "quantity" : None}   
+          shopping_list[ingredient] = {"unit": "", "quantity" : 0}   
         else:
-          shopping_list[ingredient] = {"unit": values["unit"], "quantity" : values["quantity"]}
+          shopping_list[ingredient] = {"unit": values["unit"], "quantity" : int(values["quantity"])}
       else:
-        if shopping_list[ingredient] is not None:
-          # shopping_list["quantity"] += quantity
-          pass
+        if values["quantity"] != "":
+          shopping_list[ingredient]["quantity"] += int(values["quantity"])
   
   
   return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list)
