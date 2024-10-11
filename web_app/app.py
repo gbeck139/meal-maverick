@@ -76,7 +76,8 @@ def menu():
 @app.route('/plan', methods=['GET', 'POST'])
 def plan():
   meal_quantities = json.loads(request.args.get('mealQuantities'))
-  selected_meals = Meal.query.filter(Meal.id.in_(meal_quantities_ids)).all()
+  selected_meals = Meal.query.filter(Meal.id.in_(meal_quantities.keys())).all()
+  
   shopping_list ={}
   # for each meal
   #  look at ingrdients and quantities
