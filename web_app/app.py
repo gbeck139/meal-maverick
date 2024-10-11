@@ -6,6 +6,9 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/meals.db'
 db = SQLAlchemy(app)
 
+budget = 0.0
+
+
 class Meal(db.Model):
     __tablename__ = 'meals'
 
