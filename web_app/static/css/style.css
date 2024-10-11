@@ -151,8 +151,9 @@ input[type="checkbox"] {
     text-align: center; /* Centered text inside */
     line-height: 30px; /* Center text vertically */
     color: black; /* Text color for contrast */
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 5px;
     text-align: left;
+    padding-left: 10px;
 }
 
 button {
@@ -176,10 +177,6 @@ button:hover {
     width:100%;
 }
 
-  
-.progress-bar + .progress-bar {
-  margin-top: 10px; /* Add space between bars */
-}
 
 .number {
   margin-left: 20px;
