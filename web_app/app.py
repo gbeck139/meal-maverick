@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 from dotenv import load_dotenv
 import os
+from fractions import Fraction
 
 load_dotenv()
 
@@ -102,9 +103,10 @@ def plan():
           # if values["unit"] == "cup" or values["unit"] == "tsp" or values["unit"] == "tbsp":
           shopping_list[ingredient] = {"unit": ingredient_values["unit"], "quantity" : float(ingredient_values["quantity"])/meal.servings*servingsPerPerson*session.get('people')}
         else:
-          if values["quantity"] != "":
+          if ingredient_values["quantity"] != "":
             shopping_list[ingredient]["quantity"] += float(ingredient_values["quantity"])/meal.servings*servingsPerPerson*session.get('people')
-
+  for item in shopping_list.keys():
+    shopping_list[item]["fraction"] = Fraction(shopping_list[item]["quantity"]).limit_denominator()
   
   return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list)
 

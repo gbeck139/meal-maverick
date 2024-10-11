@@ -18,7 +18,7 @@
     {%if values["quantity"] == 0%}
       <p>{{item.lower()}}</p>
     {%else%}
-      <p>{{values["quantity"]}} {{values["unit"]}} {{item.lower()}}</p>
+      <p>{{values["fraction"]}} {{values["unit"]}} {{item.lower()}}</p>
     {%endif%}
   {%endfor%}
 <p>{{quantities}}</p>
