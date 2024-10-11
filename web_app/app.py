@@ -39,7 +39,7 @@ def goals():
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
     if request.method == 'POST':
-
+    
         selected_ids = request.form.getlist('selected_meals') 
         meal_quantities = request.form.getlist('') 
         zipCode = request.args.get('zipCode')
