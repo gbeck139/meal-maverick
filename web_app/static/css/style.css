@@ -1,11 +1,12 @@
 
 
-/* Our default values set as CSS variables */
 :root {
-/*   --color-bg: #00000F; */
-  --color-text-main: #333333;
-  --color-primary: #FFF000;
-  --font-family: monospace;
+    --color-bg: #F9F9F9; /* Light beige or off-white */
+    --color-text-main: #333333; /* Dark grey */
+    --color-primary: #A3D407; /* Soft green */
+    --color-secondary: #B9D7EA; /* Pastel blue */
+    --color-accent: #F4A89F; /* Light coral or peach */
+    --font-family: monospace;
 }
 
 * {
@@ -14,48 +15,114 @@
   box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
-html, body {
-  height: 100%; /* Ensure the body takes the full height */
-}
-
-
-body {
-  font-family: monospace;
-  color: var(--color-text-main)
-/*   background-color: var(--color-bg); */
+.header-container {
+    text-align: center; /* Center align text */
+    position: relative; /* Allows for relative positioning of child elements */
+    margin-top: 50px; /* Space from the top of the page */
 }
 
 h1 {
-  font-family: var(--font-family);
-  color: var(--color-text-main);
-  font-size: 50px;
-  text-align: center;
+    font-size: 50px; /* Main heading size */
+    color: var(--color-text-main); /* Text color from your variables */
 }
 
-/* Subheading */
 h2 {
-  font-family: var(--font-family);
-  color: var(--color-text-main);
-  text-align: center;
-  font-size: 20px;
+    font-size: 25px; /* Subheading size */
+    color: var(--color-text-main);
+    margin-top: 20px; /* Space between subheadings */
+}
+
+.start-button {
+    margin-top: 30px; /* Space above the button */
+}
+
+.start-button a {
+    background-color: var(--color-accent); /* Use your accent color */
+    color: white; /* Button text color */
+    padding: 10px 20px; /* Button padding */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-size: 16px; /* Font size for button */
+}
+
+.start-button a:hover {
+    background-color: #f49c8e; /* Darker color on hover */
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--color-text-main);
+    background-color: var(--color-bg);
+}
+
+h1, h2 {
+    text-align: center;
+    color: var(--color-text-main);
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left; /* Align labels to the left */
+}
+
+form {
+    margin: 0 auto; /* Center the form */
+    max-width: 600px; /* Limit the width of the form */
+    padding: 20px; /* Add padding around the form */
+}
+
+input {
+    width: 100%; /* Make inputs take full width of the container */
+    padding: 10px; /* Add padding inside the input */
+    margin: 10px 0; /* Add vertical spacing between inputs */
+    border: 1px solid #cccccc; /* Light border for inputs */
+    border-radius: 4px; /* Rounded corners */
 }
 
 label {
-  color: #FFFFFF;
-  color: var(--color-text-main)
+    display: block; /* Stack labels above inputs */
+    margin-bottom: 5px; /* Space between label and input */
+    color: var(--color-text-main);
 }
 
+
+input[type="number"], input[type="text"] {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding for inputs */
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+    font-size: 16px; /* Font size */
+}
+
+
+.submit-button {
+    background-color: var(--color-accent);
+    color: white; /* Text color */
+    padding: 10px 15px; /* Button padding */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    width: 100%; /* Full width */
+    font-size: 16px; /* Font size */
+}
+
+.submit-button:hover {
+    background-color: #f49c8e; /* Slightly darker on hover */
+}
+
+.error-message {
+    color: red;
+}
+
+
+
+
+/* test  */
 p {
   color: var(--color-text-main)
   
 }
 
-/* Links */
-a {
-  font-size: 15px;
-  color: var(--color-text-main);
-  font-family: var(--font-family);
-}
 
 li {
   color: var(--color-text-main);
