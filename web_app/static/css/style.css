@@ -56,6 +56,7 @@ body {
 }
 
 h1, h2 {
+    padding-top: 20px;
     text-align: center;
     color: var(--color-text-main);
 }
@@ -75,7 +76,7 @@ form {
 
 
 input {
-    width: calc(100% - 500px); /* Full width minus padding */
+    width: calc(100% - 1000px); /* Full width minus padding */
     padding: 10px; /* Add padding inside input for better UX */
     box-sizing: border-box; /* Include padding in total width */
     margin: 10px 0; /* Add vertical spacing between inputs */
@@ -118,6 +119,7 @@ input[type="number"], input[type="text"] {
 
 .error-message {
     color: red;
+    
 }
 
 .data-container {
@@ -138,6 +140,7 @@ input[type="checkbox"] {
     background-color: #eeeeee; /* Light gray background for the progress container */
     border-radius: 5px; /* Rounded corners */
     margin: 10px 0; /* Margin between progress containers */
+    overflow: hidden;
 }
 
 .progress-bar {
