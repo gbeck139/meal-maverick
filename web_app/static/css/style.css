@@ -68,11 +68,11 @@ h1, h2 {
 
 form {
     max-width: 100%; /* Allow form to take the full width of the screen */
-    width: 50%;
+    width: 80%;
     margin: 0 auto; /* Center the form horizontally */
     padding: 0px; /* Optional: Add padding for better spacing */
     box-sizing: border-box; /* Ensure padding is included in the width */
-    font-size: 20px;
+    font-size: 15px;
 }
 
 
@@ -142,6 +142,7 @@ input[type="checkbox"] {
     border-radius: 5px; /* Rounded corners */
     margin: 10px 0; /* Margin between progress containers */
     overflow: hidden;
+  
 }
 
 .progress-bar {
@@ -151,6 +152,7 @@ input[type="checkbox"] {
     line-height: 30px; /* Center text vertically */
     color: white; /* Text color for contrast */
     border-radius: 5px; /* Rounded corners */
+    text-align: left;
 }
 
 button {
@@ -190,10 +192,11 @@ li {
 
 .number {
   margin-left: 20px;
-  margin-top: 10px;
+  margin-top: 20px;
   color: var(--color-text-main);
-  text-align: left;
-  width: 100%
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
 }
 
 .hidden{
