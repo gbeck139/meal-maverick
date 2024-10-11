@@ -66,15 +66,20 @@ h1, h2 {
 }
 
 form {
-    margin: 0 auto; /* Center the form */
-    max-width: 600px; /* Limit the width of the form */
-    padding: 20px; /* Add padding around the form */
+    max-width: 100%; /* Allow form to take the full width of the screen */
+    width: 100%;
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 20px; /* Optional: Add padding for better spacing */
+    box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
+
 input {
-    width: 100%; /* Make inputs take full width of the container */
-    padding: 10px; /* Add padding inside the input */
+    width: calc(100% - 500px); /* Full width minus padding */
+    padding: 10px; /* Add padding inside input for better UX */
+    box-sizing: border-box; /* Include padding in total width */
     margin: 10px 0; /* Add vertical spacing between inputs */
+    margin-bottom: 10px; /* Add space between inputs */
     border: 1px solid #cccccc; /* Light border for inputs */
     border-radius: 4px; /* Rounded corners */
 }
@@ -194,7 +199,7 @@ li {
 /* alvarotrigo.com */
 .bg {
   width: 100%;
-  height: 100vh;
+  height: 150%;
 /*   display: flex; */
   align-items: center;
   justify-content: center;
