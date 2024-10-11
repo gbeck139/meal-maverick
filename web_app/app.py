@@ -1,12 +1,10 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/meals.db'
 db = SQLAlchemy(app)
-
-budget = 0.0
 
 
 class Meal(db.Model):
@@ -28,26 +26,25 @@ def home():
 @app.route('/goals', methods=['GET', 'POST'])  # Accept both GET and POST methods
 def goals():
   if request.method == 'POST':
-      time = request.form.get('time')
-      budget = request.form.get('budget')
-      people = int(request.form.get('people'))
+      session['time'] = request.form.get('time')
+      session['budget'] = request.form.get('budget')
+      session['people'] = int(request.form.get('people'))
       servingsPerDay = int(request.form.get('servingsPerDay'))
-      maxServings = 7 * people * servingsPerDay
-      zipCode = request.form.get('zipCode')
+      session['maxServings'] = 7 * session.get('people') * servingsPerDay
+      session['zipCode'] = request.form.get('zipCode')
 
-      return redirect(url_for('menu', time=time, budget=budget, maxServings=maxServings, zipCode=zipCode, people=people))
+      return redirect(url_for('menu'))
 
   return render_template('goals.html')
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-      meals = Meal.query.all()
-      time = request.args.get('time')
-      budget = float(request.args.get('budget'))
-      maxServings = int(request.args.get('maxServings'))
-      people = int(request.args.get('people'))
-      zipCode = request.args.get('zipCode')
-      servingsPerPerson = int(maxServings / people)
+    time = session.get('time')
+    budget = float(session.get('budget'))
+    maxServings = int(session.get('maxServings'))
+    people = int(request.args.get('people'))
+    zipCode = request.args.get('zipCode')
+    servingsPerPerson = int(maxServings / people)
 
   
   
@@ -61,54 +58,12 @@ def menu():
         else:
           meal_quantities = request.form.getlist('') 
           zipCode = request.args.get('zipCode')
-            return redirect(url_for('plan', selected_ids=','.join(selected_ids), zipCode=zipCode))
-          return redirect(url_for('plan', selected_ids=','.join(selected_ids),zipCode=zipCode))
-        
-    return render_template_menu("")
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    meals = Meal.query.all()
-    time = request.args.get('time')
-    budget = float(request.args.get('budget'))
-    maxServings = int(request.args.get('maxServings'))
-    people = int(request.args.get('people'))
-    zipCode = request.args.get('zipCode')
-    
-    servingsPerPerson = maxServings // people if people > 0 else 0
-
-    if request.method == 'POST':
-        selected_ids = request.form.getlist('selected_meals') 
-        
-        if not selected_ids:
-            # Render the menu with an error message if no meals are selected
-            return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
-                                   meals=meals, people=people, servingsPerPerson=servingsPerPerson,
-                                   error_message="Please select at least one meal.")
-        else:
-            zipCode = request.args.get('zipCode')
-            return redirect(url_for('plan', selected_ids=','.join(selected_ids), zipCode=zipCode))
+          return redirect(url_for('plan', selected_ids=','.join(selected_ids),zipCode=zipCode), mealQuantities=meal_quantities)
         
     return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
                            meals=meals, people=people, servingsPerPerson=servingsPerPerson,
                            error_message="")
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+    
   
   
   
