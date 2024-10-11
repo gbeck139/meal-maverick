@@ -55,9 +55,13 @@ def menu():
                                    meals=meals, people=people, servingsPerPerson=servingsPerPerson,
                                    error_message="Please select at least one meal.")
         else:
-          meal_quantities = request.form.getlist('servings')
+          meal_quantities = {}
           
-          return redirect(url_for('plan', selected_ids=','.join(selected_ids), mealQuantities=meal_quantities))
+          for id in selected_ids:
+            servings = request.form.get('servings' + id)
+            meal_quantities[id] = servings
+          
+          return redirect(url_for('plan', mealQuantities=json.dumps(meal_quantities)))
         
     return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
                            meals=meals, people=people, servingsPerPerson=servingsPerPerson,
@@ -71,8 +75,8 @@ def menu():
   
 @app.route('/plan', methods=['GET', 'POST'])
 def plan():
-  selected_ids = request.args.get('selected_ids').split(',')
-  selected_meals = Meal.query.filter(Meal.id.in_(selected_ids)).all()
+  meal_quantities = json.loads(request.args.get('mealQuantities'))
+  selected_meals = Meal.query.filter(Meal.id.in_(meal_quantities_ids)).all()
   shopping_list ={}
   # for each meal
   #  look at ingrdients and quantities
