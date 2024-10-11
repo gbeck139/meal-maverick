@@ -41,8 +41,6 @@ def goals():
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-  
-    def render_template_menu(error_message):
       meals = Meal.query.all()
       time = request.args.get('time')
       budget = float(request.args.get('budget'))
@@ -51,23 +49,67 @@ def menu():
       zipCode = request.args.get('zipCode')
       servingsPerPerson = int(maxServings / people)
 
-      return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
-                             meals=meals, people=people, servingsPerPerson=servingsPerPerson,
-                             error_message=error_message)
   
   
     if request.method == 'POST':
         selected_ids = request.form.getlist('selected_meals') 
         
         if not selected_ids:
-          return render_template_menu("Please select at least one meal")
+          return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
+                                   meals=meals, people=people, servingsPerPerson=servingsPerPerson,
+                                   error_message="Please select at least one meal.")
         else:
           meal_quantities = request.form.getlist('') 
           zipCode = request.args.get('zipCode')
-          # return render_template('test.html', value=selected_meals)
+            return redirect(url_for('plan', selected_ids=','.join(selected_ids), zipCode=zipCode))
           return redirect(url_for('plan', selected_ids=','.join(selected_ids),zipCode=zipCode))
         
     return render_template_menu("")
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    meals = Meal.query.all()
+    time = request.args.get('time')
+    budget = float(request.args.get('budget'))
+    maxServings = int(request.args.get('maxServings'))
+    people = int(request.args.get('people'))
+    zipCode = request.args.get('zipCode')
+    
+    servingsPerPerson = maxServings // people if people > 0 else 0
+
+    if request.method == 'POST':
+        selected_ids = request.form.getlist('selected_meals') 
+        
+        if not selected_ids:
+            # Render the menu with an error message if no meals are selected
+            return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
+                                   meals=meals, people=people, servingsPerPerson=servingsPerPerson,
+                                   error_message="Please select at least one meal.")
+        else:
+            zipCode = request.args.get('zipCode')
+            return redirect(url_for('plan', selected_ids=','.join(selected_ids), zipCode=zipCode))
+        
+    return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
+                           meals=meals, people=people, servingsPerPerson=servingsPerPerson,
+                           error_message="")
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
