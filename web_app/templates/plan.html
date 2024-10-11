@@ -1,5 +1,9 @@
 {% extends 'base.html'%}
 
+
+
+
+
 {%block head%}
   <title>Your Plan</title>
 {%endblock%}
@@ -7,7 +11,7 @@
   <h1>This week's plan...</h1>
   <h2>Here are the recipes for the meals you chose and a shopping list, as well as the store that currently has the best deals</h2>
   {% for meal in selected_meals%}
-    <p>{{meal.name}}</p>
+    <a href="{{meal.url}}" target="_blank">{{meal.name}}</a>
   {%endfor%}
 
   {% for item, values in shopping_list.items()%}
