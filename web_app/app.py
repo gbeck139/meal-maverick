@@ -67,8 +67,7 @@ def menu():
         meal_quantities = {}
 
         for id in selected_ids:
-          servings = request.form.getById('servings' + id)
-          return testing(servings)
+          servings = request.form.get('servings' + id)
           meal_quantities[id] = int(servings)
           # servings is returning None on broccoli quich
         session['meal_quantities'] = meal_quantities
@@ -92,25 +91,20 @@ def plan():
   #meal_quant = {'id'=}
   
   shopping_list ={}
-  # for each meal
-  #  look at ingrdients and quantities
-  #    if ingredient not in shopping list add it
-  #      if unit is not tsp, tbsp, cup add quantity with unit
-  #    else if has quanitiy, quanitiy += ingredient quanitity
   
-  # pass in shopping list
-  
-  for meal in selected_meals:
-    ingredients = dict(json.loads(meal.ingredients))
-    
-    for ingredient, values in ingredients.items():
-      if ingredient not in shopping_list:
-        # if values["unit"] == "cup" or values["unit"] == "tsp" or values["unit"] == "tbsp":
-        shopping_list[ingredient] = {"unit": values["unit"], "quantity" : int(values["quantity"])}
-      else:
-        if values["quantity"] != "":
-          shopping_list[ingredient]["quantity"] += int(values["quantity"])*meal_quantities[str(meal.id)]/meal.servings
-  
+  for meal_id, servingsPerPerson in meal_quantities.items():
+      meal = Meal.query.get(meal_id)
+
+      ingredients = dict(json.loads(meal.ingredients))
+
+      for ingredient, ingredient_values in ingredients.items():
+        if ingredient not in shopping_list:
+          # if values["unit"] == "cup" or values["unit"] == "tsp" or values["unit"] == "tbsp":
+          shopping_list[ingredient] = {"unit": ingredient_values["unit"], "quantity" : int(ingredient_values["quantity"])/meal.servings*}
+        else:
+          if values["quantity"] != "":
+            shopping_list[ingredient]["quantity"] += int(values["quantity"])*quantity/meal.servings
+
   
   return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list)
 
