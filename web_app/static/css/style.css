@@ -21,12 +21,13 @@ html, body {
 
 body {
   font-family: monospace;
+  color: var(--color-text-main)
 /*   background-color: var(--color-bg); */
 }
 
 h1 {
   font-family: var(--font-family);
-  color: #00FF00;
+  color: var(--color-text-main);
   font-size: 50px;
   text-align: center;
 }
@@ -34,23 +35,25 @@ h1 {
 /* Subheading */
 h2 {
   font-family: var(--font-family);
-  color: #00FF00;
+  color: var(--color-text-main);
   text-align: center;
   font-size: 20px;
 }
 
 label {
   color: #FFFFFF;
+  color: var(--color-text-main)
 }
 
 p {
-  color: #00FF00;
+  color: var(--color-text-main)
+  
 }
 
 /* Links */
 a {
   font-size: 15px;
-  color: #00FF00;
+  color: var(--color-text-main);
   font-family: var(--font-family);
 }
 
@@ -113,7 +116,7 @@ form {
   align-items: center;
   justify-content: center;
   background-size: 350% 350%;
-  background-image: linear-gradient(-180deg, black 0%, black 25%, black 50%, #ff357f 100%);
+  background-image: linear-gradient(-180deg, white 0%, white 25%, white 50%, #A3D4B7 100%);
   -webkit-animation: AnimateBG 5s ease infinite;
           animation: AnimateBG 5s ease infinite;
 }
