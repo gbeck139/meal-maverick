@@ -44,35 +44,40 @@ def goals():
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    time = session.get('time')
-    budget = float(session.get('budget'))
-    maxServings = int(session.get('maxServings'))
-    people = int(session.get('people'))
-    servingsPerPerson = int(maxServings / people)
-    meals = Meal.query.order_by(Meal.unit_price).all()
   
+  def testing(test):
+    return render_template('test.html', test=test)
   
-    if request.method == 'POST':
-        selected_ids = request.form.getlist('selected_meals') 
-        
-        if not selected_ids:
-          return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
-                                   meals=meals, people=people, servingsPerPerson=servingsPerPerson,
-                                   error_message="Please select at least one meal.")
-        else:
-          meal_quantities = {}
-          
-          for id in selected_ids:
-            servings = request.form.get('servings' + id)
-            meal_quantities[id] = int(servings)
-            # servings is returning None on broccoli quich
-          session['meal_quantities'] = meal_quantities
-          return redirect(url_for('plan'))
-        
-    return render_template('menu.html', time=time, budget=budget, maxServings=maxServings, meals=meals,
-                           people=people, servingsPerPerson=servingsPerPerson,
-                           error_message="")
-    
+  time = session.get('time')
+  budget = float(session.get('budget'))
+  maxServings = int(session.get('maxServings'))
+  people = int(session.get('people'))
+  servingsPerPerson = int(maxServings / people)
+  meals = Meal.query.order_by(Meal.unit_price).all()
+
+
+  if request.method == 'POST':
+      selected_ids = request.form.getlist('selected_meals')
+
+      if not selected_ids:
+        return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
+                                 meals=meals, people=people, servingsPerPerson=servingsPerPerson,
+                                 error_message="Please select at least one meal.")
+      else:
+        meal_quantities = {}
+
+        for id in selected_ids:
+          servings = request.form.getById('servings' + id)
+          return testing(servings)
+          meal_quantities[id] = int(servings)
+          # servings is returning None on broccoli quich
+        session['meal_quantities'] = meal_quantities
+        return redirect(url_for('plan'))
+
+  return render_template('menu.html', time=time, budget=budget, maxServings=maxServings, meals=meals,
+                         people=people, servingsPerPerson=servingsPerPerson,
+                         error_message="")
+
   
   
   
