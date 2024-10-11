@@ -4,23 +4,71 @@
 
 
 
-{%block head%}
+{% block head %}
   <title>Your Plan</title>
-{%endblock%}
-{%block body%}
-  <h1>This week's plan...</h1>
-  <h2>Here are the recipes for the meals you chose and a shopping list, as well as the store that currently has the best deals</h2>
-  {% for meal in selected_meals%}
-    <a href="{{meal.url}}" target="_blank">{{meal.name}}</a>
-  {%endfor%}
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #F9F9F9; /* Light beige background */
+      color: #333; /* Dark grey text for readability */
+      margin: 20px;
+    }
 
-  {% for item, values in shopping_list.items()%}
-    {%if values["quantity"] == 0%}
-      <p>{{item.lower()}}</p>
-    {%else%}
-      <p>{{values["fraction"]}} {{values["unit"]}} {{item.lower()}}</p>
-    {%endif%}
-  {%endfor%}
-<p>{{quantities}}</p>
-  <a href="/">Home</a>
-{%endblock%}
+    h1, h2 {
+      text-align: center; /* Centered headings */
+    }
+
+    a {
+      color: #A3D407; /* Soft green links */
+      text-decoration: none; /* Remove underline */
+      display: block; /* Make each link a block element */
+      margin: 10px 0; /* Add margin between links */
+    }
+
+    a:hover {
+      text-decoration: underline; /* Underline on hover */
+    }
+
+    .shopping-list {
+      margin-top: 20px; /* Space above shopping list */
+      padding: 10px; /* Padding around the list */
+      background-color: #B9D7EA; /* Pastel blue background for list */
+      border-radius: 5px; /* Rounded corners */
+    }
+
+    .shopping-list p {
+      margin: 5px 0; /* Space between items */
+    }
+
+    .home-link {
+      display: block; /* Make home link a block */
+      text-align: center; /* Center the link */
+      margin-top: 20px; /* Space above home link */
+      font-weight: bold; /* Bold text */
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+  <h1>This Week's Plan...</h1>
+  <h2>Here are the recipes for the meals you chose and a shopping list, as well as the store that currently has the best deals.</h2>
+
+  <h3>Recipes</h3>
+  {% for meal in selected_meals %}
+    <a href="{{ meal.url }}" target="_blank">{{ meal.name }}</a>
+  {% endfor %}
+
+  <div class="shopping-list">
+    <h3>Shopping List</h3>
+    {% for item, values in shopping_list.items() %}
+      {% if values["quantity"] == 0 %}
+        <p>{{ item.lower() }}</p>
+      {% else %}
+        <p>{{ values["fraction"] }} {{ values["unit"] }} {{ item.lower() }}</p>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <p>{{ quantities }}</p>
+  <a href="/" class="home-link">Home</a>
+{% endblock %}
