@@ -1,8 +1,13 @@
 from flask import Flask, render_template, url_for, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 import json
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
+app.secret_key = os.getenv('FLASK_SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/meals.db'
 db = SQLAlchemy(app)
 
@@ -64,7 +69,7 @@ def menu():
           return redirect(url_for('plan', mealQuantities=json.dumps(meal_quantities)))
         
     return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
-                           meals=meals, people=people, servingsPerPerson=servingsPerPerson,
+                           people=people, servingsPerPerson=servingsPerPerson,
                            error_message="")
     
   
