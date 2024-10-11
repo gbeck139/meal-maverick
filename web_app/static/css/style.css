@@ -3,7 +3,7 @@
 /* Our default values set as CSS variables */
 :root {
 /*   --color-bg: #00000F; */
-  --color-text-main: #000000;
+  --color-text-main: #333333;
   --color-primary: #FFF000;
   --font-family: monospace;
 }
@@ -58,11 +58,11 @@ a {
 }
 
 li {
-  color: #00FF00;
+  color: var(--color-text-main);
 }
 
 form {
-  color: #00FF00;
+  color: var(--color-text-main);
 }
 
 
@@ -116,7 +116,7 @@ form {
   align-items: center;
   justify-content: center;
   background-size: 350% 350%;
-  background-image: linear-gradient(-180deg, white 0%, white 25%, white 50%, #A3D4B7 100%);
+  background-image: linear-gradient(-180deg, white 0%, white 52%, #A3D407 100%);
   -webkit-animation: AnimateBG 5s ease infinite;
           animation: AnimateBG 5s ease infinite;
 }
