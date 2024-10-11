@@ -64,9 +64,10 @@ def menu():
           
           for id in selected_ids:
             servings = request.form.get('servings' + id)
-            meal_quantities[id] = servings
-          
-          return redirect(url_for('plan', mealQuantities=json.dumps(meal_quantities)))
+            meal_quantities[id] = int(servings)
+            # servings is returning None on broccoli quich
+          session['meal_quantities'] = meal_quantities
+          return redirect(url_for('plan'))
         
     return render_template('menu.html', time=time, budget=budget, maxServings=maxServings, meals=meals,
                            people=people, servingsPerPerson=servingsPerPerson,
@@ -80,8 +81,10 @@ def menu():
   
 @app.route('/plan', methods=['GET', 'POST'])
 def plan():
-  meal_quantities = json.loads(request.args.get('mealQuantities'))
+  meal_quantities = session.get('meal_quantities')
   selected_meals = Meal.query.filter(Meal.id.in_(meal_quantities.keys())).all()
+  
+  #meal_quant = {'id'=}
   
   shopping_list ={}
   # for each meal
@@ -101,7 +104,7 @@ def plan():
         shopping_list[ingredient] = {"unit": values["unit"], "quantity" : int(values["quantity"])}
       else:
         if values["quantity"] != "":
-          pass # shopping_list[ingredient]["quantity"] += int(values["quantity"])*meal_quantities[str(meal.id)]/meal.servings
+          shopping_list[ingredient]["quantity"] += int(values["quantity"])*meal_quantities[str(meal.id)]/meal.servings
   
   
   return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list)
