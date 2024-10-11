@@ -19,6 +19,7 @@ body {
 h1 {
   font-family: var(--font-family);
   color: #00FF00;
+  font-size: 30px;
 }
 
 /* Subheading */
