@@ -39,22 +39,35 @@ def goals():
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
     if request.method == 'POST':
-    
         selected_ids = request.form.getlist('selected_meals') 
-        meal_quantities = request.form.getlist('') 
-        zipCode = request.args.get('zipCode')
-        # return render_template('test.html', value=selected_meals)
-        return redirect(url_for('plan', selected_ids=','.join(selected_ids),zipCode=zipCode))
-    meals = Meal.query.all()
-    time = request.args.get('time')
-    budget = float(request.args.get('budget'))
-    maxServings = int(request.args.get('maxServings'))
-    people = int(request.args.get('people'))
-    zipCode = request.args.get('zipCode')
-    servingsPerPerson = int(maxServings/people)
-    return render_template('menu.html', time=time, budget=budget, maxServings=maxServings, meals=meals, people=people, servingsPerPerson=servingsPerPerson)
+        
+        if not selected_ids:
+          render_template_menu("Please select at least one meal.")
+        else:
+          meal_quantities = request.form.getlist('') 
+          zipCode = request.args.get('zipCode')
+          # return render_template('test.html', value=selected_meals)
+          return redirect(url_for('plan', selected_ids=','.join(selected_ids),zipCode=zipCode))
+        
+    render_template_menu("")
 
+    def render_template_menu(error_message):
+      meals = Meal.query.all()
+      time = request.args.get('time')
+      budget = float(request.args.get('budget'))
+      maxServings = int(request.args.get('maxServings'))
+      people = int(request.args.get('people'))
+      zipCode = request.args.get('zipCode')
+      servingsPerPerson = int(maxServings / people)
 
+      return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
+                             meals=meals, people=people, servingsPerPerson=servingsPerPerson,
+                             error_message=error_message)
+  
+  
+  
+  
+  
 @app.route('/plan', methods=['GET', 'POST'])
 def plan():
   selected_ids = request.args.get('selected_ids').split(',')
