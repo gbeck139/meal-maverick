@@ -41,7 +41,6 @@ h2 {
     color: white; /* Button text color */
     padding: 10px 20px; /* Button padding */
     border-radius: 5px; /* Rounded corners */
-    text-decoration: none; /* Remove underline */
     font-size: 16px; /* Font size for button */
 }
 
@@ -76,7 +75,7 @@ form {
 
 
 input {
-    width: calc(100% - 500%); /* Full width minus padding */
+    width: calc(100% - 1000px); /* Full width minus padding */
     padding: 10px; /* Add padding inside input for better UX */
     box-sizing: border-box; /* Include padding in total width */
     margin: 10px 0; /* Add vertical spacing between inputs */
