@@ -42,8 +42,7 @@ def menu():
     time = session.get('time')
     budget = float(session.get('budget'))
     maxServings = int(session.get('maxServings'))
-    people = int(request.args.get('people'))
-    zipCode = request.args.get('zipCode')
+    people = int(session.get('people'))
     servingsPerPerson = int(maxServings / people)
 
   
@@ -56,9 +55,9 @@ def menu():
                                    meals=meals, people=people, servingsPerPerson=servingsPerPerson,
                                    error_message="Please select at least one meal.")
         else:
-          meal_quantities = request.form.getlist('') 
-          zipCode = request.args.get('zipCode')
-          return redirect(url_for('plan', selected_ids=','.join(selected_ids),zipCode=zipCode), mealQuantities=meal_quantities)
+          meal_quantities = request.form.getlist('servings')
+          
+          return redirect(url_for('plan', selected_ids=','.join(selected_ids), mealQuantities=meal_quantities))
         
     return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
                            meals=meals, people=people, servingsPerPerson=servingsPerPerson,
