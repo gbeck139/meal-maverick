@@ -19,13 +19,16 @@ body {
 h1 {
   font-family: var(--font-family);
   color: #00FF00;
-  font-size: 30px;
+  font-size: 50px;
+  text-align: center;
 }
 
 /* Subheading */
 h2 {
   font-family: var(--font-family);
   color: #00FF00;
+  text-align: center;
+  font-size: 20px;
 }
 
 label {
