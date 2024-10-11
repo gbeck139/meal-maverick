@@ -100,10 +100,10 @@ def plan():
       for ingredient, ingredient_values in ingredients.items():
         if ingredient not in shopping_list:
           # if values["unit"] == "cup" or values["unit"] == "tsp" or values["unit"] == "tbsp":
-          shopping_list[ingredient] = {"unit": ingredient_values["unit"], "quantity" : int(ingredient_values["quantity"])/meal.servings*}
+          shopping_list[ingredient] = {"unit": ingredient_values["unit"], "quantity" : int(ingredient_values["quantity"])/meal.servings*servingsPerPerson*session.get('people')}
         else:
           if values["quantity"] != "":
-            shopping_list[ingredient]["quantity"] += int(values["quantity"])*quantity/meal.servings
+            shopping_list[ingredient]["quantity"] += int(ingredient_values["quantity"])/meal.servings*servingsPerPerson*session.get('people')
 
   
   return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list)
