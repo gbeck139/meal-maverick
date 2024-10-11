@@ -169,16 +169,7 @@ button:hover {
 }
 
 
-/* test  */
-/* p {
-  color: var(--color-text-main)
-  
-}
 
-
-li {
-  color: var(--color-text-main);
-} */
 
   
 .progress-container-wrapper {
@@ -212,7 +203,7 @@ li {
   align-items: center;
   justify-content: center;
   background-size: 350% 350%;
-  background-image: linear-gradient(-180deg, white 0%, white 52%, #A3D407 100%);
+  background-image: linear-gradient(-180deg, white 45%, #A3D407 100%);
   -webkit-animation: AnimateBG 5s ease infinite;
           animation: AnimateBG 5s ease infinite;
 }

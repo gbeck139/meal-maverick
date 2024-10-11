@@ -2,14 +2,14 @@
 
 {%block head%}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menu</title>
+<title>Your Menu</title>
 
 {%endblock%}
 {%block body%}
 
 
 <h1>Choose Your Meals</h1>
-<h2>Select meals and servings you would like for the week. The totals are calculated for the amount of people you will be cooking for!</h2>
+<h2>Select the amount of servings you would like for the week. The totals are calculated for you and any other people you will be cooking for!</h2>
 
 <div class="data-container">
   <div class="progress-container-wrapper">
@@ -23,11 +23,11 @@
       <div id="timeProgressBar" class="progress-bar">0 mins</div>
     </div>
   </div>
-  <p id="currentServings" class="number">0/{{servingsPerPerson}} meals</p>
+  <p id="currentServings" class="number">0/{{servingsPerPerson}} Meals</p>
 </div>
 
-<h1>Select Items</h1>
-<p class="error-message" style="position: absolute; text-align: center; top: 430px; width: 100%;">{{error_message}}</p>
+<h1>Menu</h1>
+<p class="error-message" style="position: absolute; text-align: center; top: 450px; width: 100%;">{{error_message}}</p>
 
 <form id="mealForm" method="POST" action="/menu">
   <div style="overflow-y: auto; height: calc(50vh); padding: 10px; align-items: top;">
