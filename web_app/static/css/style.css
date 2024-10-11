@@ -8,7 +8,15 @@
   --font-family: monospace;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
 
+html, body {
+  height: 100%; /* Ensure the body takes the full height */
+}
 
 
 body {
@@ -102,10 +110,10 @@ form {
   width: 100%;
   height: 100vh;
 /*   display: flex; */
-/*   align-items: center; */
-/*   justify-content: center; */
-  background-size: 300% 300%;
-  background-image: linear-gradient(-45deg, black 0%, black 25%, black 51%, #ff357f 100%);
+  align-items: center;
+  justify-content: center;
+  background-size: 350% 350%;
+  background-image: linear-gradient(-180deg, black 0%, black 25%, black 50%, #ff357f 100%);
   -webkit-animation: AnimateBG 5s ease infinite;
           animation: AnimateBG 5s ease infinite;
 }
@@ -132,17 +140,4 @@ form {
   100% {
     background-position: 0% 50%;
   }
-}
-
-
-
-/* Links that open files in the editor */
-.fileopener {
-  cursor:pointer;
-  font-weight:bold;
-  border-bottom:3px solid var(--color-primary);
-  color: var(--color-secondary);
-}
-.fileopener:hover {
-  border-bottom:3px solid var(--color-secondary);
 }
