@@ -38,19 +38,7 @@ def goals():
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    if request.method == 'POST':
-        selected_ids = request.form.getlist('selected_meals') 
-        
-        if not selected_ids:
-          render_template_menu("Please select at least one meal.")
-        else:
-          meal_quantities = request.form.getlist('') 
-          zipCode = request.args.get('zipCode')
-          # return render_template('test.html', value=selected_meals)
-          return redirect(url_for('plan', selected_ids=','.join(selected_ids),zipCode=zipCode))
-        
-    render_template_menu("")
-
+  
     def render_template_menu(error_message):
       meals = Meal.query.all()
       time = request.args.get('time')
@@ -63,6 +51,20 @@ def menu():
       return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
                              meals=meals, people=people, servingsPerPerson=servingsPerPerson,
                              error_message=error_message)
+  
+  
+    if request.method == 'POST':
+        selected_ids = request.form.getlist('selected_meals') 
+        
+        if not selected_ids:
+          return render_template_menu("Please select at least one meal")
+        else:
+          meal_quantities = request.form.getlist('') 
+          zipCode = request.args.get('zipCode')
+          # return render_template('test.html', value=selected_meals)
+          return redirect(url_for('plan', selected_ids=','.join(selected_ids),zipCode=zipCode))
+        
+    return render_template_menu("")
   
   
   
