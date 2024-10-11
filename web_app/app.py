@@ -49,7 +49,7 @@ def menu():
     maxServings = int(session.get('maxServings'))
     people = int(session.get('people'))
     servingsPerPerson = int(maxServings / people)
-
+    meals = Meal.query.order_by(Meal.unit_price).all()
   
   
     if request.method == 'POST':
@@ -68,7 +68,7 @@ def menu():
           
           return redirect(url_for('plan', mealQuantities=json.dumps(meal_quantities)))
         
-    return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
+    return render_template('menu.html', time=time, budget=budget, maxServings=maxServings, meals=meals,
                            people=people, servingsPerPerson=servingsPerPerson,
                            error_message="")
     
@@ -101,7 +101,7 @@ def plan():
         shopping_list[ingredient] = {"unit": values["unit"], "quantity" : int(values["quantity"])}
       else:
         if values["quantity"] != "":
-          shopping_list[ingredient]["quantity"] += int(values["quantity"])*meal_quantities[meal.id]/meal.servings
+          pass# shopping_list[ingredient]["quantity"] += int(values["quantity"])*meal_quantities[str(meal.id)]/meal.servings
   
   
   return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list)
