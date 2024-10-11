@@ -31,7 +31,7 @@
 <form id="mealForm" method="POST" action="/menu">
   <div style="overflow-y: auto; height: calc(50vh); padding: 10px;">
     {% for meal in meals %}
-    <div style="margin-bottom: 10px; display: flex; align-items: left;">
+    <div style="margin-bottom: 10px; display: flex; align-items: center;">
       <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" 
              data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" 
              onchange="toggleServings({{ meal.id }})">
