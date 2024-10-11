@@ -7,94 +7,88 @@
 {%block body%}
 
 
-
-
-
-<h1>Choose your meals</h1>
+<h1>Choose Your Meals</h1>
 <h2>Here is where you can choose the meals you want for the week</h2>
 
-
-<div class = "data-container">
+<div class="data-container">
   <div class="progress-container-wrapper">
-    <p> Estimated price for {{people}}:</p>
-      <div class="progress-container">
-          <div id="mealProgressBar" class="progress-bar">$0.00</div>
-      </div>
+    <p>Estimated price for {{people}}:</p>
+    <div class="progress-container">
+      <div id="mealProgressBar" class="progress-bar">$0.00</div>
+    </div>
 
-      <div class="progress-container">
-        <p> Estimated prep time:</p>
-          <div id="timeProgressBar" class="progress-bar">0</div>
-      </div>
-
+    <p>Estimated prep time:</p>
+    <div class="progress-container">
+      <div id="timeProgressBar" class="progress-bar">0 mins</div>
+    </div>
   </div>
   <p id="currentServings" class="number">0/{{servingsPerPerson}} meals</p>
 </div>
 
-
 <h1>Select Items</h1>
-<p style="color: red">{{error_message}}</p>
-    <form id="mealForm" method="POST" action="/menu">
-      <div style="  overflow-y: scroll; height: calc(50vh);">
-        {% for meal in meals %}
-            <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" onchange="toggleServings({{ meal.id }})"> {{ meal.name }} (${{meal.unit_price}})<br>
-            <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" max="{{totalServings}}" value="1" style="width: 50px; display: none;"><br>
-        {% endfor %}
-      </div>
-        <button type="submit" style="margin-top: 10px;">Submit</button>
-    </form>
+<p style="color: red;">{{error_message}}</p>
 
+<form id="mealForm" method="POST" action="/menu">
+  <div style="overflow-y: auto; height: calc(50vh); padding: 10px;">
+    {% for meal in meals %}
+    <div style="margin-bottom: 10px; display: flex; align-items: left;">
+      <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" 
+             data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" 
+             onchange="toggleServings({{ meal.id }})">
+      <label for="meal{{ meal.id }}" style="margin-left: 10px;">{{ meal.name }} (${{meal.unit_price}})</label>
+      <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" 
+             max="{{totalServings}}" value="1" style="width: 50px; display: none; margin-left: 10px;">
+    </div>
+    {% endfor %}
+  </div>
+  <button type="submit" style="margin-top: 10px;">Submit</button>
+</form>
 
 <script src="../static/js/toggleServings.js"></script>
 
-
-
 <script>
-// JavaScript to handle progress bar updates
-      const mealForm = document.getElementById('mealForm');
-      const mealProgressBar = document.getElementById('mealProgressBar');
-      const timeProgressBar = document.getElementById('timeProgressBar');
-      const maxValue = {{budget}};
-      const maxTime = {{time}};
+// JavaScript for updating progress bars
+const mealForm = document.getElementById('mealForm');
+const mealProgressBar = document.getElementById('mealProgressBar');
+const timeProgressBar = document.getElementById('timeProgressBar');
+const maxValue = {{budget}};
+const maxTime = {{time}};
 
-  mealForm.addEventListener('change', function() {
-      let totalValue = 0;
-      let totalTime = 0;
-      let totalServings = 0;
+mealForm.addEventListener('change', function() {
+    let totalValue = 0;
+    let totalTime = 0;
+    let totalServings = 0;
 
-      // Calculate total value of selected meals based on servings
-      const mealsChecked = document.querySelectorAll('input[name="selected_meals"]:checked');
-      mealsChecked.forEach(meal => {
-
+    const mealsChecked = document.querySelectorAll('input[name="selected_meals"]:checked');
+    mealsChecked.forEach(meal => {
         const id = meal.value; 
         const unitPriceValue = parseFloat(meal.getAttribute("data-price"));
         const time = parseInt(meal.getAttribute("data-time"));
-        const inputId = 'servings'+id; // Get the corresponding servings input ID
-        const servings = parseInt(document.getElementById(inputId).value); // Get the number of servings
+        const inputId = 'servings' + id; 
+        const servings = parseInt(document.getElementById(inputId).value);
 
-          totalValue += unitPriceValue * servings *{{people}}; // Multiply price by servings
-          totalTime += time;
-          totalServings += servings;
-      });
+        totalValue += unitPriceValue * servings * {{people}}; 
+        totalTime += time * servings; // Adjusted to multiply by servings
+        totalServings += servings;
+    });
 
-      // Assume maximum value for progress is $100 (can be adjusted)
-      const costPercentage = (totalValue / maxValue) * 100;
-      const timePercentage = (totalTime/maxTime) * 100;
+    const costPercentage = (totalValue / maxValue) * 100;
+    const timePercentage = (totalTime / maxTime) * 100;
 
-      // Update progress bar
-      const costGreen = Math.max(0, 255-Math.round(2.55*costPercentage));
-      const costRed = Math.min(255, Math.round(2.55*costPercentage));
-      const timeGreen = Math.max(0, 255-Math.round(2.55*timePercentage));
-      const timeRed = Math.min(255, Math.round(2.55*timePercentage));
-  
-      mealProgressBar.style.backgroundColor=`rgb(${costRed}, ${costGreen}, 0)`;
-      timeProgressBar.style.backgroundColor=`rgb(${timeRed}, ${timeGreen}, 0)`;
-  
-      mealProgressBar.style.width = costPercentage + '%';
-      mealProgressBar.textContent = '$'+totalValue.toFixed(2); // Show percentage text
-      timeProgressBar.style.width = timePercentage+'%';
-      timeProgressBar.textContent = totalTime+' mins';
-      document.getElementById('currentServings').textContent = totalServings+'/{{servingsPerPerson}} meals'
-  });
+    const costGreen = Math.max(0, 255 - Math.round(2.55 * costPercentage));
+    const costRed = Math.min(255, Math.round(2.55 * costPercentage));
+    const timeGreen = Math.max(0, 255 - Math.round(2.55 * timePercentage));
+    const timeRed = Math.min(255, Math.round(2.55 * timePercentage));
+
+    mealProgressBar.style.backgroundColor = `rgb(${costRed}, ${costGreen}, 0)`;
+    timeProgressBar.style.backgroundColor = `rgb(${timeRed}, ${timeGreen}, 0)`;
+
+    mealProgressBar.style.width = costPercentage + '%';
+    mealProgressBar.textContent = '$' + totalValue.toFixed(2);
+    timeProgressBar.style.width = timePercentage + '%';
+    timeProgressBar.textContent = totalTime + ' mins';
+    document.getElementById('currentServings').textContent = totalServings + '/{{servingsPerPerson}} meals';
+});
 </script>
 
 

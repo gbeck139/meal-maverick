@@ -114,7 +114,41 @@ input[type="number"], input[type="text"] {
     color: red;
 }
 
+.data-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px; /* Add margin for spacing */
+}
 
+.progress-container {
+    width: 100%; /* Full width for progress bars */
+    background-color: #eeeeee; /* Light gray background for the progress container */
+    border-radius: 5px; /* Rounded corners */
+    margin: 10px 0; /* Margin between progress containers */
+}
+
+.progress-bar {
+    height: 30px; /* Height for progress bar */
+    background-color: green; /* Default color */
+    text-align: center; /* Centered text inside */
+    line-height: 30px; /* Center text vertically */
+    color: white; /* Text color for contrast */
+    border-radius: 5px; /* Rounded corners */
+}
+
+button {
+    background-color: #A3D407; /* Primary button color */
+    color: white; /* Button text color */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding for button */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 5px; /* Rounded button corners */
+}
+
+button:hover {
+    background-color: #F4A89F; /* Change color on hover for better UX */
+}
 
 
 /* test  */
@@ -128,36 +162,11 @@ li {
   color: var(--color-text-main);
 }
 
-form {
-  color: var(--color-text-main);
-}
-
-
-  .data-container{
-    display: flex;
-    align-items: flex-start;
-
-  }
   
 .progress-container-wrapper {
     width:100%;
 }
 
-.progress-container {
-    background-color: black;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-top: 20px;
-    
-}
-
-.progress-bar {
-    height: 30px;
-    width: 0;
-/*     background-color: red; */
-    line-height: 30px; /* Center text vertically */
-    color: white;
-}
   
   .progress-bar + .progress-bar {
     margin-top: 10px; /* Add space between bars */
