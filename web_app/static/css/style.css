@@ -150,7 +150,7 @@ input[type="checkbox"] {
     background-color: green; /* Default color */
     text-align: center; /* Centered text inside */
     line-height: 30px; /* Center text vertically */
-    color: white; /* Text color for contrast */
+    color: black; /* Text color for contrast */
     border-radius: 5px; /* Rounded corners */
     text-align: left;
 }
