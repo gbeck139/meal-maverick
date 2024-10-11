@@ -96,7 +96,7 @@ def plan():
         shopping_list[ingredient] = {"unit": values["unit"], "quantity" : int(values["quantity"])}
       else:
         if values["quantity"] != "":
-          shopping_list[ingredient]["quantity"] += int(values["quantity"])
+          shopping_list[ingredient]["quantity"] += int(values["quantity"])*meal_quantities[meal.id]/meal.servings
   
   
   return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list)
