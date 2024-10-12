@@ -129,7 +129,7 @@ def plan():
       
       shopping_list[item]["fraction"] = Fraction(round(shopping_list[item]["quantity"]*2)/2).limit_denominator()
   
-  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list, money_result=money_result , time_result=time_result, moneySpent=moneySpent, timeUsed=timeUsed, money_over = -money_result, time_over = -time_result)
+  return render_template('plan.html', selected_meals=selected_meals, meal_quantities=meal_quantities, shopping_list=shopping_list, money_result=money_result , time_result=time_result, moneySpent=moneySpent, timeUsed=timeUsed, money_over = -money_result, time_over = -time_result)
 
 
 
