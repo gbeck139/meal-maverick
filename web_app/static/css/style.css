@@ -80,14 +80,24 @@ input[type="number"], input[type="text"] {
     font-size: 16px;
 }
 
+.submit-container{
+      display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center;
+      width: 100%;
+}
+
 .submit-button {
     background-color: var(--color-accent);
     color: white;
     padding: 10px 15px;
+      padding-right: 5%;
+    padding-left: 5%;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%;
+    width: 90%;
     font-size: 16px;
 }
 
@@ -135,12 +145,12 @@ button:hover {
 
 .goal-form {
 /*   text-align: center; */
-      padding-left: 3%;
 }
 
 .form-group {
     margin-bottom: 20px; /* Adds 20px of space between each form element */
-    padding-right: 40px;
+    padding-right: 5%;
+    padding-left: 5%;
 }
 
 .hidden{
