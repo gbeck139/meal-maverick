@@ -106,6 +106,7 @@ def plan():
   money_result = int(budget - moneySpent)
   time_result = int(time - timeUsed)
   units_not_used = ["cups", "cup", "tsp", "tbsp"]
+  quantity_list = [quantity for quantity in meal_quantities.values()]
   #meal_quant = {'id'=}
   
   shopping_list ={}
@@ -128,8 +129,8 @@ def plan():
     if(shopping_list[item]["quantity"] != ""):
       
       shopping_list[item]["fraction"] = Fraction(round(shopping_list[item]["quantity"]*2)/2).limit_denominator()
-  
-  return render_template('plan.html', selected_meals=selected_meals, meal_quantities=meal_quantities, shopping_list=shopping_list, money_result=money_result , time_result=time_result, moneySpent=moneySpent, timeUsed=timeUsed, money_over = -money_result, time_over = -time_result)
+  selected_count = len(selected_meals)
+  return render_template('plan.html', selected_meals=selected_meals,  shopping_list=shopping_list, money_result=money_result , time_result=time_result, moneySpent=moneySpent, timeUsed=timeUsed, money_over = -money_result, time_over = -time_result, selected_count=selected_count, quantity_list=quantity_list)
 
 
 
