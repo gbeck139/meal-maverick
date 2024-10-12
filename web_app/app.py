@@ -101,6 +101,10 @@ def plan():
   selected_meals = Meal.query.filter(Meal.id.in_(meal_quantities.keys())).all()
   timeUsed = session.get('timeUsed')
   moneySpent = session.get('moneySpent')
+  budget=float(session.get('budget'))
+  time=int(session.get('time'))
+  money_result = budget - moneySpent
+  time_result = time - timeUsed
   #meal_quant = {'id'=}
   
   shopping_list ={}
@@ -120,7 +124,7 @@ def plan():
   for item in shopping_list.keys():
     shopping_list[item]["fraction"] = Fraction(shopping_list[item]["quantity"]).limit_denominator()
   
-  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list, budget=float(session.get('budget')), time=int(session.get('time')), moneySpent=moneySpent, timeUsed=timeUsed)
+  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list, money_result=money_result , time_result=time_result, moneySpent=moneySpent, timeUsed=timeUsed)
 
 
 
