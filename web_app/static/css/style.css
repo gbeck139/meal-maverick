@@ -71,7 +71,7 @@ a:hover {
 
 input[type="number"], input[type="text"] {
     
-    width: 90%;
+    width: 100%;
     padding: 10px;
     border: 1px solid var(--color-primary); /* Red border for inputs */
     border-radius: 5px;
@@ -131,7 +131,16 @@ button:hover {
     height: 90em;
     background-size: 350% 350%;
     background-image: var(--color-bg); /* Black to red gradient */
-    animation: AnimateBG 5s ease infinite;
+}
+
+.goal-form {
+/*   text-align: center; */
+      padding-left: 3%;
+}
+
+.form-group {
+    margin-bottom: 20px; /* Adds 20px of space between each form element */
+    padding-right: 40px;
 }
 
 .hidden{
