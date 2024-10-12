@@ -67,6 +67,21 @@ a:hover {
     font-size: 16px;
 }
 
+.recipe-links a {
+    color: var(--color-text-main); /* Set recipe links to white */
+    display: block; /* Each link takes a full line */
+    margin-bottom: 10px; /* Space between links */
+}
+
+.shopping-list a {
+    color: white; /* Bright red for links */
+    display: block; /* Each link takes a full line */
+    margin-bottom: 10px; /* Space between links */
+  
+    
+
+}
+
 .start-button a:hover {
     background-color: #FF4500; /* Darker red on hover */
 }
@@ -225,14 +240,7 @@ h1, h2, h3 {
 }
 
 /* Links in the recipes section */
-.shopping-list a {
-    color: white; /* Bright red for links */
-    display: block; /* Each link takes a full line */
-    margin-bottom: 10px; /* Space between links */
-  
-    
 
-}
 
 .shopping-list a:hover {
     text-decoration: underline; /* Underline on hover for better interactivity */
@@ -274,3 +282,4 @@ h1, h2, h3 {
     width: 90%; /* Same width as shopping list */
     color: white; /* Color for recipe links */
 }
+
