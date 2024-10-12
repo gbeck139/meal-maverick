@@ -36,7 +36,7 @@
     <div class="recipe-links">
 
     {% for i in range(selected_count) %}
-      <a href="{{ selected_meals[i].url }}" target="_blank">{{ selected_meals[i].name }} ({{quantity_list[i]}})</a>
+      <a href="{{ selected_meals[i].url }}" target="_blank">{{ selected_meals[i].name }} ({{quantity_list[i]}} servings)</a>
     {% endfor %}
   </div>
 
