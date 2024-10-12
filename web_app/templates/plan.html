@@ -11,6 +11,11 @@
   <h1>This Week's Plan</h1>
   <div>
     <h2>
+      Estimated price: ${{money_result}}<br>
+      Estimated prep time: {{time_result}} minutes
+      
+    </h2>
+    <h2>
       {% if money_result >= 0 and time_result >= 0%}
         You saved ${{money_result}} and {{time_result}} minutes!!<br>Enjoy!
       {%else%}
@@ -36,9 +41,9 @@
   </div>
 
 
-    
+    <h3 style="margin-top: 20px;">Screenshot shopping list</h3>
     <div class="shopping-list">
-      <h3>Screenshot shopping list</h3>
+      
       {% for item, values in shopping_list.items() %}
       {% if values["quantity"] == 0 %}
         <p>{{ item.lower() }}</p>
