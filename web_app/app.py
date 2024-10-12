@@ -45,10 +45,7 @@ def goals():
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-  
-  def testing(test):
-    return render_template('test.html', test=test)
-  
+    
   time = session.get('time')
   budget = float(session.get('budget'))
   maxServings = int(session.get('maxServings'))
@@ -60,10 +57,14 @@ def menu():
   if request.method == 'POST':
       selected_ids = request.form.getlist('selected_meals')
 
-      if not selected_ids:
+      # if not selected_ids:
+      #   return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
+      #                            meals=meals, people=people, servingsPerPerson=servingsPerPerson,
+      #                            error_message="Please select at least one meal.")
+      if len(selected_ids) < maxServings:
         return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
                                  meals=meals, people=people, servingsPerPerson=servingsPerPerson,
-                                 error_message="Please select at least one meal.")
+                                 error_message=f"You still need {int(maxServings/people)-len(selected_ids)} servings! Increase servings or select more meals.")
       else:
         meal_quantities = {}
 

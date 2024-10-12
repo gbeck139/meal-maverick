@@ -9,7 +9,7 @@
 
 
 <h1>Choose Your Meals</h1>
-<h2>Select a meal then enter how many servings each person will eat throughout the week. </h2>
+<h2>Select meals and enter how many servings you need for the week for one person. We’ll take care of rest!</h2>
 
 <div class="data-container">
   <div class="progress-container-wrapper">
@@ -30,7 +30,8 @@
 <p id="currentServings" class="number"> 
    0/{{servingsPerPerson}} meals selected
 </p>
-<p class="error-message" style="position: absolute; text-align: center; top: 450px; width: 100%;">{{error_message}}</p>
+<p>{{error_message}}</p>
+
 
 <form id="mealForm" method="POST" action="/menu">
   <div style="overflow-y: auto; height: calc(50vh); padding-left: 5%; align-items: top;">
