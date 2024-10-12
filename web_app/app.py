@@ -122,7 +122,7 @@ def plan():
           else: 
             shopping_list[ingredient] = {"unit": ingredient_values["unit"], "quantity" : float(ingredient_values["quantity"])/meal.servings*servingsPerPerson*session.get('people')}
         else:
-          if ingredient_values["quantity"] != "":
+          if ingredient_values["quantity"] != "" and shopping_list[ingredient]["quantity"] != "":
             shopping_list[ingredient]["quantity"] += float(ingredient_values["quantity"])/meal.servings*servingsPerPerson*session.get('people')
   for item in shopping_list.keys():
     if(shopping_list[item]["quantity"] != ""):
