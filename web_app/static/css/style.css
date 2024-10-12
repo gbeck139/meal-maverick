@@ -69,6 +69,12 @@ a:hover {
     background-color: #FF4500; /* Darker red on hover */
 }
 
+.form-group {
+    margin-bottom: 20px; /* Adds 20px of space between each form element */
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
 input[type="number"], input[type="text"] {
     
     width: 100%;
@@ -118,11 +124,20 @@ button:hover {
     background-color: #FF6347; /* Lighter red on hover */
 }
 
+.data-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+    margin: 20px; /* Add margin for spacing */
+  
+}
+
 .progress-container {
     width: 100%;
     background-color: #444444; /* Dark gray background for progress bars */
     border-radius: 5px;
     margin: 10px 0;
+  
 }
 
 .progress-bar {
@@ -134,6 +149,7 @@ button:hover {
     border-radius: 5px;
     text-align: left;
     padding-left: 10px;
+  
 }
 
 .bg {
@@ -143,15 +159,6 @@ button:hover {
     background-image: var(--color-bg); /* Black to red gradient */
 }
 
-.goal-form {
-/*   text-align: center; */
-}
-
-.form-group {
-    margin-bottom: 20px; /* Adds 20px of space between each form element */
-    padding-right: 5%;
-    padding-left: 5%;
-}
 
 .hidden{
   visibility: hidden;
