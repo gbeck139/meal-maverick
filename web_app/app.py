@@ -125,7 +125,9 @@ def plan():
           if ingredient_values["quantity"] != "":
             shopping_list[ingredient]["quantity"] += float(ingredient_values["quantity"])/meal.servings*servingsPerPerson*session.get('people')
   for item in shopping_list.keys():
-    shopping_list[item]["fraction"] = Fraction(shopping_list[item]["quantity"]).limit_denominator()
+    if(shopping_list[item]["quantity"] != ""):
+      
+      shopping_list[item]["fraction"] = Fraction(round(shopping_list[item]["quantity"]*2)/2).limit_denominator()
   
   return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list, money_result=money_result , time_result=time_result, moneySpent=moneySpent, timeUsed=timeUsed, money_over = -money_result, time_over = -time_result)
 

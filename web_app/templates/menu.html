@@ -81,7 +81,7 @@ mealForm.addEventListener('change', function() {
         const servings = parseInt(document.getElementById(inputId).value);
 
         totalValue += unitPriceValue * servings * {{people}}; 
-        totalTime += time;
+        totalTime += time + servings;
         totalServings += servings;
     });
 
