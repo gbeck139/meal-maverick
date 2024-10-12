@@ -30,11 +30,14 @@
 <p id="currentServings" class="number"> 
    0/{{servingsPerPerson}} meals selected
 </p>
+
 <p class="error-message">{{error_message}}</p>
 
 
 <form id="mealForm" method="POST" action="/menu">
-  <div style="overflow-y: auto; height: calc(50vh); padding-left: 5%; align-items: top;">
+  <div class="scrollable-container" style="overflow-y: auto; height: 300px; border: 1px solid #ccc; position: relative;">
+    <p style="position: absolute; top: 5px; right: 5px; color: gray;">Scroll down to select your meals</p>
+    <div style="height: calc(50vh); padding-left: 5%; align-items: top;">
     {% for meal in meals %}
     
     <div style="display:flex; align-items: center; padding: 3px; " >
@@ -53,7 +56,8 @@
     <input type="hidden" id="moneySpent" name="moneySpent" value="0">
     
   </div>
-  <p style="text-align: right; margin-right: 100px;">|scroll</p>
+</div>
+
   <div class="submit-container" style="margin-top: 15px;">
     <button type="submit" class="submit-button">Submit</button>
   </div>
