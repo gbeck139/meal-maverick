@@ -99,12 +99,13 @@ def menu():
 def plan():
   meal_quantities = session.get('meal_quantities')
   selected_meals = Meal.query.filter(Meal.id.in_(meal_quantities.keys())).all()
-  timeUsed = session.get('timeUsed')
-  moneySpent = session.get('moneySpent')
+  timeUsed = int(session.get('timeUsed'))
+  moneySpent = int(session.get('moneySpent'))
   budget=float(session.get('budget'))
   time=int(session.get('time'))
-  money_result = budget - moneySpent
-  time_result = time - timeUsed
+  money_result = int(budget - moneySpent)
+  time_result = int(time - timeUsed)
+  units_not_used = ["cups", "cup", "tsp", "tbsp"]
   #meal_quant = {'id'=}
   
   shopping_list ={}
@@ -116,15 +117,17 @@ def plan():
 
       for ingredient, ingredient_values in ingredients.items():
         if ingredient not in shopping_list:
-          # if values["unit"] == "cup" or values["unit"] == "tsp" or values["unit"] == "tbsp":
-          shopping_list[ingredient] = {"unit": ingredient_values["unit"], "quantity" : float(ingredient_values["quantity"])/meal.servings*servingsPerPerson*session.get('people')}
+          if ingredient_values["unit"] in units_not_used:
+            shopping_list[ingredient] = {"unit": "", "quantity" : ""}
+          else: 
+            shopping_list[ingredient] = {"unit": ingredient_values["unit"], "quantity" : float(ingredient_values["quantity"])/meal.servings*servingsPerPerson*session.get('people')}
         else:
           if ingredient_values["quantity"] != "":
             shopping_list[ingredient]["quantity"] += float(ingredient_values["quantity"])/meal.servings*servingsPerPerson*session.get('people')
   for item in shopping_list.keys():
     shopping_list[item]["fraction"] = Fraction(shopping_list[item]["quantity"]).limit_denominator()
   
-  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list, money_result=money_result , time_result=time_result, moneySpent=moneySpent, timeUsed=timeUsed)
+  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list, money_result=money_result , time_result=time_result, moneySpent=moneySpent, timeUsed=timeUsed, money_over = -money_result, time_over = -time_result)
 
 
 
