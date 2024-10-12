@@ -22,12 +22,14 @@
     <div class="progress-container">
       <div id="timeProgressBar" class="progress-bar">0 mins</div>
     </div>
-    <p id="currentServings" class="number">0/{{servingsPerPerson}} Meals</p>
   </div>
   
 </div>
 
 <h2>Menu</h2>
+<p id="currentServings" class="number"> 
+   0/{{servingsPerPerson}} meals selected
+</p>
 <p class="error-message" style="position: absolute; text-align: center; top: 450px; width: 100%;">{{error_message}}</p>
 
 <form id="mealForm" method="POST" action="/menu">
@@ -95,7 +97,7 @@ mealForm.addEventListener('change', function() {
     mealProgressBar.textContent = '$' + totalValue.toFixed(2);
     timeProgressBar.style.width = timePercentage + '%';
     timeProgressBar.textContent = totalTime + ' mins';
-    document.getElementById('currentServings').textContent = totalServings + '/{{servingsPerPerson}} meals';
+    document.getElementById('currentServings').textContent = totalServings + '/{{servingsPerPerson}} meals selected';
 });
 </script>
 
