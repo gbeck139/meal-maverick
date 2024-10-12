@@ -173,7 +173,7 @@ button:hover {
     background-color: var(--color-secondary); /* Bright green progress bar */
     text-align: center;
     line-height: 30px;
-    color: black;
+    color: white;
     border-radius: 5px;
     text-align: left;
     padding-left: 10px;
@@ -199,11 +199,11 @@ button:hover {
 
 
 .scrollable-container::-webkit-scrollbar {
-/*     width: 0px; */
+    width: 0px; /* Width of the scrollbar */
 }
 
 .scrollable-container::-webkit-scrollbar-thumb {
-    background-color: red; /* Color of the scrollbar thumb */
+    background-color: darkgray; /* Color of the scrollbar thumb */
     border-radius: 5px; /* Rounded edges */
 }
 
