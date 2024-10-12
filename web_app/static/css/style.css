@@ -1,52 +1,16 @@
-
-
 :root {
-    --color-bg: #F9F9F9; /* Light beige or off-white */
-    --color-text-main: #333333; /* Dark grey */
-    --color-primary: #A3D407; /* Soft green */
-    --color-secondary: #B9D7EA; /* Pastel blue */
-    --color-accent: #F4A89F; /* Light coral or peach */
-    --font-family: monospace;
+    --color-bg: #000000; /* Black background */
+    --color-text-main: #FFFFFF; /* White text */
+    --color-primary: #FF3333; /* Bright red for primary elements */
+    --color-secondary: #33FF66; /* Bright green for secondary elements */
+    --color-accent: #FF5733; /* Red-orange accent */
+    --font-family: 'Courier New', monospace; /* Retro monospace font */
 }
 
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Include padding and border in element's total width and height */
-}
-
-.header-container {
-    text-align: center; /* Center align text */
-    position: relative; /* Allows for relative positioning of child elements */
-    margin-top: 50px; /* Space from the top of the page */
-}
-
-h1 {
-    font-size: 50px; /* Main heading size */
-    color: var(--color-text-main); /* Text color from your variables */
-}
-
-h2 {
-    font-size: 25px; /* Subheading size */
-    color: var(--color-text-main);
-    margin-top: 20px; /* Space between subheadings */
-}
-
-.start-button {
-    margin-top: 30px; /* Space above the button */
-}
-
-.start-button a {
-    background-color: var(--color-accent); /* Use your accent color */
-    color: white; /* Button text color */
-    padding: 10px 20px; /* Button padding */
-    border-radius: 5px; /* Rounded corners */
-    text-decoration: none; /* Remove underline */
-    font-size: 16px; /* Font size for button */
-}
-
-.start-button a:hover {
-    background-color: #f49c8e; /* Darker color on hover */
+  box-sizing: border-box;
 }
 
 body {
@@ -55,176 +19,100 @@ body {
     background-color: var(--color-bg);
 }
 
-h1, h2 {
-    padding-top: 20px;
+.header-container {
     text-align: center;
-    color: var(--color-text-main);
+    position: relative;
+    margin-top: 50px;
 }
 
-.form-group {
-    margin-bottom: 15px;
-    text-align: left; /* Align labels to the left */
+h1 {
+    font-size: 50px;
+    color: var(--color-secondary); /* Use bright green for main headings */
 }
 
-form {
-    max-width: 100%; /* Allow form to take the full width of the screen */
-    width: 80%;
-    margin: 0 auto; /* Center the form horizontally */
-    padding: 0px; /* Optional: Add padding for better spacing */
-    box-sizing: border-box; /* Ensure padding is included in the width */
-    font-size: 15px;
+h2 {
+    font-size: 25px;
+    color: var(--color-primary); /* Use red for subheadings */
+    margin-top: 20px;
 }
 
-
-input {
-    width: 40px; /* Full width minus padding */
-    padding: 10px; /* Add padding inside input for better UX */
-    box-sizing: border-box; /* Include padding in total width */
-    margin: 10px 0; /* Add vertical spacing between inputs */
-    margin-bottom: 10px; /* Add space between inputs */
-    border: 1px solid #cccccc; /* Light border for inputs */
-    border-radius: 4px; /* Rounded corners */
+.start-button {
+    margin-top: 30px;
 }
 
-label {
-    display: block; /* Stack labels above inputs */
-    margin-bottom: 5px; /* Space between label and input */
-    color: var(--color-text-main);
-    cursor: pointer;
+.start-button a {
+    background-color: var(--color-accent);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
 }
 
+.start-button a:hover {
+    background-color: #FF4500; /* Darker red on hover */
+}
 
 input[type="number"], input[type="text"] {
-    width: 100%; /* Full width */
-    padding: 10px; /* Padding for inputs */
-    border: 1px solid var(--color-primary);
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--color-primary); /* Red border for inputs */
     border-radius: 5px;
-    font-size: 16px; /* Font size */
+    background-color: #222; /* Darker input background */
+    color: var(--color-text-main);
+    font-size: 16px;
 }
-
 
 .submit-button {
     background-color: var(--color-accent);
-    color: white; /* Text color */
-    padding: 10px 15px; /* Button padding */
+    color: white;
+    padding: 10px 15px;
     border: none;
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer on hover */
-    width: 100%; /* Full width */
-    font-size: 16px; /* Font size */
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
 }
 
 .submit-button:hover {
-    background-color: #f49c8e; /* Slightly darker on hover */
+    background-color: #FF4500;
 }
 
-.error-message {
-    color: red;
-    
-}
-
-.data-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Align items to the left */
-    margin: 20px; /* Add margin for spacing */
-}
-
-input[type="checkbox"] {
+button {
+    background-color: var(--color-primary); /* Red button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
     cursor: pointer;
-    align-items: left;
+    border-radius: 5px;
 }
 
+button:hover {
+    background-color: #FF6347; /* Lighter red on hover */
+}
 
 .progress-container {
-    width: 100%; /* Full width for progress bars */
-    background-color: #eeeeee; /* Light gray background for the progress container */
-    border-radius: 5px; /* Rounded corners */
-    margin: 10px 0; /* Margin between progress containers */
-    overflow: hidden;
-  
+    width: 100%;
+    background-color: #444444; /* Dark gray background for progress bars */
+    border-radius: 5px;
+    margin: 10px 0;
 }
 
 .progress-bar {
-    height: 30px; /* Height for progress bar */
-    background-color: green; /* Default color */
-    text-align: center; /* Centered text inside */
-    line-height: 30px; /* Center text vertically */
-    color: black; /* Text color for contrast */
+    height: 30px;
+    background-color: var(--color-secondary); /* Bright green progress bar */
+    text-align: center;
+    line-height: 30px;
+    color: black;
     border-radius: 5px;
     text-align: left;
     padding-left: 10px;
 }
 
-button {
-    background-color: #A3D407; /* Primary button color */
-    color: white; /* Button text color */
-    border: none; /* No border */
-    padding: 10px 20px; /* Padding for button */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 5px; /* Rounded button corners */
-}
-
-button:hover {
-    background-color: #F4A89F; /* Change color on hover for better UX */
-}
-
-
-
-
-  
-.progress-container-wrapper {
-    width:100%;
-}
-
-
-.number {
-  margin-left: 20px;
-  margin-top: 20px;
-  color: var(--color-text-main);
-  text-align: center;
-  width: 100%;
-  font-size: 20px;
-}
-
-.hidden{
-  visibility: hidden;
-}
-
-
-/* alvarotrigo.com */
 .bg {
-  width: 100%;
-  height: 90em;
-/*   display: flex; */
-  align-items: center;
-  justify-content: center;
-  background-size: 350% 350%;
-  background-image: linear-gradient(-180deg, white 45%, #A3D407 100%);
-  -webkit-animation: AnimateBG 5s ease infinite;
-          animation: AnimateBG 5s ease infinite;
-}
-
-@-webkit-keyframes AnimateBG {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 50% 0%;
-  }
-}
-
-@keyframes AnimateBG {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+    width: 100%;
+    height: 90em;
+    background-size: 350% 350%;
+    background-image: linear-gradient(-180deg, black 45%, var(--color-primary) 100%); /* Black to red gradient */
+    animation: AnimateBG 5s ease infinite;
 }
