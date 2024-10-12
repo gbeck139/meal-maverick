@@ -35,8 +35,8 @@
   
     <div class="recipe-links">
 
-    {% for meal in selected_meals %}
-      <a href="{{ meal.url }}" target="_blank">{{ meal.name }} ({{meal_quantities.get(meal.id)}})</a>
+    {% for i in range(selected_count) %}
+      <a href="{{ selected_meals[i].url }}" target="_blank">{{ selected_meals[i].name }} ({{quantity_list[i]}})</a>
     {% endfor %}
   </div>
 
