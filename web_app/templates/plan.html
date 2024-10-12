@@ -36,7 +36,7 @@
     <div class="recipe-links">
 
     {% for meal in selected_meals %}
-      <a href="{{ meal.url }}" target="_blank">{{ meal.name }}</a>
+      <a href="{{ meal.url }}" target="_blank">{{ meal.name }} ({{meal_quantities.get(meal.id)}})</a>
     {% endfor %}
   </div>
 
