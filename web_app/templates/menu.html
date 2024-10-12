@@ -40,7 +40,7 @@
     <div style="display:flex; align-items: center; padding: 3px; " >
       <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" 
              data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" 
-             onchange="toggleServings({{ meal.id }})" style="margin-right: 10px;" {% if meal.id in selected_ids %} checked {% endif %}>
+             onchange="toggleServings({{ meal.id }})" style="margin-right: 10px;">
       <label for="meal{{ meal.id }}" > {{ meal.name  }} (${{meal.unit_price}})</label>
       <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" 
              max="{{totalServings}}" value="1" style="width: 80px; display: none; margin-left: 10px;">
@@ -48,7 +48,7 @@
     </div>
      
     {% endfor %}
-    <input type="hidden" id="totalServingsInput" name="totalServings" value="0">f
+    <input type="hidden" id="totalServingsInput" name="totalServings" value="0">
   </div>
   <div class="submit-container" style="margin-top: 15px;">
     <button type="submit" class="submit-button">Submit</button>

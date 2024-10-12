@@ -186,3 +186,10 @@ button:hover {
 .hidden{
   visibility: hidden;
 }
+
+h3 {
+      text-align: center;
+      color: var(--color-secondary); /* Green for headings */
+    font-size: 25px;
+    padding: 15px;
+}

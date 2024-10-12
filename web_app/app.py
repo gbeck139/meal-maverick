@@ -58,7 +58,6 @@ def menu():
 
   if request.method == 'POST':
       selected_ids = request.form.getlist('selected_meals')
-      selected_ids = [int(id) for id in selected_ids]
       
       if (int(total_servings) >= servingsPerPerson):
         meal_quantities = {}
@@ -72,7 +71,7 @@ def menu():
       else:
         return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
                                  meals=meals, people=people, servingsPerPerson=servingsPerPerson, selected_ids=selected_ids,
-                                 error_message=f"You still need {servingsPerPerson - int(total_servings)} servings! Increase servings or select more meals.")
+                                 error_message=f"You still need {servingsPerPerson - int(total_servings)} servings! Select meals again and increase servings.")
 
   return render_template('menu.html', time=time, budget=budget, maxServings=maxServings, meals=meals,
                          people=people, servingsPerPerson=servingsPerPerson, selected_ids=selected_ids,
