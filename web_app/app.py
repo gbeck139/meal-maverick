@@ -107,7 +107,7 @@ def plan():
   for item in shopping_list.keys():
     shopping_list[item]["fraction"] = Fraction(shopping_list[item]["quantity"]).limit_denominator()
   
-  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list)
+  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list, budget=session.get('budget'), time=session.get('time'), moneySpent=moneySpent, timeUsed=timeUsed)
 
 
 
