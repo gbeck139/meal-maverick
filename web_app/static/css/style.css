@@ -335,9 +335,6 @@ h1, h2, h3 {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    display: grid; /* Use CSS Grid */
-    grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
-    gap: 10px; /* Space between the columns */
 }
 
 
