@@ -68,10 +68,11 @@ a:hover {
 }
 
 .recipe-links a {
-    color: var(--color-text-main); /* Set recipe links to white */
-    display: block; /* Each link takes a full line */
-    margin-bottom: 10px; /* Space between links */
+    color: var(--color-text-main);
+    display: block; 
+    margin-bottom: 10px; 
 }
+
 
 .shopping-list a {
     color: white; /* Bright red for links */
@@ -276,11 +277,11 @@ h1, h2, h3 {
     padding: 20px; /* Adds some padding around the link */
 }
   
-  .recipe-links {
+/*   .recipe-links {
     margin-top: 20px; 
     
     padding: 15px; 
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 5px; 
   
     margin-left: 5%;
     margin-right: 5%;
@@ -296,5 +297,27 @@ h1, h2, h3 {
     border: 1px solid white; 
     border-radius: 5px;
     
+} */
+
+.recipe-links {
+    margin-top: 20px; 
+    padding: 15px; 
+    border-radius: 5px; /* Rounded corners */
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    padding-right: 5%;
+    padding-left: 5%;
+    color: white;
+    border: 1px solid white; 
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: grid; /* Use CSS Grid */
+    grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+    gap: 10px; /* Space between the columns */
 }
+
+
+
 

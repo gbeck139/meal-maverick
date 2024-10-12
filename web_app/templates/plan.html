@@ -9,11 +9,17 @@
 
 {% block body %}
   <h1>This Week's Plan</h1>
-  
-  <h2><br>Enjoy!</h2>
+  <div>
+    <h2>
+      You saved {{budget -money}}
+    </h2>
+  </div>
+
+
+  <h2><br>Recipe links</h2>
   
     <div class="recipe-links">
-    <h3>Recipe links</h3>
+
     {% for meal in selected_meals %}
       <a href="{{ meal.url }}" target="_blank">{{ meal.name }}</a>
     {% endfor %}
