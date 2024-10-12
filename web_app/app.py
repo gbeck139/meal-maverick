@@ -53,8 +53,18 @@ def menu():
   servingsPerPerson = int(maxServings / people)
   meals = Meal.query.order_by(Meal.unit_price).all()
   total_servings = request.form.get('totalServings')
-  session['timeUsed'] = int(request.form.get('timeUsed'))
-  session['moneySpent'] = float(request.form.get('moneySpent'))
+  time_used = request.form.get('timeUsed')
+  money_spent = request.form.get('moneySpent')
+  
+  if time_used is not None and money_spent is not None:
+    session['timeUsed'] = int(time_used)
+    session['moneySpent'] = float(money_spent)
+  else:
+    session['timeUsed'] = 0
+    session['moneySpent'] = 0
+
+    
+  
   selected_ids = []
 
 
@@ -110,7 +120,7 @@ def plan():
   for item in shopping_list.keys():
     shopping_list[item]["fraction"] = Fraction(shopping_list[item]["quantity"]).limit_denominator()
   
-  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list, budget=session.get('budget'), time=session.get('time'), moneySpent=moneySpent, timeUsed=timeUsed)
+  return render_template('plan.html', selected_meals=selected_meals, shopping_list=shopping_list, budget=float(session.get('budget')), time=int(session.get('time')), moneySpent=moneySpent, timeUsed=timeUsed)
 
 
 

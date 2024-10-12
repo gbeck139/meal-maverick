@@ -176,7 +176,9 @@ button:hover {
     border-radius: 5px;
     text-align: left;
     padding-left: 10px;
+    overflow: hidden
 }
+
 
 .number {
   margin-bottom:20px;
