@@ -35,7 +35,7 @@
 
 
 <form id="mealForm" method="POST" action="/menu">
-  <div class="scrollable-container" style="overflow-y: auto; height: 300px; border: 1px solid #ccc; position: relative;">
+  <div class="scrollable-container" style="overflow-y: auto; height: 40%; border: 1px solid #ccc; position: relative; margin-right: 5%; margin-left: 5%;">
     <p style="position: absolute; top: 5px; right: 5px; color: gray;">Scroll down to select your meals</p>
     <div style="height: calc(50vh); padding-left: 5%; align-items: top;">
     {% for meal in meals %}
@@ -72,6 +72,12 @@ const mealProgressBar = document.getElementById('mealProgressBar');
 const timeProgressBar = document.getElementById('timeProgressBar');
 const maxValue = {{budget}};
 const maxTime = {{time}};
+
+mealProgressBar.style.width = '0%';
+mealProgressBar.textContent = '$0.00';
+timeProgressBar.style.width = '0%';
+timeProgressBar.textContent = '0 mins';
+
 
 mealForm.addEventListener('change', function() {
     let totalValue = 0;
