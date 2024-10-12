@@ -23,7 +23,7 @@
       <div id="timeProgressBar" class="progress-bar">0 mins</div>
     </div>
   </div>
-  
+  <input type="hidden" id="totalServingsInput" name="totalServings" value="0">
 </div>
 
 <h2>Menu</h2>
@@ -104,6 +104,7 @@ mealForm.addEventListener('change', function() {
     timeProgressBar.style.width = timePercentage + '%';
     timeProgressBar.textContent = totalTime + ' mins';
     document.getElementById('currentServings').textContent = totalServings + '/{{servingsPerPerson}} meals selected';
+    document.getElementById('totalServingsInput').value = totalServings;
 });
 </script>
 

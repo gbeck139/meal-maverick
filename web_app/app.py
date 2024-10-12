@@ -52,6 +52,7 @@ def menu():
   people = int(session.get('people'))
   servingsPerPerson = int(maxServings / people)
   meals = Meal.query.order_by(Meal.unit_price).all()
+  total_servings = request.form.get('totalServingsInput')
 
 
   if request.method == 'POST':
@@ -61,11 +62,7 @@ def menu():
       #   return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
       #                            meals=meals, people=people, servingsPerPerson=servingsPerPerson,
       #                            error_message="Please select at least one meal.")
-      if len(selected_ids) < servingsPerPerson:
-        return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
-                                 meals=meals, people=people, servingsPerPerson=servingsPerPerson,
-                                 error_message=f"You still need {int(maxServings/people)-len(selected_ids)} servings! Increase servings or select more meals.")
-      else:
+      if (total_servings >= servingsPerPerson):
         meal_quantities = {}
 
         for id in selected_ids:
@@ -74,6 +71,10 @@ def menu():
           # servings is returning None on broccoli quich
         session['meal_quantities'] = meal_quantities
         return redirect(url_for('plan'))
+      else:
+        return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
+                                 meals=meals, people=people, servingsPerPerson=servingsPerPerson,
+                                 error_message=f"You still need {servingsPerPerson - total_servings} servings! Increase servings or select more meals.")
 
   return render_template('menu.html', time=time, budget=budget, maxServings=maxServings, meals=meals,
                          people=people, servingsPerPerson=servingsPerPerson,
