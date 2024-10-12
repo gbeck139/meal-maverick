@@ -19,7 +19,7 @@
         {%elif  money_result < 0%}
           You plan to spend ${{moneySpent}}, ${{money_over}} over-budget. If you would like to re-plan, click the home button at the bottom. Good luck!
         {%elif  time_result < 0%}
-          You plan to use {{timeSpent}} minutes for prep, ${{time_over}} more than allotted. If you would like to re-plan, click the home button at the bottom. Good luck!
+          You plan to use {{timeUsed}} minutes for prep, {{time_over}} more than your goal. If you would like to re-plan, click the home button at the bottom. Good luck!
         {%endif%}
       {%endif%}
     </h2>
@@ -38,7 +38,7 @@
 
     
     <div class="shopping-list">
-      <h3>Shopping list</h3>
+      <h3>Screenshot shopping list</h3>
       {% for item, values in shopping_list.items() %}
       {% if values["quantity"] == 0 %}
         <p>{{ item.lower() }}</p>
