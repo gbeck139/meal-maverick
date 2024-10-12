@@ -2,57 +2,58 @@
 
 {% block head %}
   <title>Your Plan</title>
-  <style>
-    body {
-      font-family: 'Courier New', monospace; /* Retro monospace font */
-      background-color: var(--color-bg); /* Black background */
-      color: var(--color-text-main); /* White text */
-      margin: 20px;
-    }
+<!--   <style>
+body {
+    padding: 20px; /* Add some padding for better spacing */
+}
 
-    h1, h2, h3 {
-      text-align: center;
-      color: var(--color-secondary); /* Green for headings */
-    }
+/* Headings for the last page */
+h1, h2, h3 {
+    margin-bottom: 15px; /* Add spacing below headings */
+}
 
-    a {
-      color: var(--color-primary); /* Bright red for links */
-      text-decoration: none;
-      display: block;
-      margin: 10px 0;
-      font-size: 18px; /* Slightly larger font for readability */
-    }
+/* Style for the recipes list */
+.shopping-list {
+    margin-top: 20px; /* Space above the shopping list */
+    background-color: #222222; /* Darker background for contrast */
+    padding: 15px; /* Padding inside the shopping list */
+    border-radius: 5px; /* Rounded corners */
+}
 
-    a:hover {
-      text-decoration: underline; /* Underline on hover */
-      color: #FF4500; /* Slightly lighter red on hover */
-    }
+/* Links in the recipes section */
+.shopping-list a {
+    color: var(--color-primary); /* Bright red for links */
+    text-decoration: none; /* No underline for links */
+    display: block; /* Each link takes a full line */
+    margin-bottom: 10px; /* Space between links */
+}
 
-    .shopping-list {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #333333; /* Dark grey for shopping list background */
-      border-radius: 5px;
-      color: var(--color-text-main); /* White text */
-    }
+.shopping-list a:hover {
+    text-decoration: underline; /* Underline on hover for better interactivity */
+}
 
-    .shopping-list p {
-      margin: 5px 0;
-      color: var(--color-accent); /* Red-orange for shopping list items */
-    }
+/* Shopping list items */
+.shopping-list p {
+    color: var(--color-text-main); /* Consistent text color */
+}
 
-    .home-link {
-      display: block;
-      text-align: center;
-      margin-top: 20px;
-      font-weight: bold;
-      color: var(--color-primary); /* Red for the home link */
-    }
+/* Home link style */
+.home-link {
+    display: inline-block; /* Inline block for spacing */
+    margin-top: 20px; /* Space above the home link */
+    padding: 10px 20px; /* Padding for the button look */
+    background-color: var(--color-primary); /* Primary button color */
+    color: white; /* White text color */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* No underline */
+}
 
-    .home-link:hover {
-      color: #FF6347; /* Lighter red on hover */
-    }
-  </style>
+.home-link:hover {
+    background-color: #FF6347; /* Lighter red on hover */
+}
+
+
+  </style> -->
 {% endblock %}
 
 {% block body %}
