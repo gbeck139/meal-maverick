@@ -53,6 +53,8 @@ def menu():
   servingsPerPerson = int(maxServings / people)
   meals = Meal.query.order_by(Meal.unit_price).all()
   total_servings = request.form.get('totalServings')
+  session['timeUsed'] = int(request.form.get('timeUsed'))
+  session['moneySpent'] = float(request.form.get('moneySpent'))
   selected_ids = []
 
 
@@ -87,7 +89,8 @@ def menu():
 def plan():
   meal_quantities = session.get('meal_quantities')
   selected_meals = Meal.query.filter(Meal.id.in_(meal_quantities.keys())).all()
-  
+  timeUsed = session.get('timeUsed')
+  moneySpent = session.get('moneySpent')
   #meal_quant = {'id'=}
   
   shopping_list ={}

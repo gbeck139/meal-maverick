@@ -49,6 +49,8 @@
      
     {% endfor %}
     <input type="hidden" id="totalServingsInput" name="totalServings" value="0">
+    <input type="hidden" id="timeUsed" name="timeUsed" value="0">
+    <input type="hidden" id="moneySpent" name="moneySpent" value="0">
   </div>
   <div class="submit-container" style="margin-top: 15px;">
     <button type="submit" class="submit-button">Submit</button>
@@ -100,6 +102,8 @@ mealForm.addEventListener('change', function() {
     timeProgressBar.textContent = totalTime + ' mins';
     document.getElementById('currentServings').textContent = totalServings + '/{{servingsPerPerson}} meals selected';
     document.getElementById('totalServingsInput').value = totalServings;
+    document.getElementById('moneySpent').value = totalTime;
+    document.getElementById('timeUsed').value = totalValue;
 });
 </script>
 
