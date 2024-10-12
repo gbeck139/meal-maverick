@@ -3,7 +3,7 @@
     --color-text-main: #FFFFFF; /* White text */
     --color-primary: #FF3333; /* Bright red for primary elements */
     --color-secondary: #33FF66; /* Bright green for secondary elements */
-    --color-accent: #FF5733; /* Red-orange accent */
+    --color-accent: #FF3333; /* Red-orange accent */
     --font-family: 'Courier New', monospace; /* Retro monospace font */
 }
 
@@ -39,7 +39,7 @@ h2 {
 h1, h2 {
     padding-top: 20px;
     text-align: center;
-    color: var(--color-text-main);
+/*     color: var(--color-text-main); */
 }
 
 a:link, a:visited {
@@ -70,11 +70,12 @@ a:hover {
 }
 
 input[type="number"], input[type="text"] {
-    width: 100%;
+    
+    width: 90%;
     padding: 10px;
     border: 1px solid var(--color-primary); /* Red border for inputs */
     border-radius: 5px;
-    background-color: #222222; /* Darker input background */
+    background-color: #111111; /* Darker input background */
     color: var(--color-text-main);
     font-size: 16px;
 }
@@ -129,6 +130,10 @@ button:hover {
     width: 100%;
     height: 90em;
     background-size: 350% 350%;
-    background-image: linear-gradient(-180deg, black 45%, var(--color-primary) 100%); /* Black to red gradient */
+    background-image: var(--color-bg); /* Black to red gradient */
     animation: AnimateBG 5s ease infinite;
+}
+
+.hidden{
+  visibility: hidden;
 }
