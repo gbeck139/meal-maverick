@@ -30,7 +30,7 @@
 <p id="currentServings" class="number"> 
    0/{{servingsPerPerson}} meals selected
 </p>
-<p>{{error_message}}</p>
+<p class="error-message">{{error_message}}</p>
 
 
 <form id="mealForm" method="POST" action="/menu">
@@ -38,10 +38,15 @@
     {% for meal in meals %}
     
     <div style="display:flex; align-items: center; padding: 3px; " >
-      
+      {%if meal.id in selected_ids %}
+      <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" 
+             data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" 
+             onchange="toggleServings({{ meal.id }})" style="margin-right: 10px;" checked>
+      {%else%}
       <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" 
              data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" 
              onchange="toggleServings({{ meal.id }})" style="margin-right: 10px;">
+      {%endif%}
       <label for="meal{{ meal.id }}" > {{ meal.name  }} (${{meal.unit_price}})</label>
       <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" 
              max="{{totalServings}}" value="1" style="width: 80px; display: none; margin-left: 10px;">
