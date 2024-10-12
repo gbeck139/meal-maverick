@@ -58,6 +58,7 @@ def menu():
 
   if request.method == 'POST':
       selected_ids = request.form.getlist('selected_meals')
+      selected_ids = [int(id) for id in selected_ids]
       
       if (int(total_servings) >= servingsPerPerson):
         meal_quantities = {}
