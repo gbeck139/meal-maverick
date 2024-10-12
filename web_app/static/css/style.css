@@ -51,7 +51,6 @@ a:link, a:visited {
 }
 
 a:hover {
-    color: #FF4500; /* Slightly darker red on hover */
     text-decoration: underline; /* Optional: underline on hover */
 }
 
