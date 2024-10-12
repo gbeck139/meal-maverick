@@ -61,7 +61,7 @@ def menu():
       #   return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
       #                            meals=meals, people=people, servingsPerPerson=servingsPerPerson,
       #                            error_message="Please select at least one meal.")
-      if len(selected_ids) < maxServings:
+      if len(selected_ids) < servingsPerPerson:
         return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
                                  meals=meals, people=people, servingsPerPerson=servingsPerPerson,
                                  error_message=f"You still need {int(maxServings/people)-len(selected_ids)} servings! Increase servings or select more meals.")

@@ -163,10 +163,16 @@ button:hover {
 }
 
 .number {
-  margin-bottom: 30px;
+  margin-bottom:20px;
   color: var(--color-text-main);
   text-align: center;
   width: 100%;
+}
+
+.error-message {
+  text-align:center;
+  color: yellow;
+  margin-bottom:10px;
 }
 
 .bg {
