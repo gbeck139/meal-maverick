@@ -15,7 +15,7 @@
         You saved ${{money_result}} and {{time_result}} minutes!!<br>Enjoy!
       {%else%}
         {%if time_result < 0 and money_result < 0%}
-          You missed your goals! ${{money_over}} over-budget and {{time_over}} minutes over. If you would like to re-plan, click the home button at the bottom. Good luck!
+          You missed your goals! You are ${{money_over}} and {{time_over}} minutes over. If you would like to re-plan, click the home button at the bottom. Good luck!
         {%elif  money_result < 0%}
           You plan to spend ${{moneySpent}}, ${{money_over}} over-budget. If you would like to re-plan, click the home button at the bottom. Good luck!
         {%elif  time_result < 0%}
