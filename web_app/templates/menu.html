@@ -22,23 +22,24 @@
     <div class="progress-container">
       <div id="timeProgressBar" class="progress-bar">0 mins</div>
     </div>
+    <p id="currentServings" class="number">0/{{servingsPerPerson}} Meals</p>
   </div>
-  <p id="currentServings" class="number">0/{{servingsPerPerson}} Meals</p>
+  
 </div>
 
 <h2>Menu</h2>
 <p class="error-message" style="position: absolute; text-align: center; top: 450px; width: 100%;">{{error_message}}</p>
 
 <form id="mealForm" method="POST" action="/menu">
-  <div style="overflow-y: auto; height: calc(50vh); padding: 10px; align-items: top;">
+  <div style="overflow-y: auto; height: calc(50vh); padding-left: 5%; align-items: top;">
     {% for meal in meals %}
     
-    <div style="display:flex; align-items: center; " >
+    <div style="display:flex; align-items: center; padding: 3px; " >
       
       <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" 
              data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" 
              onchange="toggleServings({{ meal.id }})">
-      <label for="meal{{ meal.id }}" style="margin-left: 0px;">{{ meal.name }} (${{meal.unit_price}})</label>
+      <label for="meal{{ meal.id }}" > {{ meal.name  }} (${{meal.unit_price}})</label>
       <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" 
              max="{{totalServings}}" value="1" style="width: 80px; display: none; margin-left: 10px;">
      
