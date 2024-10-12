@@ -7,6 +7,7 @@
 <style>
 body {
     padding: 20px; /* Add some padding for better spacing */
+    
 }
 
 /* Headings for the last page */
@@ -33,9 +34,9 @@ h1, h2, h3 {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    border: 1px solid var(--color-primary); /* Red border for inputs */
+    border: 1px solid var(--color-primary); 
     border-radius: 5px;
-    background-color: #111111; /* Darker input background */
+/*     background-color: #111111; /* Darker input background */ */
 }
 
 /* Links in the recipes section */
@@ -43,6 +44,7 @@ h1, h2, h3 {
     color: var(--color-primary); /* Bright red for links */
     display: block; /* Each link takes a full line */
     margin-bottom: 10px; /* Space between links */
+  
     
 
 }
@@ -80,6 +82,13 @@ h1, h2, h3 {
     margin-top: auto; /* Pushes the footer to the bottom */
     padding: 20px; /* Adds some padding around the link */
 }
+  
+  .recipe-links {
+    margin-left: 5%; /* Align with shopping list */
+    margin-right: 5%;
+    width: 90%; /* Same width as shopping list */
+    color: white; /* Color for recipe links */
+}
 
 </style>
 
@@ -94,9 +103,11 @@ h1, h2, h3 {
   <h1>This Week's Plan</h1>
   <h2>Enjoy!</h2>
   <h3>Recipe links</h3>
-  {% for meal in selected_meals %}
-    <a href="{{ meal.url }}" target="_blank">{{ meal.name }}</a>
-  {% endfor %}
+    <div class="recipe-links">
+    {% for meal in selected_meals %}
+      <a href="{{ meal.url }}" target="_blank">{{ meal.name }}</a>
+    {% endfor %}
+  </div>
 
 
     
