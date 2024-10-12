@@ -1,50 +1,56 @@
-{% extends 'base.html'%}
-
-
-
-
+{% extends 'base.html' %}
 
 {% block head %}
   <title>Your Plan</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #F9F9F9; /* Light beige background */
-      color: #333; /* Dark grey text for readability */
+      font-family: 'Courier New', monospace; /* Retro monospace font */
+      background-color: var(--color-bg); /* Black background */
+      color: var(--color-text-main); /* White text */
       margin: 20px;
     }
 
-    h1, h2 {
-      text-align: center; /* Centered headings */
+    h1, h2, h3 {
+      text-align: center;
+      color: var(--color-secondary); /* Green for headings */
     }
 
     a {
-      color: #A3D407; /* Soft green links */
-      text-decoration: none; /* Remove underline */
-      display: block; /* Make each link a block element */
-      margin: 10px 0; /* Add margin between links */
+      color: var(--color-primary); /* Bright red for links */
+      text-decoration: none;
+      display: block;
+      margin: 10px 0;
+      font-size: 18px; /* Slightly larger font for readability */
     }
 
     a:hover {
       text-decoration: underline; /* Underline on hover */
+      color: #FF4500; /* Slightly lighter red on hover */
     }
 
     .shopping-list {
-      margin-top: 20px; /* Space above shopping list */
-      padding: 10px; /* Padding around the list */
-      background-color: #B9D7EA; /* Pastel blue background for list */
-      border-radius: 5px; /* Rounded corners */
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #333333; /* Dark grey for shopping list background */
+      border-radius: 5px;
+      color: var(--color-text-main); /* White text */
     }
 
     .shopping-list p {
-      margin: 5px 0; /* Space between items */
+      margin: 5px 0;
+      color: var(--color-accent); /* Red-orange for shopping list items */
     }
 
     .home-link {
-      display: block; /* Make home link a block */
-      text-align: center; /* Center the link */
-      margin-top: 20px; /* Space above home link */
-      font-weight: bold; /* Bold text */
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      color: var(--color-primary); /* Red for the home link */
+    }
+
+    .home-link:hover {
+      color: #FF6347; /* Lighter red on hover */
     }
   </style>
 {% endblock %}
