@@ -102,7 +102,7 @@ input[type="number"], input[type="text"] {
 }
 
 .submit-button:hover {
-    background-color: #FF4500;
+    background-color: #CC2929;
 }
 
 button {
