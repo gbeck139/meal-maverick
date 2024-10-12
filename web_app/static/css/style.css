@@ -193,3 +193,84 @@ h3 {
     font-size: 25px;
     padding: 15px;
 }
+
+
+/* Headings for the last page */
+h1, h2, h3 {
+    margin-bottom: 10px; /* Add spacing below headings */
+}
+
+/* Style for the recipes list */
+.shopping-list {
+  
+    margin-top: 20px; 
+    
+    padding: 15px; 
+    border-radius: 5px; /* Rounded corners */
+  
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    padding-right: 5%;
+    padding-left: 5%;
+  
+    color: white;
+
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border: 1px solid var(--color-primary); 
+    border-radius: 5px;
+
+}
+
+/* Links in the recipes section */
+.shopping-list a {
+    color: white; /* Bright red for links */
+    display: block; /* Each link takes a full line */
+    margin-bottom: 10px; /* Space between links */
+  
+    
+
+}
+
+.shopping-list a:hover {
+    text-decoration: underline; /* Underline on hover for better interactivity */
+  
+}
+
+/* Shopping list items */
+.shopping-list p {
+    color: var(--color-text-main); /* Consistent text color */
+    margin: 5px;
+}
+
+/* Home link style */
+.home-link {
+    display: inline-block; /* Inline block for spacing */
+    margin-top: 20px; /* Space above the home link */
+    padding: 10px 20px; /* Padding for the button look */
+    background-color: var(--color-primary); /* Primary button color */
+    color: white; /* White text color */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* No underline */
+}
+
+.home-link:hover {
+    background-color: #FF6347; /* Lighter red on hover */
+}
+  
+  .footer-container {
+    display: flex;
+    justify-content: center; /* Center the link horizontally */
+    position: relative;
+    margin-top: auto; /* Pushes the footer to the bottom */
+    padding: 20px; /* Adds some padding around the link */
+}
+  
+  .recipe-links {
+    margin-left: 5%; /* Align with shopping list */
+    margin-right: 5%;
+    width: 90%; /* Same width as shopping list */
+    color: white; /* Color for recipe links */
+}
