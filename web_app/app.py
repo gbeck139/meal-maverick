@@ -52,17 +52,14 @@ def menu():
   people = int(session.get('people'))
   servingsPerPerson = int(maxServings / people)
   meals = Meal.query.order_by(Meal.unit_price).all()
-  total_servings = request.form.get('totalServingsInput')
+  total_servings = request.form.get('totalServings')
+  selected_ids = []
 
 
   if request.method == 'POST':
       selected_ids = request.form.getlist('selected_meals')
-
-      # if not selected_ids:
-      #   return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
-      #                            meals=meals, people=people, servingsPerPerson=servingsPerPerson,
-      #                            error_message="Please select at least one meal.")
-      if (total_servings >= servingsPerPerson):
+      
+      if (int(total_servings) >= servingsPerPerson):
         meal_quantities = {}
 
         for id in selected_ids:
@@ -73,11 +70,11 @@ def menu():
         return redirect(url_for('plan'))
       else:
         return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
-                                 meals=meals, people=people, servingsPerPerson=servingsPerPerson,
-                                 error_message=f"You still need {servingsPerPerson - total_servings} servings! Increase servings or select more meals.")
+                                 meals=meals, people=people, servingsPerPerson=servingsPerPerson, selected_ids=selected_ids,
+                                 error_message=f"You still need {servingsPerPerson - int(total_servings)} servings! Increase servings or select more meals.")
 
   return render_template('menu.html', time=time, budget=budget, maxServings=maxServings, meals=meals,
-                         people=people, servingsPerPerson=servingsPerPerson,
+                         people=people, servingsPerPerson=servingsPerPerson, selected_ids=selected_ids,
                          error_message="")
 
   
