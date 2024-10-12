@@ -11,7 +11,11 @@
   <h1>This Week's Plan</h1>
   <div>
     <h2>
-      You saved ${{budget - moneySpent}} and {{time-timeUsed}}!!<br>Enjoy!
+      {%if budget - moneySpent => 0 and time-timeUsed > 0}
+        You saved ${{budget - moneySpent}} and {{time-timeUsed}} minutes!!<br>Enjoy!
+      {%elif budget - moneySpent <= 0%}
+        You saved ${{budget - moneySpent}} and {{time-timeUsed}} minutes!!<br>Enjoy!
+      {%endif%}
     </h2>
   </div>
 
