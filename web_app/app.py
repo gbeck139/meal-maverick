@@ -98,11 +98,19 @@ def menu():
 @app.route('/plan', methods=['GET', 'POST'])
 def plan():
   
-  def mixed_number(num):
-    fraction = num-int(num)
-    Fraction(round(num*2)/2).limit_denominator() 
-    # 
-    return 
+  def rounded_mixed_number(num):
+    rounded_num = int(num)
+    fraction = num-rounded_num
+    rounded_fraction = round(fraction*2)/2
+    if rounded_fraction == 1:
+      return str(rounded_num +1)
+    elif rounded_fraction == 0:
+      return str(rounded_num)
+    else:
+      if rounded_num == 0:
+        return str(Fraction(rounded_fraction).limit_denominator())
+      else:
+        return str(rounded_num)+ " " + str(Fraction(rounded_fraction).limit_denominator())
   
   meal_quantities = session.get('meal_quantities')
   selected_meals = Meal.query.filter(Meal.id.in_(meal_quantities.keys())).all()
@@ -135,7 +143,7 @@ def plan():
   for item in shopping_list.keys():
     if(shopping_list[item]["quantity"] != ""):
       
-      shopping_list[item]["fraction"] =       shopping_list[item]["quantity"]
+      shopping_list[item]["fraction"] =  rounded_mixed_number(shopping_list[item]["quantity"])
   selected_count = len(selected_meals)
   return render_template('plan.html', selected_meals=selected_meals,  shopping_list=shopping_list, money_result=money_result , time_result=time_result, moneySpent=moneySpent, timeUsed=timeUsed, money_over = -money_result, time_over = -time_result, selected_count=selected_count, quantity_list=quantity_list)
 
