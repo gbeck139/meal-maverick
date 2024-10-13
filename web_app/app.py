@@ -52,6 +52,7 @@ def menu():
   people = int(session.get('people'))
   servingsPerPerson = int(maxServings / people)
   meals = Meal.query.order_by(Meal.unit_price).all()
+  meals[]
   total_servings = request.form.get('totalServings')
   time_used = request.form.get('timeUsed')
   money_spent = request.form.get('moneySpent')
