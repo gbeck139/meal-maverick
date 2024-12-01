@@ -95,7 +95,7 @@ def menu():
       # Otherwise, return an message asking to start over and select more
       if (int(total_servings) >= servings_per_person):
         
-        # Dictionary to store the quati
+        # Dictionary to store the quantity of each meal
         meal_quantities = {}
         
         for id in selected_ids:
