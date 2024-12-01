@@ -3,11 +3,9 @@
 {%block head%}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Menu</title>
-
 {%endblock%}
+
 {%block body%}
-
-
 <h1>Choose Your Meals</h1>
 <h2>Select meals and enter how many servings you need for the week for one person. We’ll take care of rest!</h2>
 
@@ -17,13 +15,11 @@
     <div class="progress-container">
       <div id="mealProgressBar" class="progress-bar">$0.00</div>
     </div>
-
     <p>Estimated prep time:</p>
     <div class="progress-container">
       <div id="timeProgressBar" class="progress-bar">0 mins</div>
     </div>
   </div>
-  
 </div>
 
 <h2>Menu</h2>
@@ -38,26 +34,21 @@
   <div class="scrollable-container" style="overflow-y: auto; height: 40%; border: 1px solid #ccc; position: relative; margin-right: 5%; margin-left: 5%;">
     <p style="position: absolute; top: 5px; right: 5px; color: gray;">↓scroll↓</p>
     <div style="height: calc(50vh); padding-left: 5%; align-items: top;">
-    {% for meal in meals %}
-    
-    <div style="display:flex; align-items: center; padding: 3px; " >
-      <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" 
-             data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" 
-             onchange="toggleServings({{ meal.id }})" style="margin-right: 10px;">
-      <label for="meal{{ meal.id }}" > {{ meal.name  }} (${{meal.unit_price}})</label>
-      <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" 
-             max="{{totalServings}}" value="1" style="width: 80px; display: none; margin-left: 10px;">
-     
+      {% for meal in meals %}
+        <div style="display:flex; align-items: center; padding: 3px; " >
+          <input type="checkbox" id="meal{{ meal.id }}" name="selected_meals" value="{{ meal.id }}" 
+                 data-price="{{meal.unit_price}}" data-time="{{meal.prep}}" 
+                 onchange="toggleServings({{ meal.id }})" style="margin-right: 10px;">
+          <label for="meal{{ meal.id }}" > {{ meal.name  }} (${{meal.unit_price}})</label>
+          <input type="number" id="servings{{ meal.id }}" name="servings{{ meal.id }}" min="1" 
+                 max="{{totalServings}}" value="1" style="width: 80px; display: none; margin-left: 10px;">
+        </div>
+      {% endfor %}
+      <input type="hidden" id="totalServingsInput" name="totalServings" value="0">
+      <input type="hidden" id="timeUsed" name="timeUsed" value="0">
+      <input type="hidden" id="moneySpent" name="moneySpent" value="0">
     </div>
-     
-    {% endfor %}
-    <input type="hidden" id="totalServingsInput" name="totalServings" value="0">
-    <input type="hidden" id="timeUsed" name="timeUsed" value="0">
-    <input type="hidden" id="moneySpent" name="moneySpent" value="0">
-    
   </div>
-</div>
-
   <div class="submit-container" style="margin-top: 15px;">
     <button type="submit" class="submit-button">Submit</button>
   </div>

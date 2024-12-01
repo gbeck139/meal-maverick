@@ -2,60 +2,50 @@
 
 {% block head %}
   <title>Your Plan</title>
-
-
-
 {% endblock %}
 
 {% block body %}
-  <h1>This Week's Plan</h1>
-  <div>
-    <h2>
-      Estimated price: ${{moneySpent}}<br>
-      Estimated prep time: {{timeUsed}} minutes
-      
-    </h2>
-    <h2 style="color: white;">
-      {% if money_result >= 0 and time_result >= 0%}
-        You saved ${{money_result}} and {{time_result}} minutes!!<br>Enjoy!
-      {%else%}
-        {%if time_result < 0 and money_result < 0%}
-          You missed your goals! You are ${{money_over}} and {{time_over}} minutes over. If you would like to re-plan, click the home button at the bottom. Good luck!
-        {%elif  money_result < 0%}
-          You plan to spend ${{moneySpent}}, ${{money_over}} over-budget. If you would like to re-plan, click the home button at the bottom. Good luck!
-        {%elif  time_result < 0%}
-          You plan to use {{timeUsed}} minutes for prep, {{time_over}} more than your goal. If you would like to re-plan, click the home button at the bottom. Good luck!
-        {%endif%}
+<h1>This Week's Plan</h1>
+<div>
+  <h2>
+    Estimated price: ${{moneySpent}}<br>
+    Estimated prep time: {{timeUsed}} minutes
+  </h2>
+  <h2 style="color: white;">
+    {% if money_result >= 0 and time_result >= 0%}
+      You saved ${{money_result}} and {{time_result}} minutes!!<br>Enjoy!
+    {%else%}
+      {%if time_result < 0 and money_result < 0%}
+        You missed your goals! You are ${{money_over}} and {{time_over}} minutes over. If you would like to re-plan, click the home button at the bottom. Good luck!
+      {%elif  money_result < 0%}
+        You plan to spend ${{moneySpent}}, ${{money_over}} over-budget. If you would like to re-plan, click the home button at the bottom. Good luck!
+      {%elif  time_result < 0%}
+        You plan to use {{timeUsed}} minutes for prep, {{time_over}} more than your goal. If you would like to re-plan, click the home button at the bottom. Good luck!
       {%endif%}
-    </h2>
-  </div>
+    {%endif%}
+  </h2>
+</div>
 
+<h2><br>Recipe links</h2>
 
-  <h2><br>Recipe links</h2>
-  
-    <div class="recipe-links">
+<div class="recipe-links">
+  {% for i in range(selected_count) %}
+    <a href="{{ selected_meals[i].url }}" target="_blank">{{ selected_meals[i].name }} ({{quantity_list[i]}} servings)</a>
+  {% endfor %}
+</div>
 
-    {% for i in range(selected_count) %}
-      <a href="{{ selected_meals[i].url }}" target="_blank">{{ selected_meals[i].name }} ({{quantity_list[i]}} servings)</a>
-    {% endfor %}
-  </div>
-
-
-    <h3 style="margin-top: 20px;">Screenshot-shopping list</h3>
-    <div class="shopping-list">
-      
-      {% for item, values in shopping_list.items() %}
-      {% if values["quantity"] == 0 %}
-        <p>{{ item.lower() }}</p>
-      {% else %}
-        <p>{{ values["fraction"] }} {{ values["unit"] }} {{ item.lower() }}</p>
-      {% endif %}
-      {% endfor %}
-    </div>
-
+<h3 style="margin-top: 20px;">Screenshot-shopping list</h3>
+<div class="shopping-list">
+  {% for item, values in shopping_list.items() %}
+    {% if values["quantity"] == 0 %}
+      <p>{{ item.lower() }}</p>
+    {% else %}
+      <p>{{ values["fraction"] }} {{ values["unit"] }} {{ item.lower() }}</p>
+    {% endif %}
+  {% endfor %}
+</div>
 
 <div class="footer-container">
   <a href="/">Home</a>
 </div>
-  
 {% endblock %}

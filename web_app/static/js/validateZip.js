@@ -1,3 +1,5 @@
+// For future use with store API integrations
+
 function validateForm() {
     const zipCode = document.getElementById('zipCode').value;
     const zipCodeErrorMessage = document.getElementById('zipCodeErrorMessage');
