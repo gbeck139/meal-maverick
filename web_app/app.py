@@ -12,7 +12,7 @@ app.secret_key = os.getenv('FLASK_SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/meals.db'
 db = SQLAlchemy(app)
 
-
+# Create a model for the database with necessary field information
 class Meal(db.Model):
     __tablename__ = 'meals'
 
@@ -23,6 +23,7 @@ class Meal(db.Model):
     prep = db.Column(db.Integer)  # Preparation time
     ingredients = db.Column(db.Text)  # Ingredients list
     url = db.Column(db.String)  # URL for the meal
+
 
 @app.route('/')
 def home():

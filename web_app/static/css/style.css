@@ -194,10 +194,6 @@ button:hover {
   margin-bottom:10px;
 }
 
-
-
-
-
 .scrollable-container::-webkit-scrollbar {
     width: 0px; /* Width of the scrollbar */
 }
@@ -206,12 +202,6 @@ button:hover {
     background-color: darkgray; /* Color of the scrollbar thumb */
     border-radius: 5px; /* Rounded edges */
 }
-
-
-
-
-
-
 
 .bg {
     width: 100%;
@@ -264,7 +254,6 @@ h1, h2, h3 {
 
 /* Links in the recipes section */
 
-
 .shopping-list a:hover {
     text-decoration: underline; /* Underline on hover for better interactivity */
   
@@ -298,28 +287,6 @@ h1, h2, h3 {
     margin-top: auto; /* Pushes the footer to the bottom */
     padding: 20px; /* Adds some padding around the link */
 }
-  
-/*   .recipe-links {
-    margin-top: 20px; 
-    
-    padding: 15px; 
-    border-radius: 5px; 
-  
-    margin-left: 5%;
-    margin-right: 5%;
-    width: 90%;
-    padding-right: 5%;
-    padding-left: 5%;
-  
-    color: white;
-
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    border: 1px solid white; 
-    border-radius: 5px;
-    
-} */
 
 .recipe-links {
     margin-top: 20px; 
