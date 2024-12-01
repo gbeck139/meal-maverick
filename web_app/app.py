@@ -43,9 +43,9 @@ def goals():
       session['time'] = request.form.get('time')
       session['budget'] = request.form.get('budget')
       session['people'] = int(request.form.get('people'))
-      servingsPerDay = int(request.form.get('servingsPerDay'))
-      session['max_servings'] = 7 * session.get('people') * servingsPerDay
-      session['zipCode'] = request.form.get('zipCode')
+      servings_per_day = int(request.form.get('servingsPerDay'))
+      session['max_servings'] = 7 * session.get('people') * servings_per_day # Total number of servings for a week given number of daily servings and quantity of people
+      session['zip_code'] = request.form.get('zipCode') # For future use with API integration
 
       return redirect(url_for('menu'))
 
@@ -61,7 +61,7 @@ def menu():
   budget = float(session.get('budget'))
   max_servings = int(session.get('max_servings'))
   people = int(session.get('people'))
-  servingsPerPerson = int(max_servings / people)
+  servings_per_person = int(max_servings / people)
   meals = Meal.query.order_by(Meal.unit_price).all()
   total_servings = request.form.get('totalServings')
   time_used = request.form.get('timeUsed')
@@ -78,7 +78,7 @@ def menu():
 
   if request.method == 'POST':
       selected_ids = request.form.getlist('selected_meals')
-      if (int(total_servings) >= servingsPerPerson):
+      if (int(total_servings) >= servings_per_person):
         
         meal_quantities = {}
         
@@ -90,12 +90,12 @@ def menu():
         
         return redirect(url_for('plan'))
       else:
-        return render_template('menu.html', time=time, budget=budget, maxServings=maxServings,
-                                 meals=meals, people=people, servingsPerPerson=servingsPerPerson, selected_ids=selected_ids,
-                                 error_message=f"You still need {servingsPerPerson - int(total_servings)} servings! Select meals again and increase servings.")
+        return render_template('menu.html', time=time, budget=budget,
+                                 meals=meals, people=people, servingsPerPerson=servings_per_person, selected_ids=selected_ids,
+                                 error_message=f"You still need {servings_per_person - int(total_servings)} servings! Select meals again and increase servings.")
 
-  return render_template('menu.html', time=time, budget=budget, maxServings=maxServings, meals=meals,
-                         people=people, servingsPerPerson=servingsPerPerson, selected_ids=selected_ids,
+  return render_template('menu.html', time=time, budget=budget, meals=meals,
+                         people=people, servingsPerPerson=servings_per_person, selected_ids=selected_ids,
                          error_message="")
 
 
@@ -137,7 +137,7 @@ def plan():
   
   shopping_list ={}
   
-  for meal_id, servingsPerPerson in meal_quantities.items():
+  for meal_id, servings_per_person in meal_quantities.items():
       meal = Meal.query.get(meal_id)
       ingredients = dict(json.loads(meal.ingredients))
 
@@ -146,10 +146,10 @@ def plan():
           if ingredient_values["unit"] in units_not_used:
             shopping_list[ingredient] = {"unit": "", "quantity" : ""}
           else: 
-            shopping_list[ingredient] = {"unit": ingredient_values["unit"], "quantity" : float(ingredient_values["quantity"])/meal.servings*servingsPerPerson*session.get('people')}
+            shopping_list[ingredient] = {"unit": ingredient_values["unit"], "quantity" : float(ingredient_values["quantity"])/meal.servings*servings_per_person*session.get('people')}
         else:
           if ingredient_values["quantity"] != "" and shopping_list[ingredient]["quantity"] != "":
-            shopping_list[ingredient]["quantity"] += float(ingredient_values["quantity"])/meal.servings*servingsPerPerson*session.get('people')
+            shopping_list[ingredient]["quantity"] += float(ingredient_values["quantity"])/meal.servings*servings_per_person*session.get('people')
   
   for item in shopping_list.keys():
     if(shopping_list[item]["quantity"] != ""):
