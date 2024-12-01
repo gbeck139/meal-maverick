@@ -40,14 +40,16 @@ def goals():
   Page for the user to set their budget goals for the week's meals
   """
   if request.method == 'POST':
-      session['time'] = request.form.get('time')
-      session['budget'] = request.form.get('budget')
-      session['people'] = int(request.form.get('people'))
-      servings_per_day = int(request.form.get('servingsPerDay'))
-      session['max_servings'] = 7 * session.get('people') * servings_per_day # Total number of servings for a week given number of daily servings and quantity of people
-      session['zip_code'] = request.form.get('zipCode') # For future use with API integration
-
-      return redirect(url_for('menu'))
+    # Retrieve the information and store it in the session
+    session['time'] = request.form.get('time')
+    session['budget'] = request.form.get('budget')
+    session['people'] = int(request.form.get('people'))
+    servings_per_day = int(request.form.get('servingsPerDay'))
+    session['max_servings'] = 7 * session.get('people') * servings_per_day # Total number of servings for a week given number of daily servings and quantity of people
+    session['zip_code'] = request.form.get('zipCode') # For future use with API integration
+    
+    # Move to menu selection page
+    return redirect(url_for('menu'))
 
   return render_template('goals.html')
 
@@ -57,16 +59,23 @@ def menu():
   """
   Menu page where the user selects meals based on their goals made previously
   """
+  # Retrieve information from session for logic
   time = session.get('time')
   budget = float(session.get('budget'))
   max_servings = int(session.get('max_servings'))
   people = int(session.get('people'))
+  
   servings_per_person = int(max_servings / people)
+  
+  # Get all meals ordered by price from the database
   meals = Meal.query.order_by(Meal.unit_price).all()
+  
+  # Grab the current numbers from the user
   total_servings = request.form.get('totalServings')
   time_used = request.form.get('timeUsed')
   money_spent = request.form.get('moneySpent')
   
+  # Check how much time and money is used, if none, set to zero
   if time_used is not None and money_spent is not None:
     session['timeUsed'] = int(time_used)
     session['moneySpent'] = float(money_spent)
@@ -74,12 +83,19 @@ def menu():
     session['timeUsed'] = 0
     session['moneySpent'] = 0
 
+  # List for the IDs of meals selected
   selected_ids = []
 
   if request.method == 'POST':
+      
+      # Add to the list all meals that have been selected
       selected_ids = request.form.getlist('selected_meals')
+      
+      # If the user has selected enough meals and servings with the week proceed
+      # Otherwise, return an message asking to start over and select more
       if (int(total_servings) >= servings_per_person):
         
+        # Dictionary to store the quati
         meal_quantities = {}
         
         for id in selected_ids:
@@ -92,7 +108,7 @@ def menu():
       else:
         return render_template('menu.html', time=time, budget=budget,
                                  meals=meals, people=people, servingsPerPerson=servings_per_person, selected_ids=selected_ids,
-                                 error_message=f"You still need {servings_per_person - int(total_servings)} servings! Select meals again and increase servings.")
+                                 error_message=f"You still need {servings_per_person - int(total_servings)} servings! Start over and select meals again and increase servings.")
 
   return render_template('menu.html', time=time, budget=budget, meals=meals,
                          people=people, servingsPerPerson=servings_per_person, selected_ids=selected_ids,
