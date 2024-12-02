@@ -77,11 +77,11 @@ def menu():
   
   # Check how much time and money is used, if none, set to zero
   if time_used is not None and money_spent is not None:
-    session['timeUsed'] = int(time_used)
-    session['moneySpent'] = float(money_spent)
+    session['time_used'] = int(time_used)
+    session['money_spent'] = float(money_spent)
   else:
-    session['timeUsed'] = 0
-    session['moneySpent'] = 0
+    session['time_used'] = 0
+    session['money_spent'] = 0
 
   # List for the IDs of meals selected
   selected_ids = []
@@ -142,15 +142,15 @@ def plan():
   
   # Get session variables
   meal_quantities = session.get('meal_quantities')
-  timeUsed = int(session.get('timeUsed'))
-  moneySpent = int(session.get('moneySpent'))
+  time_used = int(session.get('time_used'))
+  money_spent = int(session.get('money_spent'))
   budget=float(session.get('budget'))
   time=int(session.get('time'))
   quantity_list = [session.get('people')*quantity for quantity in meal_quantities.values()]
   
   # Save results of the user's actual spending and goals
-  money_result = int(budget - moneySpent)
-  time_result = int(time - timeUsed)
+  money_result = int(budget - money_spent)
+  time_result = int(time - time_used)
   
   selected_meals = Meal.query.filter(Meal.id.in_(meal_quantities.keys())).all()
   
@@ -181,7 +181,7 @@ def plan():
       else:
         shopping_list[item]["fraction"] =  rounded_mixed_number(shopping_list[item]["quantity"])
   
-  return render_template('plan.html', selected_meals=selected_meals,  shopping_list=shopping_list, money_result=money_result , time_result=time_result, moneySpent=moneySpent, timeUsed=timeUsed, money_over = -money_result, time_over = -time_result, selected_count=selected_count, quantity_list=quantity_list)
+  return render_template('plan.html', selected_meals=selected_meals,  shopping_list=shopping_list, money_result=money_result , time_result=time_result, moneySpent=money_spent, timeUsed=time_used, money_over = -money_result, time_over = -time_result, selected_count=selected_count, quantity_list=quantity_list)
 
 
 if __name__ == "__main__":
