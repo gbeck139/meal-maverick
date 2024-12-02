@@ -57,24 +57,32 @@
 <script src="../static/js/toggleServings.js"></script>
 
 <script>
-// JavaScript for updating progress bars
+// Script for updating progress bars
+  
+// Get progress bar elements to modify and the meal form info
 const mealForm = document.getElementById('mealForm');
 const mealProgressBar = document.getElementById('mealProgressBar');
 const timeProgressBar = document.getElementById('timeProgressBar');
+
+// Set the max values based on the users goals
 const maxValue = {{budget}};
 const maxTime = {{time}};
 
+// Start with none of the progress bars filled
 mealProgressBar.style.width = '0%';
 mealProgressBar.textContent = '$0.00';
 timeProgressBar.style.width = '0%';
 timeProgressBar.textContent = '0 mins';
 
-
+// Listener to detect when the mealform is changed by the user to update running total of cost and time
 mealForm.addEventListener('change', function() {
+  
+    // Variables to keep track of the amount of time and money the user has selected so far
     let totalValue = 0;
     let totalTime = 0;
     let totalServings = 0;
 
+    // Go through all selected meals and 
     const mealsChecked = document.querySelectorAll('input[name="selected_meals"]:checked');
     mealsChecked.forEach(meal => {
         const id = meal.value; 
@@ -84,7 +92,7 @@ mealForm.addEventListener('change', function() {
         const servings = parseInt(document.getElementById(inputId).value);
 
         totalValue += unitPriceValue * servings * {{people}}; 
-        totalTime += time + servings;
+        totalTime += time;
         totalServings += servings;
     });
 
