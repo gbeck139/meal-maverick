@@ -2,7 +2,7 @@
 
 Meal Maverick is a full-stack web application that simplifies weekly meal planning. In under 5 minutes, users can define their food goals, select budget-friendly recipes, and generate a complete shopping list with exact ingredient amounts — saving time, money, and food waste.
 
-**Live App**: [https://your-app-name.fly.dev](https://meal-maverick.fly.dev/)  
+**Live App**: [https://meal-maverick.fly.dev](https://meal-maverick.fly.dev/)  
 *(Deployed using Docker and Fly.io)*
 
 ![Meal Maverick Screenshot](docs/screenshot-home.png)  
