@@ -82,35 +82,50 @@ mealForm.addEventListener('change', function() {
     let totalTime = 0;
     let totalServings = 0;
 
-    // Go through all selected meals and 
+    // Go through all selected meals and save 
     const mealsChecked = document.querySelectorAll('input[name="selected_meals"]:checked');
     mealsChecked.forEach(meal => {
         const id = meal.value; 
+      
+        // Unit price and time associated with the meal
         const unitPriceValue = parseFloat(meal.getAttribute("data-price"));
         const time = parseInt(meal.getAttribute("data-time"));
-        const inputId = 'servings' + id; 
+      
+        const inputId = 'servings' + id;
+      
+        // Number of servings currently selected for the meal
         const servings = parseInt(document.getElementById(inputId).value);
-
-        totalValue += unitPriceValue * servings * {{people}}; 
+        
+        // Add to running cost based on serving count and number of people
+        totalValue += unitPriceValue * servings * {{people}};
+        
+        // Add to running time
         totalTime += time;
+        
+        // Add to total servings value so the user can keep track of how many more they need
         totalServings += servings;
     });
 
+    // Percentages of budget used
     const costPercentage = (totalValue / maxValue) * 100;
     const timePercentage = (totalTime / maxTime) * 100;
 
+    // Logic for finding the values of Red and Green to be display on each progress bar
+    // The closer the user gets to 100% the more red and less green will be used
     const costGreen = Math.max(0, 255 - Math.round(2.55 * costPercentage));
     const costRed = Math.min(255, Math.round(2.55 * costPercentage));
     const timeGreen = Math.max(0, 255 - Math.round(2.55 * timePercentage));
     const timeRed = Math.min(255, Math.round(2.55 * timePercentage));
 
+    // Update the progress bars' display with proper colors and width
     mealProgressBar.style.backgroundColor = `rgb(${costRed}, ${costGreen}, 0)`;
     timeProgressBar.style.backgroundColor = `rgb(${timeRed}, ${timeGreen}, 0)`;
-
     mealProgressBar.style.width = costPercentage + '%';
     mealProgressBar.textContent = '$' + totalValue.toFixed(2);
     timeProgressBar.style.width = timePercentage + '%';
     timeProgressBar.textContent = totalTime + ' mins';
+    
+    // Update the other values on the screen for the user to see how much they have spent and servings planned for
     document.getElementById('currentServings').textContent = totalServings + '/{{servingsPerPerson}} meals selected';
     document.getElementById('totalServingsInput').value = totalServings;
     document.getElementById('moneySpent').value = totalValue;
