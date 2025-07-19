@@ -102,6 +102,7 @@ def menu():
           servings = request.form.get('servings' + id)
           meal_quantities[id] = int(servings)
           
+        # Store meals with associated number of servings
         session['meal_quantities'] = meal_quantities
         
         return redirect(url_for('plan'))
@@ -139,16 +140,22 @@ def plan():
       else:
         return str(rounded_num)+ " " + str(Fraction(rounded_fraction).limit_denominator())
   
+  # Get session variables
   meal_quantities = session.get('meal_quantities')
-  selected_meals = Meal.query.filter(Meal.id.in_(meal_quantities.keys())).all()
   timeUsed = int(session.get('timeUsed'))
   moneySpent = int(session.get('moneySpent'))
   budget=float(session.get('budget'))
   time=int(session.get('time'))
+  quantity_list = [session.get('people')*quantity for quantity in meal_quantities.values()]
+  
+  # Save results of the user's actual spending and goals
   money_result = int(budget - moneySpent)
   time_result = int(time - timeUsed)
+  
+  selected_meals = Meal.query.filter(Meal.id.in_(meal_quantities.keys())).all()
+  
+  
   units_not_used = ["cups", "cup", "tsp", "tbsp"]
-  quantity_list = [session.get('people')*quantity for quantity in meal_quantities.values()]
   selected_count = len(selected_meals)
   
   shopping_list ={}
