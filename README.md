@@ -1,78 +1,83 @@
 # Meal Maverick
 
-Meal Maverick is a web application designed to streamline weekly meal planning. It cuts planning time from over 30 minutes to less than 5 by providing users with a curated library of budget-friendly recipes and generating a precise shopping list with a single click. This not only saves time and money but also helps to reduce food waste.
+Meal Maverick is a full-stack web application that simplifies weekly meal planning. In under 5 minutes, users can define their food goals, select budget-friendly recipes, and generate a complete shopping list with exact ingredient amounts — saving time, money, and food waste.
 
-<br>
+**Live App**: [https://your-app-name.fly.dev](https://meal-maverick.fly.dev/)  
+*(Deployed using Docker and Fly.io)*
+
+![Meal Maverick Screenshot](docs/screenshot-home.png)  
+A preview of the home screen
 
 ## Tech Stack
 
-**Backend:** Python, Flask, Flask-SQLAlchemy  
-**Database:** SQLite  
-**Web Scraping:** Selenium, Beautiful Soup  
-**Frontend:** HTML, CSS, JavaScript
-
-<br>
+- Backend: Python, Flask, Flask-SQLAlchemy
+- Frontend: HTML, CSS, JavaScript
+- Database: SQLite
+- Web Scraping (optional): Selenium, BeautifulSoup
+- Deployment: Docker and Fly.io
 
 ## Key Features
 
-* **Goal Setting:** Users can define their weekly meal prep goals, including budget, available time, and the number of people to feed.
-* **Dynamic Meal Selection:** A menu of recipes, populated by a web scraper, is presented to the user, ordered by price. As the user selects meals, the estimated total cost and prep time are updated in real-time with dynamic progress bars.
-* **Automated Shopping List:** Once the user finalizes their meal plan, the application generates a consolidated shopping list. It intelligently calculates the precise quantity of each ingredient needed, preventing over-buying and food waste.
-* **Recipe Links:** The final plan includes direct links to the original recipes for easy access during cooking.
+- Goal Setting – Define budget, prep time, people, and servings per day
+- Dynamic Meal Selection – Browse meals sorted by cost; real-time budget and time progress bars
+- Automated Shopping List – Ingredient quantities calculated and aggregated intelligently
+- Recipe Links – Final meal plan includes direct links to cooking instructions
 
-<br>
+## Run Locally (No Docker)
 
-## Setup and Installation
+1. Clone the repo and enter the app folder:
+```bash
+git clone https://github.com/gbeck139/meal-maverick.git
+cd meal-maverick/web_app
+```
 
-To run Meal Maverick locally, follow these steps:
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/gbeck139/meal-maverick.git](https://github.com/gbeck139/meal-maverick.git)
-    cd meal-maverick
-    ```
+3. Add a `.env` file:
+```bash
+FLASK_SECRET_KEY=your-secret-key
+```
 
-2.  **Create and activate a virtual environment:**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    ```
+4. Run the app:
+```bash
+flask run
+```
 
-3.  **Install the dependencies:**
-    The project uses a `Pipfile` to manage dependencies. Install `pipenv` first if you don't have it:
-    ```bash
-    pip install pipenv
-    pipenv install
-    ```
-    Alternatively, you can use the `requirements.txt` in the `web_app` directory:
-    ```bash
-    pip install -r web_app/requirements.txt
-    ```
+Then go to http://127.0.0.1:5000
 
-4.  **Populate the database:**
-    Run the web scraper to populate the SQLite database with recipes.
-    ```bash
-    cd meal_mav_scrapers
-    python budget_bytes_scraper.py
-    ```
+## Run with Docker (Recommended)
 
-5.  **Run the Flask application:**
-    ```bash
-    cd ../web_app
-    flask run
-    ```
-    The application will be available at `http://127.0.0.1:5000`.
+If you have Docker installed, you can run the app without setting up Python or pip:
+```bash
+cd web_app
+docker build -t meal-maverick .
+docker run -p 5000:5000 meal-maverick
+```
+Then visit http://localhost:5000
 
-<br>
+## Data Setup (Optional)
+
+The `meals.db` file is already included in `web_app/`.
+
+To regenerate it using the included scrapers:
+```bash
+cd meal_mav_scrapers
+python budget_bytes_scraper.py
+```
+
+Note: You may need to adjust the output path to save the file to `../web_app/meals.db`.
 
 ## Technical Highlights
 
-* **Web Scraper:** The project utilizes a Selenium scraper to navigate paginated content on *budgetbytes.com*. It extracts recipe details, including name, prep time, servings, and a detailed ingredient list, and then populates the `meals.db` SQLite database.
-* **Ingredient Calculation Logic:** A key feature of the application is its ability to calculate the exact amount of each ingredient for the shopping list. The Flask backend processes the user's selected meals and servings, aggregates the required ingredients, and even converts quantities into user-friendly fractions for easier use in the kitchen.
-* **Dynamic Frontend:** The menu page provides real-time feedback to the user. As meals are selected, JavaScript updates progress bars for the budget and prep time, giving instant insight into how their choices align with their goals.
+- Selenium Scraper – Navigates paginated recipe content and extracts structured data
+- Smart Ingredient Aggregation – Combines, scales, and rounds ingredient quantities based on servings and people
+- Real-Time Frontend Feedback – JavaScript-driven budget and time tracking on the meal selection page
 
-<br>
+## Future Enhancements
 
-## Future Development
-
-* **Store API Integration:** The application includes a placeholder for ZIP code input, with plans to integrate with a store API for localized pricing and online shopping cart functionality.
+- Store API integration using ZIP code to personalize pricing
+- User authentication and saved meal plans using PostgreSQL
+- Improved mobile responsiveness and accessibility
