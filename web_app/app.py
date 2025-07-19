@@ -154,10 +154,13 @@ def plan():
   
   selected_meals = Meal.query.filter(Meal.id.in_(meal_quantities.keys())).all()
   
-  
+  # Exclude these units from the final shopping list
   units_not_used = ["cups", "cup", "tsp", "tbsp"]
+  
+  # Number of selected meals
   selected_count = len(selected_meals)
   
+  # The 
   shopping_list ={}
   
   for meal_id, servings_per_person in meal_quantities.items():
