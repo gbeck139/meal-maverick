@@ -9,8 +9,13 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
-basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'meals.db')
+
+if os.environ.get("FLASK_ENV") == "docker":
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/meals.db'
+else:
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'meals.db')
+
 db = SQLAlchemy(app)
 
 class Meal(db.Model):
