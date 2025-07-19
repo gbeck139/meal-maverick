@@ -23,7 +23,7 @@ Here's a quick walkthrough of the Meal Maverick experience:
 ![Menu](docs/menu.png)
 
 ### Final Plan + Shopping List
-![Plan](screenshots/plan.png)
+![Plan](docs/plan.png)
 
 ## Tech Stack
 
