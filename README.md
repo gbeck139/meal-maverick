@@ -31,17 +31,29 @@ git clone https://github.com/gbeck139/meal-maverick.git
 cd meal-maverick/web_app
 ```
 
-2. Install dependencies:
+2. Create and activate a virtual environment:
+```bash
+# Create virtual environment
+python3 -m venv .venv
+
+# Activate
+# On macOS/Linux:
+source .venv/bin/activate
+# On Windows:
+.venv\Scripts\activate
+```
+
+3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Add a `.env` file:
+4. Add a `.env` file:
 ```bash
 FLASK_SECRET_KEY=your-secret-key
 ```
 
-4. Run the app:
+5. Run the app:
 ```bash
 flask run
 ```
