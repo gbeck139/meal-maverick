@@ -160,18 +160,22 @@ def plan():
   # Number of selected meals
   selected_count = len(selected_meals)
   
-  # The 
-  shopping_list ={}
+  # Dictionary for storing the information of user's shopping list
+  shopping_list = {}
   
   for meal_id, servings_per_person in meal_quantities.items():
+    
+      # Get the meal from the db and its associated ingredients
       meal = Meal.query.get(meal_id)
       ingredients = dict(json.loads(meal.ingredients))
 
       for ingredient, ingredient_values in ingredients.items():
         if ingredient not in shopping_list:
           if ingredient_values["unit"] in units_not_used:
+            # Add empty unit and quantity if the item uses a unit not used
             shopping_list[ingredient] = {"unit": "", "quantity" : ""}
           else: 
+            # Add unit and calculate quantity of food needed based on servings and people
             shopping_list[ingredient] = {"unit": ingredient_values["unit"], "quantity" : float(ingredient_values["quantity"])/meal.servings*servings_per_person*session.get('people')}
         else:
           if ingredient_values["quantity"] != "" and shopping_list[ingredient]["quantity"] != "":
