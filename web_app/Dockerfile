@@ -17,6 +17,7 @@ EXPOSE 5000
 # Optional: define environment vars
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_ENV=docker
 
 # Run Flask app
 CMD ["flask", "run"]
