@@ -5,8 +5,25 @@ Meal Maverick is a full-stack web application that simplifies weekly meal planni
 **Live App**: [https://meal-maverick.fly.dev](https://meal-maverick.fly.dev/)  
 *(Deployed using Docker and Fly.io)*
 
-![Meal Maverick Screenshot](docs/screenshot-home.png)  
-A preview of the home screen
+## Demo
+
+Here's a quick walkthrough of the Meal Maverick experience:
+
+![Meal Maverick Demo](docs/demo.gif)
+
+## Screenshots
+
+### Home Page
+![Home](docs/home.png)
+
+### Goal Setup
+![Goals](docs/goals.png)
+
+### Menu
+![Menu](docs/menu.png)
+
+### Final Plan + Shopping List
+![Plan](screenshots/plan.png)
 
 ## Tech Stack
 
