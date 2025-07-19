@@ -1,6 +1,6 @@
 # Meal Maverick
 
-Meal Maverick is a full-stack web application that simplifies weekly meal planning. In under 5 minutes, users can define their food goals, select budget-friendly recipes, and generate a complete shopping list with exact ingredient amounts — saving time, money, and food waste.
+Meal Maverick is a full-stack web application that simplifies weekly meal planning. In under 5 minutes, users can define their food goals, select budget-friendly recipes, and generate a complete shopping list with exact ingredient amounts, saving time, money, and food waste.
 
 **Live App**: [https://meal-maverick.fly.dev](https://meal-maverick.fly.dev/)  
 *(Deployed using Docker and Fly.io)*
@@ -62,12 +62,24 @@ Then go to http://127.0.0.1:5000
 
 ## Run with Docker (Recommended)
 
-If you have Docker installed, you can run the app without setting up Python or pip:
+If you have Docker installed, you can run the app without setting up Python or pip.
+1. Run the following to build the image:
 ```bash
-cd web_app
+git clone https://github.com/gbeck139/meal-maverick.git
+cd meal-maverick/web_app
 docker build -t meal-maverick .
-docker run -p 5000:5000 meal-maverick
 ```
+
+2. Add a `.env` file:
+```bash
+FLASK_SECRET_KEY=your-secret-key
+```
+
+3. Launch the container
+```bash
+docker run --env-file .env -p 5000:5000 mealmaverick
+```
+
 Then visit http://localhost:5000
 
 ## Data Setup (Optional)
@@ -91,5 +103,3 @@ Note: You may need to adjust the output path to save the file to `../web_app/mea
 ## Future Enhancements
 
 - Store API integration using ZIP code to personalize pricing
-- User authentication and saved meal plans using PostgreSQL
-- Improved mobile responsiveness and accessibility
