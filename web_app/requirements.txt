@@ -1,5 +1,3 @@
 Flask
-SQLAlchemy
-json
+Flask-SQLAlchemy
 python-dotenv
-os

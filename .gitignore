@@ -2,3 +2,7 @@ glitch.json
 .glitch-assets
 instance/
 .env
+web_app/.env
+web_app/data/
+web_app/.python_history
+web_app/.gitconfig
