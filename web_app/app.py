@@ -9,7 +9,8 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/meals.db'
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'meals.db')
 db = SQLAlchemy(app)
 
 class Meal(db.Model):
