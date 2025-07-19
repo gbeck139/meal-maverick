@@ -168,7 +168,9 @@ def plan():
       # Get the meal from the db and its associated ingredients
       meal = Meal.query.get(meal_id)
       ingredients = dict(json.loads(meal.ingredients))
-
+      
+      total_meal_servings = 1/meal.servings*servings_per_person*session.get('people')
+      
       for ingredient, ingredient_values in ingredients.items():
         if ingredient not in shopping_list:
           if ingredient_values["unit"] in units_not_used:
@@ -176,16 +178,19 @@ def plan():
             shopping_list[ingredient] = {"unit": "", "quantity" : ""}
           else: 
             # Add unit and calculate quantity of food needed based on servings and people
-            shopping_list[ingredient] = {"unit": ingredient_values["unit"], "quantity" : float(ingredient_values["quantity"])/meal.servings*servings_per_person*session.get('people')}
+            shopping_list[ingredient] = {"unit": ingredient_values["unit"], "quantity" : float(ingredient_values["quantity"])*total_meal_servings}
         else:
+          # Check if existing item has quantity to add to, and add new quantity
           if ingredient_values["quantity"] != "" and shopping_list[ingredient]["quantity"] != "":
-            shopping_list[ingredient]["quantity"] += float(ingredient_values["quantity"])/meal.servings*servings_per_person*session.get('people')
+            shopping_list[ingredient]["quantity"] += float(ingredient_values["quantity"])*total_meal_servings
   
   for item in shopping_list.keys():
     if(shopping_list[item]["quantity"] != ""):
       if (shopping_list[item]["unit"] == "lb."):
+        # For pounds, use to the nearest second decimal
         shopping_list[item]["fraction"] = round(shopping_list[item]["quantity"], 2)
       else:
+        # For all else, round the quantity to a mixed number for easy usage by user
         shopping_list[item]["fraction"] =  rounded_mixed_number(shopping_list[item]["quantity"])
   
   return render_template('plan.html', selected_meals=selected_meals,  shopping_list=shopping_list, money_result=money_result , time_result=time_result, moneySpent=money_spent, timeUsed=time_used, money_over = -money_result, time_over = -time_result, selected_count=selected_count, quantity_list=quantity_list)
